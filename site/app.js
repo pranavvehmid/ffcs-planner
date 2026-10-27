@@ -686,7 +686,15 @@
     const hours = Math.round(blocks.reduce((a, b) => a + b.e - b.s, 0) / 60);
     const lastEnd = blocks.reduce((a, b) => Math.max(a, b.e), 0);
     const after = (h) => blocks.filter((b) => b.e > h * 60).length;
-    return { gaps, early, late, days: days.size, earlyDays: earlyDays.size, nineDays, lunchDays, hours, lastEnd, after6: after(18), after7: after(19) };
+    // lab-free days and how lopsided the week is
+    const labDaySet = new Set(times.filter((x) => x.kind === "lab").map((x) => x.d));
+    const labDays = labDaySet.size;
+    const noLabDays = [0, 1, 2, 3, 4].filter((d) => !labDaySet.has(d)).length;
+    const perDay = [0, 1, 2, 3, 4, 5, 6].map((d) => blocks.filter((b) => b.d === d).reduce((a, b) => a + b.e - b.s, 0));
+    const sorted = perDay.slice().sort((a, b) => b - a);
+    const lightMins = sorted.slice(2).reduce((a, b) => a + b, 0);
+    const heavy2 = sorted[0] + sorted[1];
+    return { gaps, early, late, days: days.size, earlyDays: earlyDays.size, nineDays, lunchDays, hours, lastEnd, after6: after(18), after7: after(19), labDays, noLabDays, lightMins, heavy2, perDay };
   }
   const PROFILES = [
     { id: "compact", name: "Compact days", blurb: "Fewest gaps between classes, so you're not waiting around campus.", color: "var(--lime)",
@@ -698,6 +706,10 @@
   ];
   const RATED = { id: "rated", name: "Top-rated teachers", blurb: "Picks the best-reviewed teachers you rated, then keeps the days tidy.", color: "var(--pink)",
     score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 };
+  const LABDAYS = { id: "labdays", name: "Lab-free days", blurb: "Packs your labs into as few days as possible, so the other days are theory only.", color: "var(--lavender)",
+    score: (m) => m.labDays * 400 + m.gaps * 0.4 + m.early * 5 + m.late * 5 };
+  const HEAVY = { id: "heavy", name: "Two heavy days", blurb: "Crowds two days so the rest of the week is light, with only a class or two.", color: "var(--peach)",
+    score: (m) => m.lightMins * 1.2 - m.heavy2 * 0.2 + m.gaps * 0.15 };
   const commChip = (name) => { const c = commOf(name); return c ? ` <span class="chip pink" title="Student review site rating">${c[0]}/10 · ${c[1]} review${c[1] > 1 ? "s" : ""}</span>` : ""; };
   const facRating = (name) => { const f = state.fac && state.fac[name]; return f && f.rating ? Number(f.rating) : 0; };
   // Community ratings (out of 10) from a student review site; used when you haven't rated someone.
@@ -798,14 +810,14 @@
   const diffCount = (a, b) => a.groups.filter((g, i) => g !== b.groups[i]).length;
 
   function generateScenario(codes, prefs) {
-    let res = search(codes, prefs, true, 350);
+    let res = search(codes, prefs, true, 300);
     let relaxed = false;
-    if (res.missing || !res.results.some((l) => l.length)) { res = search(codes, prefs, false, 350); relaxed = true; }
+    if (res.missing || !res.results.some((l) => l.length)) { res = search(codes, prefs, false, 300); relaxed = true; }
     // extra searches for an all-morning-labs and an all-evening-labs version of each plan
     const labRuns = ["am", "pm"].map((half) => {
       const lp = Object.assign({}, prefs, { labs: half });
-      let r = search(codes, lp, true, 200);
-      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 200); r.bestFit = true; }
+      let r = search(codes, lp, true, 140);
+      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 140); r.bestFit = true; }
       return r.missing ? null : r;
     });
     if (res.missing) return { error: `No options left for ${res.missing.map((c) => COURSES[c].title).join(", ")}.` };
@@ -852,7 +864,7 @@
 
   function generatePlans() {
     const prefs = genPrefs();
-    PROF = hasReviews() ? PROFILES.concat(RATED) : PROFILES;
+    PROF = (hasReviews() ? PROFILES.concat(RATED) : PROFILES).concat([LABDAYS, HEAVY]);
     const base = state.genCourses.filter((c) => COURSES[c]);
     const out = { base: generateScenario(base, prefs), extra: null, extraCode: null, view: "base" };
     if (prefs.extra && COURSES[prefs.extra] && !base.includes(prefs.extra)) {
@@ -905,7 +917,7 @@
         <div class="q" style="border-bottom:0"><div class="q-l">Teachers you want or want to avoid</div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="chip mint">${liked} preferred</span><span class="chip salmon">${avoided} avoided</span>
           <a class="btn sm lav" href="#/teachers">Pick teachers & add reviews</a></div></div>
-        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length ? "" : "disabled"}>${icon("spark", 16)} Make 3 plans</button>
+        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length ? "" : "disabled"}>${icon("spark", 16)} Make 6 plans</button>
       </section>
       <div id="gen-out">${genResult ? renderGen(genResult) : ""}</div>
       <hr class="rule">
@@ -989,6 +1001,8 @@
         <span class="chip ${o.m.lunchDays > genPrefs().lunchSkip ? "salmon" : o.m.lunchDays ? "peach" : "mint"}">${o.m.lunchDays ? o.m.lunchDays + " day" + (o.m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
         <span class="chip ${o.m.lastEnd > 18 * 60 ? "peach" : "mint"}">Ends by ${fmt(o.m.lastEnd)}</span>
         <span class="chip lav">${Math.round(o.m.gaps / 60)} h gaps</span>
+        ${p.profile.id === "labdays" ? `<span class="chip cyan">${o.m.noLabDays} lab-free weekday${o.m.noLabDays === 1 ? "" : "s"}</span>` : ""}
+        ${p.profile.id === "heavy" ? `<span class="chip peach">${o.m.perDay.slice(0, 5).map((x, d) => `${DAYS[d][0]} ${Math.round(x / 60)}h`).join(" · ")}</span>` : ""}
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
         ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
       </div>
