@@ -707,9 +707,9 @@
   ];
   const RATED = { id: "rated", name: "Top-rated teachers", blurb: "Picks the best-reviewed teachers you rated, then keeps the days tidy.", color: "var(--pink)",
     score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 };
-  const LABDAYS = { id: "labdays", name: "Lab-free days", blurb: "Packs your labs into as few days as possible, so the other days are theory only.", color: "var(--lavender)",
-    score: (m) => m.labDays * 400 + m.gaps * 0.4 + m.early * 5 + m.late * 5 };
-  const HEAVY = { id: "heavy", name: "Two heavy days", blurb: "Crowds two days so the rest of the week is light, with only a class or two.", color: "var(--peach)",
+  const LABDAYS = { id: "labdays", name: "Lab-free days", blurb: "Packs your labs into as few days as possible, so the other days are theory only. May cross your limits to do it.", color: "var(--lavender)",
+    score: (m) => m.labDays * 600 + m.gaps * 0.4 + m.early * 5 + m.late * 5 };
+  const HEAVY = { id: "heavy", name: "Two heavy days", blurb: "Crowds two days so the rest of the week is light. May cross your limits to do it.", color: "var(--peach)",
     score: (m) => m.lightMins * 1.2 - m.heavy2 * 0.2 + m.gaps * 0.15 };
   const commChip = (name) => { const c = commOf(name); return c ? ` <span class="chip pink" title="Student review site rating">${c[0]}/10 · ${c[1]} review${c[1] > 1 ? "s" : ""}</span>` : ""; };
   const facRating = (name) => { const f = state.fac && state.fac[name]; return f && f.rating ? Number(f.rating) : 0; };
@@ -793,6 +793,65 @@
     return { results, count: seen.size, timed, untimed };
   }
 
+  // Focused search for the "Lab-free days" and "Two heavy days" plans. Instead of hoping the
+  // general search stumbles on a good week, it fixes which days may hold labs (or which two
+  // days are the heavy ones), tries every choice, and keeps the best. Your limits become soft
+  // here, so these plans may cross them; the card says where.
+  const WEEKDAY_SETS = (() => {
+    const out = [];
+    for (let m = 1; m < 32; m++) out.push(m);
+    return out;
+  })();
+  function bestFocused(codes, prefs, p, excl, budgetEach) {
+    const base = codes.map((code) => ({ code, groups: timingGroups(code, prefs, false, excl) }));
+    if (base.some((c) => !c.groups.length)) return null;
+    const timedAll = base.filter((c) => c.groups.some((g) => g.times.length));
+    const untimed = base.filter((c) => !c.groups.some((g) => g.times.length));
+    const masks = WEEKDAY_SETS.filter((m) => (p.id === "heavy" ? bits(m) === 2 : bits(m) >= 2 && bits(m) <= 3));
+    let best = null;
+    const inMask = (mask, d) => (mask >> d) & 1;
+    for (const mask of masks) {
+      let timed = timedAll.map((c) => ({ code: c.code, groups: c.groups }));
+      if (p.id === "labdays") {
+        timed = timed.map((c) => ({ code: c.code, groups: c.groups.filter((g) => g.times.every((x) => x.kind !== "lab" || inMask(mask, x.d))) }));
+        if (timed.some((c) => !c.groups.length)) continue;
+      }
+      const outside = (g) => g.times.reduce((a, x) => a + (inMask(mask, x.d) ? 0 : x.e - x.s), 0);
+      const solo = (g) => (p.id === "heavy" ? outside(g) : p.score(metrics(g.times)) * 0.01) + penalty(metrics(g.times), [g], prefs, p) * 0.08;
+      timed.sort((a, b) => a.groups.length - b.groups.length);
+      const order = timed.map((c) => c.groups.slice().sort((a, b) => solo(a) - solo(b)));
+      const start = performance.now();
+      const pick = [];
+      (function dfs(i) {
+        if (performance.now() - start > budgetEach) return;
+        if (i === timed.length) {
+          const m = metrics(pick.flatMap((g) => g.times));
+          const score = p.score(m) + penalty(m, pick, prefs, p) * 0.08;
+          if (!best || score < best.score) best = { score, m, sig: "F" + pick.map((g) => g.code + g.key).join("/"), groups: pick.slice() };
+          return;
+        }
+        for (const g of order[i]) {
+          if (!pick.every((h) => !timesClash(h.times, g.times))) continue;
+          pick.push(g);
+          dfs(i + 1);
+          pick.pop();
+        }
+      })(0);
+    }
+    return best ? { sol: best, untimed } : null;
+  }
+  // which of your answers a plan crosses
+  function bendsOf(o, prefs) {
+    const m = o.m, out = [];
+    if (prefs.max8 < 9 && m.earlyDays > prefs.max8) out.push(`${m.earlyDays} days with 8 AM (you said ${prefs.max8})`);
+    if (prefs.max9 < 9 && m.nineDays > prefs.max9) out.push(`${m.nineDays} days starting 9–10 AM (you said ${prefs.max9})`);
+    if (prefs.lunchSkip < 99 && m.lunchDays > prefs.lunchSkip) out.push(`${m.lunchDays} days without lunch (you said ${prefs.lunchSkip})`);
+    if (prefs.endBy < 99 && m.lastEnd > prefs.endBy * 60) out.push(`ends at ${fmt(m.lastEnd)} (you said by ${prefs.endBy - 12} PM)`);
+    const outPRP = o.ids.filter((i) => CLASSES[i].times.length && !CLASSES[i].prp).length;
+    if (prefs.prp === "all" && outPRP) out.push(`${outPRP} class${outPRP > 1 ? "es" : ""} outside PRP`);
+    return out;
+  }
+
   // pick the concrete classes for a set of timings: liked faculty, then PRP, never avoided
   function materialize(sol, untimed) {
     const ids = [], alt = {};
@@ -809,7 +868,7 @@
     });
     return { ...sol, ids, alt };
   }
-  const diffCount = (a, b) => a.groups.filter((g, i) => g !== b.groups[i]).length;
+  const diffCount = (a, b) => { const mb = new Map(b.groups.map((g) => [g.code, g.key])); return a.groups.filter((g) => mb.get(g.code) !== g.key).length; };
 
   function generateScenario(codes, prefs) {
     let res = search(codes, prefs, true, 300);
@@ -827,7 +886,9 @@
     const taken = new Set();
     const plans = PROF.map((p, pi) => {
       const list = res.results[pi];
-      const main = list.find((r) => !taken.has(r.sig));
+      const focused = p.id === "labdays" || p.id === "heavy";
+      const fb = focused ? bestFocused(codes, prefs, p, null, 30) : null;
+      const main = (fb && fb.sol) || list.find((r) => !taken.has(r.sig));
       if (!main) return null;
       taken.add(main.sig);
       // variations keep the plan's core and change one or two courses
@@ -840,7 +901,7 @@
       }
       for (const r of list) { if (vars.length === 2) break; if (!taken.has(r.sig)) { vars.push(r); taken.add(r.sig); } }
       const missingLab = [];
-      const opts = [main, vars[0]].filter(Boolean).map((s, j) => Object.assign(materialize(s, res.untimed), { label: j ? "Variation 2" : "Main" }));
+      const opts = [main, vars[0]].filter(Boolean).map((s, j) => Object.assign(materialize(s, j === 0 && fb ? fb.untimed : res.untimed), { label: j ? "Variation 2" : "Main" }));
       labRuns.forEach((lr, li) => {
         const half = li ? "pm" : "am";
         const share = (r) => { const gs = r.groups.filter((g) => g.labHalf); return gs.length ? gs.filter((g) => g.labHalf === half).length / gs.length : 0; };
@@ -852,6 +913,14 @@
       const backups = [];
       const excl = new Set(opts[0].ids.map((id) => CLASSES[id].faculty));
       for (let b = 0; b < 2; b++) {
+        if (focused) {
+          const f = bestFocused(codes, prefs, p, excl, 12);
+          if (!f) { backups.push({ missing: ["clash"] }); break; }
+          const mo = Object.assign(materialize(f.sol, f.untimed), { label: "Backup " + "BC"[b], fit: true });
+          backups.push(mo);
+          mo.ids.forEach((id) => excl.add(CLASSES[id].faculty));
+          continue;
+        }
         let r = search(codes, prefs, true, 100, pi, excl);
         let fit = true;
         if (r.missing || !r.results[pi].length) { r = search(codes, prefs, false, 100, pi, excl); fit = false; }
@@ -885,7 +954,7 @@
     const out = { base: generateScenario(base, prefs), extra: null, extraCode: null, view: "base" };
     if (prefs.extra && COURSES[prefs.extra] && !base.includes(prefs.extra)) {
       out.extraCode = prefs.extra;
-      out.extra = generateScenario(base.concat(prefs.extra), prefs);
+      out.extra = null; // built when you open the "With" tab, to keep things quick
     }
     return out;
   }
@@ -969,11 +1038,12 @@
     const scen = res.view === "extra" && res.extra ? res.extra : res.base;
     const xName = res.extraCode ? COURSES[res.extraCode].title : "";
     let html = '<div style="margin-top:18px">';
-    if (res.extra) {
+    if (res.extraCode) {
+      const xcr = res.base.credits + credits(res.extraCode);
       html += `<div class="seg" style="margin-bottom:12px">
         <button class="tab ${res.view !== "extra" ? "active" : ""}" data-act="gview" data-v="base">Without ${esc(xName)} · ${res.base.credits || 0} cr</button>
-        <button class="tab ${res.view === "extra" ? "active" : ""}" data-act="gview" data-v="extra">With ${esc(xName)} · ${res.extra.credits || 0} cr</button></div>`;
-      html += compareTable(res, xName);
+        <button class="tab ${res.view === "extra" ? "active" : ""}" data-act="gview" data-v="extra">With ${esc(xName)} · ${xcr} cr</button></div>`;
+      if (res.extra) html += compareTable(res, xName);
     }
     if (scen.error) return html + `<div class="card" style="background:#fff3f3"><b>${esc(scen.error)}</b></div></div>`;
     if (scen.relaxed) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> no timetable could meet everything, so these bend on: ${esc(scen.broken.join(", "))}. The plans below get as close as possible.</div>`;
@@ -1010,7 +1080,9 @@
     const outside = ks.filter((k) => k.times.length && !k.prp);
     const lanes = [{ name: p.profile.name, color: p.profile.color, times: labelled(ks) }];
     const base = p.options[0];
-    const changed = vi ? o.groups.filter((g, gi) => g !== base.groups[gi]).map((g) => `${COURSES[g.code].title} → ${g.key.replace("|", " + ")}`) : [];
+    const baseKeys = new Map(base.groups.map((g) => [g.code, g.key]));
+    const changed = vi ? o.groups.filter((g) => baseKeys.get(g.code) !== g.key).map((g) => `${COURSES[g.code].title} → ${g.key.replace("|", " + ")}`) : [];
+    const bends = bendsOf(o, genPrefs());
     const likedFac = [...new Set(ks.filter((k) => facPref(k.faculty) > 0).map((k) => k.faculty))];
     return `<div class="card gen">
       <div class="gen-head" style="background:${p.profile.color}">
@@ -1033,6 +1105,7 @@
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
         ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
       </div>
+      ${bends.length ? `<div class="bend">Crosses your limits: ${esc(bends.join("; "))}</div>` : ""}
       <div class="card" style="padding:8px 6px;box-shadow:none">${gantt(lanes, activeDays([lanes[0].times]), { labels: true, compact: true })}</div>
       <details class="gen-list"><summary>Faculty and slots</summary>
         ${codes.map((code) => {
@@ -1257,7 +1330,7 @@
         genResult = null; save(); render(); return;
       }
       case "generate": {
-        el.disabled = true; el.textContent = "Thinking… (about 10 seconds)";
+        el.disabled = true; el.textContent = "Thinking… (about 8 seconds)";
         setTimeout(() => {
           genResult = generatePlans();
           for (const k in genSel) delete genSel[k];
@@ -1267,7 +1340,18 @@
         }, 30);
         return;
       }
-      case "gview": genResult.view = el.dataset.v; render(); return;
+      case "gview": {
+        genResult.view = el.dataset.v;
+        if (el.dataset.v === "extra" && !genResult.extra) {
+          el.textContent = "Thinking…";
+          setTimeout(() => {
+            genResult.extra = generateScenario(state.genCourses.filter((c) => COURSES[c]).concat(genResult.extraCode), genPrefs());
+            render();
+          }, 30);
+          return;
+        }
+        render(); return;
+      }
       case "gvar": genSel[el.dataset.key] = Number(el.dataset.j); render(); return;
       case "gbk": genBk[el.dataset.key] = Number(el.dataset.j); render(); return;
       case "genuse": {

@@ -366,6 +366,8 @@ table.cmp thead th { font-weight: 900; }
 
 .bk-seg .tab.active { background: var(--black); color: var(--lime); }
 
+.bend { font-size: 12px; font-weight: 700; background: #fff3f3; border: 2px solid var(--black); border-radius: 12px; padding: 6px 10px; margin-bottom: 10px; }
+
 /* ---------- plans ---------- */
 .plan { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
 .plan.active { background: #f3ffc0; }
