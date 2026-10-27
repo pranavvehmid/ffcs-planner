@@ -771,18 +771,18 @@
 
       <section class="card questions" style="margin-top:14px">
         <h2 class="section-title">Must-haves</h2>
-        <p class="small muted" style="margin:-4px 0 4px">Every plan keeps these. If nothing fits, the planner tells you which one it had to loosen.</p>
+        <p class="small muted" style="margin:-4px 0 4px">Every plan keeps these, always. If nothing fits, the planner tells you which one it had to loosen.</p>
         <div class="q"><div class="q-l">All classes in PRP, or hybrid?</div>${seg("prp", pr.prp, [["all", "All PRP"], ["hybrid", "Hybrid is OK"]])}
           <div class="q-h">Courses with no PRP classes at all (like Spanish) are the only exception.</div></div>
         <div class="q"><div class="q-l">How many days can have an 8 AM class?</div>${seg("max8", pr.max8, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3 days"], [9, "Any"]])}</div>
         <div class="q"><div class="q-l">Morning labs only?</div>${seg("labs", pr.labs, [["am", "Yes, morning labs"], ["any", "Either is fine"]])}
           <div class="q-h">Morning labs put every lab before lunch and every theory class (including Maths) after lunch.</div></div>
-        <div class="q"><div class="q-l">How many weekdays do you want with no labs at all?</div>${seg("labFree", pr.labFree, [[0, "No rule"], [1, "1 day"], [2, "2 days"], [3, "3 days"]])}
+        <h2 class="section-title" style="margin-top:16px">Nice-to-haves</h2>
+        <p class="small muted" style="margin:-4px 0 4px">Plans 1–4 follow these closely (the lab split and lab-free days come first). Plan 5 and Plan 6 may reshape them to reach their own goal, and every plan lists anything it bends. Each plan also gets its own lab days, so no two plans look alike.</p>
+        <div class="q"><div class="q-l">How many weekdays would you like with no labs at all?</div>${seg("labFree", pr.labFree, [[0, "No rule"], [1, "1 day"], [2, "2 days"], [3, "3 days"]])}
           ${labDays ? `<div class="q-h">That puts your ${nLabs} lab sessions on ${labDays} day${labDays > 1 ? "s" : ""}.</div>` : ""}</div>
         <div class="q"><div class="q-l">How should the labs be split? (most labs on one day)</div>${seg("maxLabs", pr.maxLabs, [[1, "1 a day"], [2, `2 a day${labDays ? ` (${splitText(nLabs, labDays)})` : ""}`], [3, `3 a day${labDays && labDays <= 2 ? ` (${splitText(nLabs, Math.ceil(nLabs / 3))})` : ""}`], [9, "No limit"]])}
-          <div class="q-h">${labDays ? `With ${labDays} lab days: 2 a day gives a ${splitText(nLabs, labDays)} split, 3 a day allows ${splitText(nLabs, Math.ceil(nLabs / 3))}.` : "Caps how many lab sessions can land on the same day."}${fitsSplit ? "" : ` <b>${labDays} days × ${pr.maxLabs} = ${labDays * pr.maxLabs} labs can't hold all ${nLabs}, so one of these will be loosened.</b>`}</div></div>
-        <h2 class="section-title" style="margin-top:16px">Nice-to-haves</h2>
-        <p class="small muted" style="margin:-4px 0 4px">Plans try hard to keep these, but Plan 5 and Plan 6 may bend them to reach their goal. Each plan lists anything it bends.</p>
+          <div class="q-h">${labDays ? `With ${labDays} lab days: 2 a day gives a ${splitText(nLabs, labDays)} split, 3 a day allows ${splitText(nLabs, Math.ceil(nLabs / 3))}.` : "Caps how many lab sessions can land on the same day."}${fitsSplit ? "" : ` <b>${labDays} days × ${pr.maxLabs} = ${labDays * pr.maxLabs} labs can't hold all ${nLabs}, so plans will get as close as they can.</b>`}</div></div>
         <div class="q"><div class="q-l">Keep a day's labs back-to-back?</div>${seg("labStretch", pr.labStretch, [["prefer", "Yes, in one stretch"], ["any", "Gaps are fine"]])}</div>
         <div class="q"><div class="q-l">How many days can you skip lunch?</div>${seg("lunchSkip", pr.lunchSkip, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3"], [99, "Any"]])}
           <div class="q-h">Skipping lunch means a lab ending at 1:20 right before a 2 PM class.</div></div>
@@ -855,6 +855,9 @@
     if (pr.endBy < 99 && L.lastEnd > pr.endBy * 60) unavoid.push(`finishing after ${pr.endBy - 12} PM (earliest possible ${fmt(L.lastEnd)})`);
     if (pr.labStretch === "prefer" && L.labGap > 30) unavoid.push("a gap between labs on some day");
     if (unavoid.length) notes.push(`With your must-haves, every possible timetable means ${esc(unavoid.join(" and "))}, so no plan can avoid that. Loosening a must-have (for example one more 8 AM day) can fix it.`);
+    const K = scen.limitsKeep || {};
+    if (!unavoid.length && pr.lunchSkip < 99 && K.lunchDays > pr.lunchSkip && L.lunchDays <= pr.lunchSkip)
+      notes.push(`Keeping your lab split (${pr.labFree ? pr.labFree + " lab-free days, " : ""}up to ${pr.maxLabs < 9 ? pr.maxLabs : "any"} labs a day) means skipping lunch on ${K.lunchDays} days. Plans 1–4 keep the split, so they skip lunch ${K.lunchDays} days; only a different split could get it down to ${L.lunchDays}.`);
     if (scen.amMiss.length) notes.push(`${esc(scen.amMiss.map((c) => COURSES[c].title).join(", "))} can't follow the morning-labs pattern, so it keeps its other timing.`);
     if (notes.length) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> ${notes.join(" ")}</div>`;
     html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked all ${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;

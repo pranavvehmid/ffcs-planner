@@ -146,7 +146,7 @@
       score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 },
     { id: "labdays", name: "Most lab-free days", color: "var(--lavender)",
       blurb: "Squeezes labs into as few days as your lab answers allow and keeps each day's labs back-to-back. Softer answers can bend.",
-      score: (m) => m.labDays * 800 + m.labGap * 2 + m.gaps * 0.3 },
+      score: (m) => m.labDays * 1500 + m.labGap * 2 + m.gaps * 0.3 },
     { id: "heavy", name: "Two heavy days", color: "var(--peach)",
       blurb: "Crowds two days so the rest of the week is light. Softer answers can bend.",
       score: (m) => m.lightMins * 1.2 - m.heavy2 * 0.2 + m.gaps * 0.15 },
@@ -251,10 +251,10 @@
 
     // Hard rules, then step back one rule at a time if nothing fits. All-PRP is never dropped.
     const wantAm = prefs.labs === "am";
-    const steps = [{ rules: { max8: prefs.max8, labFree: prefs.labFree || 0, maxLabs: prefs.maxLabs, amLabs: wantAm }, drop: null }];
+    // Lab-free days and the lab split are wishes, not rules: plans 1-4 follow them closely,
+    // while Plan 5 and Plan 6 may reshape the labs to reach their own goal.
+    const steps = [{ rules: { max8: prefs.max8, labFree: 0, maxLabs: 9, amLabs: wantAm }, drop: null }];
     const stepDown = (change, drop) => steps.push({ rules: Object.assign({}, steps[steps.length - 1].rules, change), drop });
-    if (prefs.labFree > 0) stepDown({ labFree: 0 }, `at least ${prefs.labFree} lab-free day${prefs.labFree === 1 ? "" : "s"}`);
-    if (prefs.maxLabs < 9) stepDown({ maxLabs: 9 }, `at most ${prefs.maxLabs} lab${prefs.maxLabs === 1 ? "" : "s"} a day`);
     if (wantAm) stepDown({ amLabs: false }, "morning labs with afternoon theory");
     if (prefs.max8 < 9) stepDown({ max8: 9 }, `at most ${prefs.max8} day${prefs.max8 === 1 ? "" : "s"} with 8 AM`);
     progress("Listing every clash-free timetable…", 3);
@@ -280,14 +280,21 @@
       if (prefs.max9 < 9) soft += Math.max(0, m.nineDays - prefs.max9) * 700;
       if (prefs.lunchSkip < 99) soft += Math.max(0, m.lunchDays - prefs.lunchSkip) * 1200;
       const stretch = prefs.labStretch === "prefer" ? m.labGap * 4 : 0;
+      let split = 0;
+      if (prefs.labFree > 0) split += Math.max(0, prefs.labFree - m.noLabDays) * 6000;
+      if (prefs.maxLabs < 9) split += m.labsPerDay.reduce((a, x) => a + Math.max(0, x - prefs.maxLabs), 0) * 6000;
+      const layout = m.labsPerDay.slice(0, 5).join(",");
       gs.forEach((g) => { if (g.liked) liked++; rate += g.rating - 2.5; });
-      sols[i] = { groups: gs, m, sig: gs.map((g) => g.n).join("/"), soft, stretch, liked, rate, key: new Map(gs.map((g) => [g.code, g.key])) };
+      sols[i] = { idx: i, groups: gs, m, sig: gs.map((g) => g.n).join("/"), soft, stretch, split, layout, liked, rate, key: new Map(gs.map((g) => [g.code, g.key])) };
       if (i % 4000 === 0) progress(`Scoring ${n.toLocaleString("en-IN")} timetables…`, 5 + (i / n) * 55);
     }
+    let minSplit = Infinity;
+    for (const s2 of sols) if (s2.split < minSplit) minSplit = s2.split;
     const diffCount = (a, b) => { let d = 0; a.groups.forEach((g) => { if (b.key.get(g.code) !== g.key) d++; }); return d; };
     function scoreFor(p, s) {
       const relax = p.id === "labdays" || p.id === "heavy" ? 0.15 : 1;
-      let v = p.score(s.m) + s.soft * relax + s.stretch - s.liked * 200 - s.rate * 40;
+      const splitW = p.id === "labdays" ? 0.05 : p.id === "heavy" ? 0.1 : 1;
+      let v = p.score(s.m) + s.soft * relax + s.split * splitW + s.stretch * (p.id === "heavy" ? 0.3 : 1) - s.liked * 200 - s.rate * 40;
       if (p.id === "rated") v += -s.rate * 260 - s.liked * 160;
       return v;
     }
@@ -335,12 +342,27 @@
       const order = Array.from({ length: n }, (_, i) => i).sort((a, b) => sc[a] - sc[b]);
       orders[id] = order;
       const first = (fn) => { for (const i of order) if (fn(sols[i])) return sols[i]; return null; };
+      // each plan gets its own lab layout (which days hold labs and how many) and differs in courses
       let main = null, apart = 0, sameTiming = false;
       const needs = id === "labdays" ? [2, 1] : [3, 2, 1];
-      for (const need of needs) {
-        main = first((s) => !usedSigs.has(s.sig) && mainList.every((o) => diffCount(s, o) >= need));
-        if (main) { apart = mainList.length ? need : 0; break; }
+      const usedLayouts = new Set(mainList.map((o) => o.layout));
+      const bestScore = sc[order[0]];
+      // plans 1-4 keep your lab split whenever any timetable can; Plan 5 and 6 may reshape it
+      const goal = id === "labdays" || id === "heavy";
+      const splitOk = (s) => goal || s.split <= minSplit;
+      search:
+      for (const keep of goal ? [false] : [true, false]) {
+        for (const fresh of [true, false]) {
+          for (const need of needs) {
+            main = first((s) => !usedSigs.has(s.sig) && (!keep || splitOk(s)) && (!fresh || !usedLayouts.has(s.layout)) && mainList.every((o) => diffCount(s, o) >= need));
+            // don't take a new layout that wrecks the plan's own goal
+            if (main && fresh && sc[main.idx] - bestScore > 1500) main = null;
+            if (main) { apart = mainList.length ? need : 0; break search; }
+          }
+        }
       }
+      // if the only new timetables break your lab split, reuse a split-keeping timing with other teachers
+      if (main && !goal && main.split > minSplit) { const k = first((s) => s.split <= minSplit); if (k) { main = k; sameTiming = usedSigs.has(k.sig); } }
       if (!main) { main = sols[order[0]]; sameTiming = true; } // fewer timetables than plans
       usedSigs.add(main.sig);
       mainList.push(main);
@@ -394,9 +416,11 @@
     // the best any timetable can do on each softer answer, so the page can say when a bend is unavoidable
     const limits = { lunchDays: Infinity, nineDays: Infinity, lastEnd: Infinity, labGap: Infinity };
     for (const s2 of sols) for (const k in limits) if (s2.m[k] < limits[k]) limits[k] = s2.m[k];
+    const limitsKeep = { lunchDays: Infinity, nineDays: Infinity, lastEnd: Infinity, labGap: Infinity };
+    for (const s2 of sols) if (s2.split <= minSplit) for (const k in limitsKeep) if (s2.m[k] < limitsKeep[k]) limitsKeep[k] = s2.m[k];
     progress("Done", 100);
     const debug = input.debug ? { sols, scoreFor, diffCount } : undefined;
-    return { debug, plans, limits, count: n, capped: res.capped, relaxed: notes.relaxed, noPRP: notes.noPRP, amMiss: notes.amMiss || [], rules: rulesUsed };
+    return { debug, plans, limits, limitsKeep, minSplit, count: n, capped: res.capped, relaxed: notes.relaxed, noPRP: notes.noPRP, amMiss: notes.amMiss || [], rules: rulesUsed };
   }
 
   const api = { build, plan, metrics, blocksOf, timesClash, halfOf, PROFILES, SLOT_TIMES, DAYS };

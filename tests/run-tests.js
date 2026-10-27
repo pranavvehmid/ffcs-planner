@@ -22,6 +22,7 @@ const COURSE_SETS = [
 const ALL_FAC = [...new Set(BASE.flatMap((c) => COURSES[c].ids.map((i) => CLASSES[i].faculty)))];
 
 const failures = [];
+const layoutStats = [];
 const warnings = [];
 let checks = 0;
 const fail = (ctx, msg) => failures.push(`${ctx}: ${msg}`);
@@ -49,8 +50,6 @@ function checkTimetable(ids, codes, prefs, res, ctx, facPrefs) {
   if (prefs.prp === "all") ks.filter((k) => k.times.length && !k.prp).forEach((k) =>
     ok(res.noPRP.includes(k.code), ctx, `${k.code} ${k.slots} is outside PRP (${k.venue}) though PRP classes exist`));
   if (prefs.max8 < 9 && !/8 AM/.test(relaxed)) ok(m.earlyDays <= prefs.max8, ctx, `${m.earlyDays} days with 8 AM > ${prefs.max8}`);
-  if (prefs.maxLabs < 9 && !/labs? a day/.test(relaxed)) ok(m.maxLabsDay <= prefs.maxLabs, ctx, `${m.maxLabsDay} labs on one day > ${prefs.maxLabs}`);
-  if (prefs.labFree > 0 && !/lab-free/.test(relaxed)) ok(m.noLabDays >= prefs.labFree, ctx, `${m.noLabDays} lab-free weekdays < ${prefs.labFree}`);
   if (prefs.labs === "am" && !/morning labs/.test(relaxed)) ks.filter((k) => k.times.length && !res.amMiss.includes(k.code)).forEach((k) => {
     const want = k.group === "lab" ? "am" : "pm";
     ok(P.halfOf(k) === want, ctx, `${k.code} ${k.slots} is in the ${P.halfOf(k)} but morning labs means ${k.group === "lab" ? "labs in the morning" : "theory in the afternoon"}`);
@@ -108,9 +107,18 @@ function runOne(r) {
   const solOf = new Map(D.sols.map((s) => [s.sig, s]));
   const mainSols = res.plans.map((p) => solOf.get(p.options[0].sig.split("~")[0]));
   let minApart = 99;
-  for (let i = 0; i < mainSols.length; i++) for (let j = i + 1; j < mainSols.length; j++) minApart = Math.min(minApart, D.diffCount(mainSols[i], mainSols[j]));
+  for (let i = 0; i < mainSols.length; i++) for (let j = i + 1; j < mainSols.length; j++)
+    if (!res.plans[i].sameTiming && !res.plans[j].sameTiming) minApart = Math.min(minApart, D.diffCount(mainSols[i], mainSols[j]));
   ok(minApart >= 1 || D.sols.length < res.plans.length, ctx, "two plans are the same timetable");
   if (minApart < 2 && D.sols.length > 50) warnings.push(`${ctx}: two plans differ in only ${minApart} course(s) though ${D.sols.length} timetables exist`);
+  // plans 1-4 must keep your lab split whenever some timetable can
+  const bestSplit = D.sols.reduce((a, s) => Math.min(a, s.split), Infinity);
+  mainSols.slice(0, 4).forEach((s, i) => ok(!(bestSplit === 0 && s.split > 0), ctx, `plan ${i + 1} breaks your lab split/lab-free days (${s.layout}) though it was possible`));
+  // every plan should have its own lab layout when enough layouts exist
+  const layouts = new Set(D.sols.map((s) => s.layout));
+  const mainLayouts = new Set(mainSols.map((s) => s.layout));
+  if (layouts.size >= mainSols.length && mainLayouts.size < mainSols.length) warnings.push(`${ctx}: only ${mainLayouts.size} distinct lab layouts among the 6 plans though ${layouts.size} exist`);
+  layoutStats.push(mainLayouts.size);
   // plan goals: compare with the best possible over every timetable (first plan is unconstrained by diversity)
   const best = (f) => D.sols.reduce((a, s) => Math.min(a, f(s)), Infinity);
   // "Two heavy days" picks first, so it must be the true best for its goal
@@ -122,12 +130,23 @@ function runOne(r) {
   const minLight = best((s) => s.m.lightMins);
   if (heavyPlan.m.lightMins > minLight + 240) warnings.push(`${ctx}: Two heavy days leaves ${heavyPlan.m.lightMins} min on light days, best possible ${minLight}`);
   if (prefs.lunchSkip < 99 && !res.relaxed.length) {
-    const can = best((s) => s.m.lunchDays);
+    const can = best((s) => (s.split === bestSplit ? s.m.lunchDays : 99));
     mainSols.slice(0, 4).forEach((s, i) => { if (s.m.lunchDays > prefs.lunchSkip && can <= prefs.lunchSkip) warnings.push(`${ctx}: plan ${i + 1} skips lunch ${s.m.lunchDays} days though ${can} was possible`); });
   }
   return { ms, count: res.count, minApart };
 }
 
+// Sensitivity: changing one answer must change the plans whenever that answer matters
+function sensitivity() {
+  const base = { max8: 1, max9: 9, labs: "am", labFree: 2, maxLabs: 2, labStretch: "prefer", lunchSkip: 1, endBy: 99, prp: "all" };
+  const changes = [["labFree", 0], ["labFree", 1], ["labFree", 3], ["maxLabs", 3], ["maxLabs", 1], ["maxLabs", 9], ["max8", 0], ["max8", 2], ["labs", "any"], ["labStretch", "any"], ["lunchSkip", 0], ["lunchSkip", 99], ["endBy", 18], ["max9", 0], ["prp", "hybrid"]];
+  const run = (prefs) => P.plan(db, { codes: BASE, prefs, comm: RATINGS.faculty, board: RATINGS.board }).plans.map((p) => p.options[0].sig).join("|");
+  const b = run(base);
+  const same = [];
+  changes.forEach(([k, v]) => { if (run(Object.assign({}, base, { [k]: v })) === b) same.push(`${k}=${v}`); });
+  console.log(`Sensitivity: ${changes.length - same.length}/${changes.length} single-answer changes changed the plans${same.length ? "; no change for: " + same.join(", ") : ""}`);
+}
+sensitivity();
 const t0 = Date.now();
 let slowest = 0, total = 0, errors = 0;
 for (let r = 0; r < RUNS; r++) {
@@ -138,6 +157,7 @@ for (let r = 0; r < RUNS; r++) {
   } catch (e) { fail(`run ${r}`, "crashed: " + e.stack); }
 }
 console.log(`\n${RUNS} runs, ${checks} checks, ${failures.length} failures, ${warnings.length} warnings, ${errors} no-fit answers, slowest ${slowest} ms, avg ${Math.round(total / RUNS)} ms, wall ${Math.round((Date.now() - t0) / 1000)} s`);
+console.log(`Distinct lab layouts across the 6 plans: avg ${(layoutStats.reduce((a, b) => a + b, 0) / Math.max(1, layoutStats.length)).toFixed(2)}, min ${Math.min(...layoutStats)}`);
 const uniq = (a) => [...new Set(a)];
 if (failures.length) { console.log("\nFAILURES:"); uniq(failures).slice(0, 40).forEach((f) => console.log(" - " + f)); }
 if (warnings.length) { console.log("\nWARNINGS (sample):"); uniq(warnings).slice(0, 25).forEach((f) => console.log(" - " + f)); }
