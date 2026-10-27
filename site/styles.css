@@ -359,6 +359,9 @@ table.cmp thead th { font-weight: 900; }
 .teacher.liked { background: #eafff5; }
 .teacher.avoid { background: #fff3f3; }
 .t-row { display: flex; justify-content: space-between; gap: 8px; align-items: center; margin-bottom: 8px; flex-wrap: wrap; }
+.t-rate { display: flex; align-items: center; gap: 2px; font-size: 12px; font-weight: 800; margin-bottom: 8px; }
+.star { border: 0; background: none; font-size: 20px; line-height: 1; padding: 0 1px; color: #ddd; -webkit-text-stroke: 1px #000; }
+.star.on { color: var(--lime); }
 .note-in { padding: 7px 14px; font-size: 13px; box-shadow: 2px 2px 0 var(--black); }
 
 /* ---------- plans ---------- */

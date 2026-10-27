@@ -89,9 +89,13 @@
 
   // Credits are not on VTOP's allocation page, so these are estimates:
   // theory + lab 4, theory only 3, online 2, lab only 2, soft skills 1.
+  // Known credits (from Pranav); the rest are estimates.
+  const CREDITS = { BAHUM101: 1, BAMAT205: 4, BAPHY105: 4, BACSE103: 4, BACSE104: 4, BACSE105: 4, BACSE106: 4,
+    BAESP101: 2, BAFRE101: 2, BAGER101: 2, BAJAP101: 2, BAARB101: 2, BACHI101: 2 };
   function credits(code) {
     const c = COURSES[code];
     if (!c) return 0;
+    if (CREDITS[code] !== undefined) return CREDITS[code];
     if (c.embedded) return 4;
     if (c.types.includes("TH") || c.types.includes("ETH")) return 3;
     if (c.types.includes("OC")) return 2;
@@ -315,7 +319,7 @@
             <h3 class="section-title" style="font-size:15px">Clashes</h3>
             ${clashes.map(([a, b]) => `<div class="small" style="font-weight:700;margin:4px 0">${esc(a.code)} ${esc(a.slots)} ✕ ${esc(b.code)} ${esc(b.slots)}</div>`).join("")}
           </div>` : ""}
-          <p class="footer-note">*Credits are estimates (theory + lab 4, theory 3, online 2), since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.</p>
+          <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates, since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.</p>
         </section>
       </div>`;
   }
@@ -439,7 +443,7 @@
     const ids = o.join(",");
     return `<div class="opt ${on ? "sel" : clashN ? "clash" : ""}">
       <div class="opt-head">
-        <div class="opt-fac">${facPref(ks[0].faculty) > 0 ? "★ " : ""}${esc(fac)}${facPref(ks[0].faculty) < 0 ? ' <span class="chip salmon">Avoid</span>' : ""}</div>
+        <div class="opt-fac">${facPref(ks[0].faculty) > 0 ? "♥ " : ""}${esc(fac)}${facRating(ks[0].faculty) ? ` <span class="chip lav">${facRating(ks[0].faculty)}/5</span>` : ""}${facPref(ks[0].faculty) < 0 ? ' <span class="chip salmon">Avoid</span>' : ""}</div>
         <button class="icon-btn" data-act="compare" data-code="${esc(code)}" data-ids="${ids}" aria-label="Compare on your week" title="Compare on your week">${icon("eye", 17)}</button>
       </div>
       ${parts.map(({ k, clash }) => `<div class="opt-part">
@@ -638,6 +642,7 @@
       g.opts.push(o);
       if (allPRP) g.prpOK = true;
       if (ks.some((k) => facPref(k.faculty) > 0)) g.liked = true;
+      g.rating = Math.max(g.rating || 0, facRating(ks[0].faculty));
       if (!avoided) g.avoidedOnly = false;
     });
     return Object.values(groups).map((g) => {
@@ -684,14 +689,21 @@
     { id: "evenings", name: "Done early", blurb: "Finishes your days as early as it can, keeping evenings free.", color: "var(--cyan)",
       score: (m) => m.late * 150 + m.gaps * 0.5 + m.early * 5 },
   ];
-  function penalty(m, groups, prefs) {
+  const RATED = { id: "rated", name: "Top-rated teachers", blurb: "Picks the best-reviewed teachers you rated, then keeps the days tidy.", color: "var(--pink)",
+    score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 };
+  const facRating = (name) => { const f = state.fac && state.fac[name]; return f && f.rating ? Number(f.rating) : 0; };
+  const hasReviews = () => Object.values(state.fac || {}).some((f) => f.rating || f.pref > 0);
+  let PROF = PROFILES;
+  function penalty(m, groups, prefs, prof) {
     let p = 0;
+    if (prof && prof.id === "rated") groups.forEach((g) => { p -= (g.rating || 0) * 120 + (g.liked ? 150 : 0); });
     if (prefs.max8 < 9) p += Math.max(0, m.earlyDays - prefs.max8) * 1500;
     if (prefs.max9 < 9) p += Math.max(0, m.nineDays - prefs.max9) * 700;
     if (prefs.lunch) p += m.lunchDays * 1200;
     groups.forEach((g) => {
       if (!g.prpOK) p += prefs.prp === "all" ? 900 : 25;
       if (g.liked) p -= 200;
+      p -= (g.rating || 0) * 40;
       if (g.avoidedOnly) p += 2000;
       if (prefs.labs !== "any" && g.labHalf && g.labHalf !== prefs.labs) p += 500;
     });
@@ -708,10 +720,10 @@
     const all = [];
     timed.forEach((c) => c.groups.forEach((g) => { g.n = all.length; all.push(g); }));
     const ok = all.map((a) => all.map((b) => !timesClash(a.times, b.times)));
-    const results = PROFILES.map(() => []);
+    const results = PROF.map(() => []);
     const seen = new Set();
-    PROFILES.forEach((p) => {
-      const own = (g) => p.score(metrics(g.times)) + penalty(metrics(g.times), [g], prefs);
+    PROF.forEach((p) => {
+      const own = (g) => p.score(metrics(g.times)) + penalty(metrics(g.times), [g], prefs, p);
       const order = timed.map((c) => c.groups.slice().sort((a, b) => own(a) - own(b)));
       const start = performance.now();
       const pick = [];
@@ -726,8 +738,8 @@
           if (seen.has(sig)) return;
           seen.add(sig);
           const m = metrics(pick.flatMap((g) => g.times));
-          const pen = penalty(m, pick, prefs);
-          PROFILES.forEach((q, qi) => {
+          PROF.forEach((q, qi) => {
+            const pen = penalty(m, pick, prefs, q);
             const list = results[qi];
             list.push({ score: q.score(m) + pen, pen, m, sig, groups: pick.slice() });
             if (list.length > 400) { list.sort((a, b) => a.score - b.score); list.length = 200; }
@@ -749,7 +761,7 @@
   // pick the concrete classes for a set of timings: liked faculty, then PRP, never avoided
   function materialize(sol, untimed) {
     const ids = [], alt = {};
-    const rank = (o) => { const ks = optClasses(o); return ks.reduce((a, k) => a + facPref(k.faculty) * 10 + (k.prp ? 1 : 0), 0); };
+    const rank = (o) => { const ks = optClasses(o); return ks.reduce((a, k) => a + facPref(k.faculty) * 10 + facRating(k.faculty) * 3 + (k.prp ? 1 : 0), 0); };
     sol.groups.forEach((g) => {
       const sorted = g.opts.slice().sort((a, b) => rank(b) - rank(a));
       ids.push(...sorted[0]);
@@ -771,7 +783,7 @@
     if (res.missing) return { error: `No options left for ${res.missing.map((c) => COURSES[c].title).join(", ")}.` };
     if (!res.results.some((l) => l.length)) return { error: "These courses can't all fit without a clash. Try removing one." };
     const taken = new Set();
-    const plans = PROFILES.map((p, pi) => {
+    const plans = PROF.map((p, pi) => {
       const list = res.results[pi];
       const main = list.find((r) => !taken.has(r.sig));
       if (!main) return null;
@@ -801,6 +813,7 @@
 
   function generatePlans() {
     const prefs = genPrefs();
+    PROF = hasReviews() ? PROFILES.concat(RATED) : PROFILES;
     const base = state.genCourses.filter((c) => COURSES[c]);
     const out = { base: generateScenario(base, prefs), extra: null, extraCode: null, view: "base" };
     if (prefs.extra && COURSES[prefs.extra] && !base.includes(prefs.extra)) {
@@ -879,7 +892,7 @@
         <button class="btn lav" data-act="pimport">Import a code</button>
         ${plan().sel.length ? `<button class="btn salmon" data-act="pclear">Clear active plan</button>` : ""}
       </div>
-      <p class="footer-note">*Credits are estimates: theory + lab 4, theory only 3, online 2.</p>`;
+      <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
   }
 
   function renderGen(res) {
@@ -906,7 +919,7 @@
     };
     return `<div class="card tight" style="margin-bottom:14px"><div class="scroll-x"><table class="cmp">
       <thead><tr><th></th><th>Without ${esc(xName)}</th><th>With ${esc(xName)}</th></tr></thead>
-      <tbody>${PROFILES.map(row).join("")}</tbody></table></div></div>`;
+      <tbody>${PROF.map(row).join("")}</tbody></table></div></div>`;
   }
   function genCard(p, i, scenKey) {
     const key = scenKey + i;
@@ -919,7 +932,7 @@
     const lanes = [{ name: p.profile.name, color: p.profile.color, times: labelled(ks) }];
     const base = p.options[0];
     const changed = vi ? o.groups.filter((g, gi) => g !== base.groups[gi]).map((g) => `${COURSES[g.code].title} → ${g.key.replace("|", " + ")}`) : [];
-    const likedFac = ks.filter((k) => facPref(k.faculty) > 0).map((k) => titleCase(k.faculty));
+    const likedFac = [...new Set(ks.filter((k) => facPref(k.faculty) > 0).map((k) => k.faculty))];
     return `<div class="card gen">
       <div class="gen-head" style="background:${p.profile.color}">
         <div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div>
@@ -934,7 +947,7 @@
         <span class="chip ${o.m.late ? "peach" : "mint"}">${o.m.late} after 5 PM</span>
         <span class="chip lav">${Math.round(o.m.gaps / 60)} h gaps</span>
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
-        ${likedFac.length ? `<span class="chip mint">★ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
+        ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
       </div>
       <div class="card" style="padding:8px 6px;box-shadow:none">${gantt(lanes, activeDays([lanes[0].times]), { labels: true, compact: true })}</div>
       <details class="gen-list"><summary>Faculty and slots</summary>
@@ -942,7 +955,7 @@
           const cs = ks.filter((k) => k.code === code);
           const alt = o.alt[code] || [];
           return `<div class="gen-row"><b>${esc(COURSES[code].title)}</b>
-            <div class="small">${facPref(cs[0].faculty) > 0 ? "★ " : ""}${esc(titleCase(cs[0].faculty))} · ${cs.map((k) => `${esc(k.slots === "NIL" ? "Online" : k.slots)}${k.times.length ? ` (${esc(k.venue)}${k.prp ? "" : ", outside PRP"})` : ""}`).join(" + ")}</div>
+            <div class="small">${facPref(cs[0].faculty) > 0 ? "♥ " : ""}${facRating(cs[0].faculty) ? "(" + facRating(cs[0].faculty) + "/5) " : ""}${esc(titleCase(cs[0].faculty))} · ${cs.map((k) => `${esc(k.slots === "NIL" ? "Online" : k.slots)}${k.times.length ? ` (${esc(k.venue)}${k.prp ? "" : ", outside PRP"})` : ""}`).join(" + ")}</div>
             ${cs.filter((k) => k.times.length).map((k) => `<div class="small muted">${k.group === "lab" ? "Lab" : "Theory"}: ${whenText(k.times)}</div>`).join("")}
             ${alt.length ? `<div class="small muted">Same timing also with ${esc(alt.slice(0, 4).join(", "))}${alt.length > 4 ? ` +${alt.length - 4} more` : ""}</div>` : ""}</div>`;
         }).join("")}
@@ -960,7 +973,7 @@
     const c = teachCourse && COURSES[teachCourse];
     const facs = c ? [...new Set(c.ids.map((i) => CLASSES[i].faculty))].sort() : [];
     const q = teachQuery.trim().toLowerCase();
-    const marked = Object.entries(state.fac || {}).filter(([, v]) => v.pref || v.note);
+    const marked = Object.entries(state.fac || {}).filter(([, v]) => v.pref || v.note || v.rating);
     return `
       ${topbar("Teachers", true)}
       <p class="page-sub">Mark teachers you want or want to avoid. Smart Plans uses this right away.</p>
@@ -972,28 +985,37 @@
         return `<div class="card tight teacher ${v.pref > 0 ? "liked" : v.pref < 0 ? "avoid" : ""}">
           <div class="t-row"><div><b>${esc(titleCase(f))}</b><div class="small muted">${esc(slots)}</div></div>
             <div style="display:flex;gap:6px">
-              <button class="btn sm ${v.pref > 0 ? "mint" : ""}" data-act="tpref" data-name="${esc(f)}" data-v="1">★ Want</button>
+              <button class="btn sm ${v.pref > 0 ? "mint" : ""}" data-act="tpref" data-name="${esc(f)}" data-v="1">♥ Want</button>
               <button class="btn sm ${v.pref < 0 ? "salmon" : ""}" data-act="tpref" data-name="${esc(f)}" data-v="-1">Avoid</button>
             </div></div>
+          <div class="t-rate">Rating ${[1, 2, 3, 4, 5].map((n) => `<button class="star ${v.rating >= n ? "on" : ""}" data-act="trate" data-name="${esc(f)}" data-v="${n}" aria-label="${n} stars">★</button>`).join("")}</div>
           <input class="input note-in" data-name="${esc(f)}" placeholder="Review or note (optional)" value="${esc(v.note || "")}" maxlength="200">
         </div>`;
       }).join("") || `<div class="card empty"><div class="big">No match</div></div>`}</div>` : `<div class="card empty"><div class="big">No courses</div><div class="muted">Add courses in Smart Plans first.</div></div>`}
       <hr class="rule">
       <div class="card">
         <h2 class="section-title">Paste a list</h2>
-        <p class="small muted" style="margin:0 0 8px">One name per line. Start a line with + to want that teacher or - to avoid them. Anything after a colon is saved as a note, e.g. "+ Sudha S: explains well".</p>
-        <textarea class="input" id="tpaste" rows="5" placeholder="+ Sudha S: explains well&#10;- Some Name: strict marking"></textarea>
+        <p class="small muted" style="margin:0 0 8px">One teacher per line: name | rating out of 5 | review. Start with + to want them or - to avoid them, e.g. "+ Sudha S | 4.5 | explains well". "Name: note" works too.</p>
+        <textarea class="input" id="tpaste" rows="5" placeholder="+ Sudha S | 4.5 | explains well&#10;- Some Name | 2 | strict marking"></textarea>
         <div class="row" style="justify-content:flex-start"><button class="btn lime" data-act="tapply">Apply list</button>
           ${marked.length ? `<button class="btn lav" data-act="tcopy">${icon("copy", 16)} Copy my list</button><button class="btn salmon" data-act="tclear">Clear all</button>` : ""}</div>
       </div>
       ${marked.length ? `<div class="card" style="margin-top:14px"><h2 class="section-title">Your list (${marked.length})</h2>
-        ${marked.map(([n, v]) => `<div class="small" style="padding:4px 0"><b>${v.pref > 0 ? "★" : v.pref < 0 ? "✕" : "•"} ${esc(titleCase(n))}</b>${v.note ? ` — ${esc(v.note)}` : ""}</div>`).join("")}</div>` : ""}`;
+        ${marked.map(([n, v]) => `<div class="small" style="padding:4px 0"><b>${v.pref > 0 ? "♥" : v.pref < 0 ? "✕" : "•"} ${esc(titleCase(n))}</b>${v.rating ? ` · ${v.rating}/5` : ""}${v.note ? ` — ${esc(v.note)}` : ""}</div>`).join("")}</div>` : ""}`;
   }
   const ALL_FACULTY = [...new Set(CLASSES.map((k) => k.faculty))];
   function applyTeacherList(text) {
     let hit = 0; const miss = [];
     text.split(/\n+/).map((l) => l.trim()).filter(Boolean).forEach((line) => {
-      const m = line.match(/^([+\-−]?)\s*([^:]+?)\s*(?::\s*(.*))?$/);
+      let m = line.match(/^([+\-−]?)\s*([^:|]+?)\s*(?::\s*(.*))?$/);
+      let rating = 0;
+      if (line.includes("|")) {
+        const parts = line.split("|").map((x) => x.trim());
+        const sign = parts[0].match(/^([+\-−]?)\s*(.*)$/);
+        const num = parts.slice(1).find((x) => /^\d(\.\d+)?(\s*\/\s*5)?$/.test(x));
+        rating = num ? Math.max(1, Math.min(5, Math.round(parseFloat(num) * 2) / 2)) : 0;
+        m = [line, sign[1], sign[2], parts.slice(1).filter((x) => x !== num && x !== "-").join(" · ")];
+      }
       if (!m) return;
       const want = m[1] === "+" ? 1 : m[1] ? -1 : 0;
       const name = m[2].toLowerCase().replace(/[.\s]+/g, " ").trim();
@@ -1003,6 +1025,7 @@
         const v = (state.fac[f] = state.fac[f] || {});
         if (want || !v.pref) v.pref = want || v.pref || 0;
         if (m[3]) v.note = m[3];
+        if (rating) v.rating = rating;
         hit++;
       });
     });
@@ -1178,8 +1201,14 @@
         f.pref = f.pref === v ? 0 : v;
         genResult = null; save(); render(); return;
       }
+      case "trate": {
+        const n = el.dataset.name, v = Number(el.dataset.v);
+        const f = (state.fac[n] = state.fac[n] || {});
+        f.rating = f.rating === v ? 0 : v;
+        genResult = null; save(); render(); return;
+      }
       case "tapply": applyTeacherList($("#tpaste").value); genResult = null; render(); return;
-      case "tcopy": copy(Object.entries(state.fac).filter(([, v]) => v.pref || v.note).map(([n, v]) => `${v.pref > 0 ? "+" : v.pref < 0 ? "-" : ""} ${titleCase(n)}${v.note ? ": " + v.note : ""}`.trim()).join("\n")); return;
+      case "tcopy": copy(Object.entries(state.fac).filter(([, v]) => v.pref || v.note || v.rating).map(([n, v]) => `${v.pref > 0 ? "+" : v.pref < 0 ? "-" : ""} ${titleCase(n)} | ${v.rating || "-"} | ${v.note || ""}`.trim()).join("\n")); return;
       case "tclear": confirmModal("Clear teacher list?", "This removes every want, avoid and note.", "Clear", () => { state.fac = {}; genResult = null; save(); }); return;
       case "pactive": state.active = pl.id; save(); render(); toast(`Now using ${pl.name}`); return;
       case "pcopy": { const id2 = uid(); state.plans.push({ id: id2, name: (pl.name + " copy").slice(0, 40), sel: pl.sel.slice() }); save(); render(); toast("Duplicated"); return; }
