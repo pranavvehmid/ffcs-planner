@@ -854,13 +854,17 @@
     if (pr.lunchSkip < 99 && L.lunchDays > pr.lunchSkip) unavoid.push(`skipping lunch on ${L.lunchDays} days (you said ${pr.lunchSkip})`);
     if (pr.endBy < 99 && L.lastEnd > pr.endBy * 60) unavoid.push(`finishing after ${pr.endBy - 12} PM (earliest possible ${fmt(L.lastEnd)})`);
     if (pr.labStretch === "prefer" && L.labGap > 30) unavoid.push("a gap between labs on some day");
+    if (pr.max9 < 9 && L.nineDays > pr.max9) unavoid.push(`${L.nineDays} days starting between 9 and 10 AM (you said ${pr.max9})`);
+    if (pr.labFree > 0 && L.noLabDays < pr.labFree) unavoid.push(`at most ${L.noLabDays} lab-free day${L.noLabDays === 1 ? "" : "s"} (you asked for ${pr.labFree})`);
+    if (pr.maxLabs < 9 && L.maxLabsDay > pr.maxLabs) unavoid.push(`at least ${L.maxLabsDay} labs on some day (you said up to ${pr.maxLabs})`);
     if (unavoid.length) notes.push(`With your must-haves, every possible timetable means ${esc(unavoid.join(" and "))}, so no plan can avoid that. Loosening a must-have (for example one more 8 AM day) can fix it.`);
     const K = scen.limitsKeep || {};
     if (!unavoid.length && pr.lunchSkip < 99 && K.lunchDays > pr.lunchSkip && L.lunchDays <= pr.lunchSkip)
       notes.push(`Keeping your lab split (${pr.labFree ? pr.labFree + " lab-free days, " : ""}up to ${pr.maxLabs < 9 ? pr.maxLabs : "any"} labs a day) means skipping lunch on ${K.lunchDays} days. Plans 1–4 keep the split, so they skip lunch ${K.lunchDays} days; only a different split could get it down to ${L.lunchDays}.`);
+    if (scen.capped) notes.push(`Your answers allow over ${scen.count.toLocaleString("en-IN")} timetables, so the planner stopped there to keep your phone from running out of memory. Tightening a must-have (like the 8 AM limit or morning labs) gives a complete check.`);
     if (scen.amMiss.length) notes.push(`${esc(scen.amMiss.map((c) => COURSES[c].title).join(", "))} can't follow the morning-labs pattern, so it keeps its other timing.`);
     if (notes.length) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> ${notes.join(" ")}</div>`;
-    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked all ${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;
+    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.capped ? "" : "all "}${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;
     html += `<div class="gen-grid">${scen.plans.map((p, i) => genCard(p, i, res.view === "extra" ? "x" : "b")).join("")}</div>`;
     return html + "</div>";
   }

@@ -226,7 +226,7 @@
       const max8 = rules.max8 < 9 ? rules.max8 : 99;
       const maxLabs = rules.maxLabs < 9 ? rules.maxLabs : 99;
       const maxLabDays = rules.labFree > 0 ? 5 - rules.labFree : 99;
-      const CAP = 1500000;
+      const CAP = 700000; // memory guard for phones; the page says when this kicks in
       const raw = [];
       const pick = [];
       const lab = [0, 0, 0, 0, 0, 0, 0];
@@ -285,12 +285,18 @@
       if (prefs.maxLabs < 9) split += m.labsPerDay.reduce((a, x) => a + Math.max(0, x - prefs.maxLabs), 0) * 6000;
       const layout = m.labsPerDay.slice(0, 5).join(",");
       gs.forEach((g) => { if (g.liked) liked++; rate += g.rating - 2.5; });
-      sols[i] = { idx: i, groups: gs, m, sig: gs.map((g) => g.n).join("/"), soft, stretch, split, layout, liked, rate, key: new Map(gs.map((g) => [g.code, g.key])) };
+      // keep only the numbers the plan styles need: there can be close to a million timetables
+      const mm = { gaps: m.gaps, early: m.early, late: m.late, days: m.days, earlyDays: m.earlyDays, nineDays: m.nineDays, lunchDays: m.lunchDays,
+        hours: m.hours, lastEnd: m.lastEnd, after6: m.after6, after7: m.after7, labDays: m.labDays, noLabDays: m.noLabDays, maxLabsDay: m.maxLabsDay,
+        labGap: m.labGap, lightMins: m.lightMins, heavy2: m.heavy2, startLate: m.startLate, endLate: m.endLate };
+      res.raw[i] = null;
+      sols[i] = { idx: i, groups: gs, m: mm, sig: gs.map((g) => g.n).join("/"), soft, stretch, split, layout, liked, rate };
       if (i % 4000 === 0) progress(`Scoring ${n.toLocaleString("en-IN")} timetables…`, 5 + (i / n) * 55);
     }
     let minSplit = Infinity;
     for (const s2 of sols) if (s2.split < minSplit) minSplit = s2.split;
-    const diffCount = (a, b) => { let d = 0; a.groups.forEach((g) => { if (b.key.get(g.code) !== g.key) d++; }); return d; };
+    // every timetable lists its courses in the same order, so compare position by position
+    const diffCount = (a, b) => { let d = 0; for (let i = 0; i < a.groups.length; i++) if (a.groups[i] !== b.groups[i]) d++; return d; };
     function scoreFor(p, s) {
       const relax = p.id === "labdays" || p.id === "heavy" ? 0.15 : 1;
       const splitW = p.id === "labdays" ? 0.05 : p.id === "heavy" ? 0.1 : 1;
@@ -387,7 +393,7 @@
         usedSigs.add(v2.sig);
         const vo = materialize(v2);
         vo.label = "Variation 2";
-        vo.changed = v2.groups.filter((g) => main.key.get(g.code) !== g.key).map((g) => [g.code, g.key]);
+        vo.changed = v2.groups.filter((g, gi) => main.groups[gi] !== g).map((g) => [g.code, g.key]);
         options.push(vo);
       }
       if (prefs.labs !== "am") {
@@ -396,7 +402,7 @@
           usedSigs.add(am.sig);
           const ao = materialize(am);
           ao.label = "Morning labs";
-          ao.changed = am.groups.filter((g) => main.key.get(g.code) !== g.key).map((g) => [g.code, g.key]);
+          ao.changed = am.groups.filter((g, gi) => main.groups[gi] !== g).map((g) => [g.code, g.key]);
           options.push(ao);
         }
       }
@@ -416,6 +422,8 @@
     // the best any timetable can do on each softer answer, so the page can say when a bend is unavoidable
     const limits = { lunchDays: Infinity, nineDays: Infinity, lastEnd: Infinity, labGap: Infinity };
     for (const s2 of sols) for (const k in limits) if (s2.m[k] < limits[k]) limits[k] = s2.m[k];
+    limits.noLabDays = sols.reduce((a, x) => Math.max(a, x.m.noLabDays), 0);
+    limits.maxLabsDay = sols.reduce((a, x) => Math.min(a, x.m.maxLabsDay), Infinity);
     const limitsKeep = { lunchDays: Infinity, nineDays: Infinity, lastEnd: Infinity, labGap: Infinity };
     for (const s2 of sols) if (s2.split <= minSplit) for (const k in limitsKeep) if (s2.m[k] < limitsKeep[k]) limitsKeep[k] = s2.m[k];
     progress("Done", 100);
