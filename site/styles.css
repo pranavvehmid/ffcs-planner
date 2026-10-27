@@ -231,14 +231,19 @@ textarea.input { border-radius: 16px; resize: vertical; min-height: 70px; font-f
 
 /* ---------- class option cards ---------- */
 .opt {
-  display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center;
   border: var(--b); border-radius: 18px; background: var(--white); box-shadow: var(--shadow);
-  padding: 12px 14px;
+  padding: 12px 14px; display: flex; flex-direction: column; gap: 8px;
 }
 .opt.sel { background: #f3ffc0; }
 .opt.clash { background: #fff3f3; }
-.opt .slot { font-family: var(--display); font-weight: 800; font-size: 16px; margin-bottom: 6px; word-break: break-word; }
-.opt .why { font-size: 12px; font-weight: 700; margin-top: 6px; }
+.opt-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.opt-fac { font-family: var(--display); font-weight: 800; font-size: 15px; line-height: 1.2; }
+.opt-part { border-top: 1.5px dashed rgba(0,0,0,.35); padding-top: 8px; }
+.opt .when { font-size: 12.5px; font-weight: 800; margin-top: 6px; }
+.opt .why, .why { font-size: 12px; font-weight: 700; margin-top: 6px; color: #a10000; }
+.opt .note { font-size: 12px; font-weight: 700; background: var(--peach); border: 2px solid var(--black); border-radius: 12px; padding: 5px 9px; }
+.opt-foot { display: flex; justify-content: flex-end; margin-top: 2px; }
+.chip .x { border: 0; background: none; padding: 0 0 0 4px; font-weight: 900; font-size: 12px; line-height: 1; }
 
 /* ---------- my course (collapsible) ---------- */
 .mc { padding: 0; overflow: hidden; }
@@ -291,7 +296,7 @@ textarea.input { border-radius: 16px; resize: vertical; min-height: 70px; font-f
 .slotgrid td.day-sep { border-bottom-width: 2.5px; }
 
 /* ---------- schedule (gantt) ---------- */
-.gantt { padding: 12px 10px 10px; }
+.gantt { }
 .g-head, .g-row { display: grid; grid-template-columns: 26px 1fr; align-items: stretch; }
 .g-hours { position: relative; height: 18px; }
 .g-hours span { position: absolute; transform: translateX(-50%); font-size: 10px; font-weight: 700; }
@@ -301,7 +306,12 @@ textarea.input { border-radius: 16px; resize: vertical; min-height: 70px; font-f
 .g-lane { position: relative; height: 12px; margin: 3px 0; }
 .g-lines { position: absolute; inset: 0; pointer-events: none; }
 .g-lines i { position: absolute; top: 0; bottom: 0; border-left: 1px dashed rgba(0,0,0,.22); }
-.g-bar { position: absolute; top: 0; height: 12px; border: 1.5px solid var(--black); border-radius: 999px; }
+.g-bar { position: absolute; top: 0; height: 12px; border: 1.5px solid var(--black); border-radius: 999px; overflow: hidden; }
+.g-bar em { font-style: normal; font-size: 8.5px; font-weight: 800; line-height: 13px; display: block; text-align: center; white-space: nowrap; }
+.gantt.compact .g-row { min-height: 24px; }
+.gantt .g-bar.clash { outline: 2px solid var(--black); }
+.modal .gantt .g-lane, .gen .g-lane { height: 14px; }
+.modal .gantt .g-bar, .gen .g-bar { height: 14px; }
 .g-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 
 .friend {
@@ -324,6 +334,18 @@ textarea.input { border-radius: 16px; resize: vertical; min-height: 70px; font-f
   background: var(--lavender); border: 2px solid var(--black); border-radius: 14px;
   padding: 10px 12px; word-break: break-all; margin: 10px 0;
 }
+
+/* ---------- smart plans ---------- */
+.gen-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+.gen { padding: 0 14px 14px; overflow: hidden; }
+.gen-head { margin: 0 -14px; padding: 12px 14px; border-bottom: var(--b); display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.gen-head h3 { margin: 0; font-family: var(--display); font-weight: 900; font-size: 18px; }
+.gen-k { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em; }
+.gen-list { margin-top: 10px; }
+.gen-list summary { font-weight: 800; cursor: pointer; padding: 4px 0; }
+.gen-row { padding: 8px 0; border-top: 1.5px dashed rgba(0,0,0,.35); }
+select.input { appearance: none; cursor: pointer; }
+.modal { max-height: calc(100vh - 36px); overflow: auto; max-width: 560px; }
 
 /* ---------- plans ---------- */
 .plan { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
@@ -380,6 +402,7 @@ textarea.input { border-radius: 16px; resize: vertical; min-height: 70px; font-f
   .toast { bottom: 100px; }
   .two-col { display: grid; grid-template-columns: 1.15fr .85fr; gap: 22px; align-items: start; }
   .two-col > .rule { display: none; }
+  .gen-grid { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 1000px) {
   .grid2 { grid-template-columns: repeat(4, 1fr); }
