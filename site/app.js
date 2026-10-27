@@ -491,7 +491,7 @@
     const tabs = `<div class="tabs">${days.map((d) => `<button class="tab ${ttDay === d ? "active" : ""}" data-act="day" data-d="${d}">${DAYS[d]}</button>`).join("")}
       <button class="tab ${ttDay === "W" ? "active" : ""}" data-act="day" data-d="W">Weekly</button></div>`;
     if (!sel.length) return `${topbar("Timetable")}${tabs}<div class="card empty"><div class="big">Empty week</div><div class="muted">Add courses to see your timetable.</div><a class="btn lime" style="margin-top:14px" href="#/courses">Browse courses</a></div>`;
-    return `${topbar("Timetable")}${tabs}${ttDay === "W" ? weeklyGrid(sel, days) : dayView(sel, ttDay)}`;
+    return `${topbar("Timetable")}${tabs}<div style="text-align:center;margin:-6px 0 14px"><a class="btn sm cyan" href="${viewLink(plan().sel, plan().name)}" target="_blank" rel="noopener">${icon("cal", 14)} Open full timetable</a></div>${ttDay === "W" ? weeklyGrid(sel, days) : dayView(sel, ttDay)}`;
   }
 
   function dayView(sel, d) {
@@ -614,337 +614,45 @@
     return `<span class="chip mint big">${free} common free hours</span>`;
   }
 
-  /* ======================= smart plan generator ======================= */
-  // Preferences asked on the Plans page.
-  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "any", lunchSkip: 1, prp: "all", endBy: 99, extra: "BAESP101" };
+  /* ======================= smart plans (engine in planner.js, run in a Web Worker) ======================= */
+  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "am", labFree: 2, maxLabs: 2, labStretch: "prefer", lunchSkip: 1, prp: "all", endBy: 99, extra: "BAESP101" };
   const genPrefs = () => {
     const p = Object.assign({}, GEN_DEFAULTS, state.gen || {});
     if (state.gen && state.gen.lunchSkip === undefined && state.gen.lunch !== undefined) p.lunchSkip = state.gen.lunch ? 0 : 99;
+    if (p.labs !== "am" && p.labs !== "any") p.labs = "am"; // evening labs are no longer offered
     return p;
   };
   const facPref = (name) => (state.fac && state.fac[name] && state.fac[name].pref) || 0;
   const LUNCH_END = t("13:20"), AFTERNOON = t("14:00");
-
-  // Each course's options are grouped by their exact times, so the search only
-  // looks at distinct timings; the faculty is picked afterwards.
-  function timingGroups(code, prefs, strict, excl) {
-    const c = COURSES[code];
-    const groups = {};
-    c.options.forEach((o) => {
-      const ks = optClasses(o);
-      if (excl && ks.some((k) => excl.has(k.faculty))) return; // teachers used by an earlier plan
-      if (c.embedded && o.length < 2) return; // unpaired leftovers
-      const allPRP = ks.every((k) => k.prp || !k.times.length);
-      const avoided = ks.some((k) => facPref(k.faculty) < 0);
-      const lab = ks.find((k) => k.group === "lab");
-      if (strict) {
-        if (prefs.prp === "all" && !allPRP) return;
-        if (avoided) return;
-        if (lab && c.embedded && prefs.labs !== "any" && halfOf(lab) !== prefs.labs) return;
-      }
-      if (strict && prefs.endBy < 99 && optTimes(o).some((x) => x.e > prefs.endBy * 60)) return;
-      const key = ks.map((k) => k.slots).join("|");
-      const g = groups[key] || (groups[key] = { key, code, times: optTimes(o), opts: [], prpOK: false, liked: false, labHalf: lab ? halfOf(lab) : null, avoidedOnly: true });
-      g.opts.push(o);
-      if (allPRP) g.prpOK = true;
-      if (ks.some((k) => facPref(k.faculty) > 0)) g.liked = true;
-      g.rating = Math.max(g.rating || 0, effRating(ks[0].faculty));
-      if (!avoided) g.avoidedOnly = false;
-    });
-    return Object.values(groups).map((g) => {
-      // day masks used to prune the search quickly
-      let m8 = 0, end13 = 0, start14 = 0;
-      blocksOf(g.times).forEach((b) => {
-        if (b.s <= t("08:00")) m8 |= 1 << b.d;
-        if (b.e >= t("12:30") && b.e <= LUNCH_END) end13 |= 1 << b.d;
-        if (b.s >= AFTERNOON && b.s < t("14:10")) start14 |= 1 << b.d;
-      });
-      return Object.assign(g, { m8, end13, start14 });
-    });
-  }
-  const bits = (x) => { let n = 0; while (x) { n += x & 1; x >>= 1; } return n; };
-
-  function metrics(times) {
-    const blocks = blocksOf(times);
-    let gaps = 0, early = 0, late = 0;
-    const days = new Set(), earlyDays = new Set(), first = {}, ends1320 = new Set(), starts14 = new Set();
-    blocks.forEach((b, i) => {
-      days.add(b.d);
-      if (first[b.d] === undefined) first[b.d] = b.s;
-      if (b.s <= 480) { early++; earlyDays.add(b.d); }
-      if (b.e > 17 * 60) late++;
-      if (b.e >= t("12:30") && b.e <= LUNCH_END) ends1320.add(b.d);
-      if (b.s >= AFTERNOON && b.s < t("14:10")) starts14.add(b.d);
-      const prev = blocks[i - 1];
-      if (prev && prev.d === b.d) {
-        let g = b.s - prev.e;
-        if (prev.e <= LUNCH_END && b.s >= AFTERNOON) g -= 40; // lunch is not a gap
-        gaps += Math.max(0, g);
-      }
-    });
-    const nineDays = Object.values(first).filter((s) => s >= t("09:00") && s <= t("10:00")).length;
-    const lunchDays = [...ends1320].filter((d) => starts14.has(d)).length;
-    const hours = Math.round(blocks.reduce((a, b) => a + b.e - b.s, 0) / 60);
-    const lastEnd = blocks.reduce((a, b) => Math.max(a, b.e), 0);
-    const after = (h) => blocks.filter((b) => b.e > h * 60).length;
-    // lab-free days and how lopsided the week is
-    const labDaySet = new Set(times.filter((x) => x.kind === "lab").map((x) => x.d));
-    const labDays = labDaySet.size;
-    const noLabDays = [0, 1, 2, 3, 4].filter((d) => !labDaySet.has(d)).length;
-    const perDay = [0, 1, 2, 3, 4, 5, 6].map((d) => blocks.filter((b) => b.d === d).reduce((a, b) => a + b.e - b.s, 0));
-    const sorted = perDay.slice().sort((a, b) => b - a);
-    const lightMins = sorted.slice(2).reduce((a, b) => a + b, 0);
-    const heavy2 = sorted[0] + sorted[1];
-    return { gaps, early, late, days: days.size, earlyDays: earlyDays.size, nineDays, lunchDays, hours, lastEnd, after6: after(18), after7: after(19), labDays, noLabDays, lightMins, heavy2, perDay };
-  }
-  const PROFILES = [
-    { id: "compact", name: "Compact days", blurb: "Fewest gaps between classes, so you're not waiting around campus.", color: "var(--lime)",
-      score: (m) => m.gaps * 1.0 + m.early * 15 + m.late * 15 + m.days * 20 },
-    { id: "mornings", name: "Easy mornings", blurb: "Starts your days as late as it can, within your 8 AM limit.", color: "var(--mint)",
-      score: (m) => m.early * 150 + m.nineDays * 60 + m.gaps * 0.5 + m.late * 5 },
-    { id: "evenings", name: "Done early", blurb: "Finishes your days as early as it can, keeping evenings free.", color: "var(--cyan)",
-      score: (m) => m.late * 150 + m.gaps * 0.5 + m.early * 5 },
-  ];
-  const RATED = { id: "rated", name: "Top-rated teachers", blurb: "Picks the best-reviewed teachers you rated, then keeps the days tidy.", color: "var(--pink)",
-    score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 };
-  const LABDAYS = { id: "labdays", name: "Lab-free days", blurb: "Packs your labs into as few days as possible, so the other days are theory only. May cross your limits to do it.", color: "var(--lavender)",
-    score: (m) => m.labDays * 600 + m.gaps * 0.4 + m.early * 5 + m.late * 5 };
-  const HEAVY = { id: "heavy", name: "Two heavy days", blurb: "Crowds two days so the rest of the week is light. May cross your limits to do it.", color: "var(--peach)",
-    score: (m) => m.lightMins * 1.2 - m.heavy2 * 0.2 + m.gaps * 0.15 };
-  const commChip = (name) => { const c = commOf(name); return c ? ` <span class="chip pink" title="Student review site rating">${c[0]}/10 · ${c[1]} review${c[1] > 1 ? "s" : ""}</span>` : ""; };
+  const metrics = window.FFCSPlanner.metrics;
+  const BOARD_MARKS = (window.FFCS_RATINGS && window.FFCS_RATINGS.board) || {};
+  const boardChip = (name) => { const b = BOARD_MARKS[name]; return b ? ` <span class="chip ${b[0] === "star" ? "lime" : b[0] === "avoid" ? "salmon" : "lav"}" title="Mark from FFCS Board (study material, strictness)">${b[0] === "star" ? "★ Board pick" : b[0] === "avoid" ? "Board: avoid" : "Board: okay"}</span>` : ""; };
+  const commChip = (name) => { const c = commOf(name); return (c ? ` <span class="chip pink" title="Student review site rating">${c[0]}/10 · ${c[1]} review${c[1] > 1 ? "s" : ""}</span>` : "") + boardChip(name); };
   const facRating = (name) => { const f = state.fac && state.fac[name]; return f && f.rating ? Number(f.rating) : 0; };
   // Community ratings (out of 10) from a student review site; used when you haven't rated someone.
   const COMM = (window.FFCS_RATINGS && window.FFCS_RATINGS.faculty) || {};
   const commOf = (name) => COMM[name] || null;
-  // effective score out of 5, 2.5 = neutral / unknown
-  const effRating = (name) => {
-    const mine = facRating(name);
-    if (mine) return mine;
-    const c = commOf(name);
-    if (!c) return 2.5;
-    const conf = Math.min(1, c[1] / 4); // few reviews count for less
-    return Math.max(1, Math.min(5, 2.5 + (c[0] - 5) * 1.6 * conf));
-  };
-  const hasReviews = () => Object.keys(COMM).length > 0 || Object.values(state.fac || {}).some((f) => f.rating || f.pref > 0);
-  let PROF = PROFILES;
-  function penalty(m, groups, prefs, prof) {
-    let p = 0;
-    if (prof && prof.id === "rated") groups.forEach((g) => { p -= ((g.rating || 2.5) - 2.5) * 220 + (g.liked ? 150 : 0); });
-    if (prefs.max8 < 9) p += Math.max(0, m.earlyDays - prefs.max8) * 1500;
-    if (prefs.endBy < 99) p += (prefs.endBy === 18 ? m.after6 : m.after7) * 900;
-    if (prefs.max9 < 9) p += Math.max(0, m.nineDays - prefs.max9) * 700;
-    if (prefs.lunchSkip < 99) p += Math.max(0, m.lunchDays - prefs.lunchSkip) * 1200;
-    groups.forEach((g) => {
-      if (!g.prpOK) p += prefs.prp === "all" ? 900 : 25;
-      if (g.liked) p -= 200;
-      p -= ((g.rating || 2.5) - 2.5) * 40;
-      if (g.avoidedOnly) p += 2000;
-      if (prefs.labs !== "any" && g.labHalf && g.labHalf !== prefs.labs) p += 500;
-    });
-    return p;
-  }
+  const labCount = (codes) => codes.reduce((a, c) => a + (COURSES[c] && COURSES[c].embedded
+    ? Math.max(...COURSES[c].ids.map((i) => CLASSES[i]).filter((k) => k.group === "lab").map((k) => k.slotList.length / 2)) : 0), 0);
 
-  function search(codes, prefs, strict, budget, only, excl) {
-    const courses = codes.map((code) => ({ code, groups: timingGroups(code, prefs, strict, excl) }));
-    const missing = courses.filter((c) => !c.groups.length).map((c) => c.code);
-    if (missing.length) return { missing };
-    const timed = courses.filter((c) => c.groups.some((g) => g.times.length));
-    const untimed = courses.filter((c) => !c.groups.some((g) => g.times.length));
-    timed.sort((a, b) => a.groups.length - b.groups.length);
-    const all = [];
-    timed.forEach((c) => c.groups.forEach((g) => { g.n = all.length; all.push(g); }));
-    const ok = all.map((a) => all.map((b) => !timesClash(a.times, b.times)));
-    const results = PROF.map(() => []);
-    const seen = new Set();
-    PROF.forEach((p, pIdx) => {
-      if (only !== undefined && pIdx !== only) return;
-      const own = (g) => p.score(metrics(g.times)) + penalty(metrics(g.times), [g], prefs, p);
-      const order = timed.map((c) => c.groups.slice().sort((a, b) => own(a) - own(b)));
-      const start = performance.now();
-      const pick = [];
-      (function dfs(i, m8, e13, s14) {
-        if (performance.now() - start > budget) return;
-        if (strict) {
-          if (prefs.max8 < 9 && bits(m8) > prefs.max8) return;
-          if (prefs.lunchSkip < 99 && bits(e13 & s14) > prefs.lunchSkip) return;
-        }
-        if (i === timed.length) {
-          const sig = pick.map((g) => g.n).join("/");
-          if (seen.has(sig)) return;
-          seen.add(sig);
-          const m = metrics(pick.flatMap((g) => g.times));
-          PROF.forEach((q, qi) => {
-            const pen = penalty(m, pick, prefs, q);
-            const list = results[qi];
-            list.push({ score: q.score(m) + pen, pen, m, sig, groups: pick.slice() });
-            if (list.length > 400) { list.sort((a, b) => a.score - b.score); list.length = 200; }
-          });
-          return;
-        }
-        for (const g of order[i]) {
-          if (!pick.every((h) => ok[h.n][g.n])) continue;
-          pick.push(g);
-          dfs(i + 1, m8 | g.m8, e13 | g.end13, s14 | g.start14);
-          pick.pop();
-        }
-      })(0, 0, 0, 0);
-    });
-    results.forEach((l) => l.sort((a, b) => a.score - b.score));
-    return { results, count: seen.size, timed, untimed };
-  }
-
-  // Focused search for the "Lab-free days" and "Two heavy days" plans. Instead of hoping the
-  // general search stumbles on a good week, it fixes which days may hold labs (or which two
-  // days are the heavy ones), tries every choice, and keeps the best. Your limits become soft
-  // here, so these plans may cross them; the card says where.
-  const WEEKDAY_SETS = (() => {
-    const out = [];
-    for (let m = 1; m < 32; m++) out.push(m);
-    return out;
-  })();
-  function bestFocused(codes, prefs, p, excl, budgetEach) {
-    const base = codes.map((code) => ({ code, groups: timingGroups(code, prefs, false, excl) }));
-    if (base.some((c) => !c.groups.length)) return null;
-    const timedAll = base.filter((c) => c.groups.some((g) => g.times.length));
-    const untimed = base.filter((c) => !c.groups.some((g) => g.times.length));
-    const masks = WEEKDAY_SETS.filter((m) => (p.id === "heavy" ? bits(m) === 2 : bits(m) >= 2 && bits(m) <= 3));
-    let best = null;
-    const inMask = (mask, d) => (mask >> d) & 1;
-    for (const mask of masks) {
-      let timed = timedAll.map((c) => ({ code: c.code, groups: c.groups }));
-      if (p.id === "labdays") {
-        timed = timed.map((c) => ({ code: c.code, groups: c.groups.filter((g) => g.times.every((x) => x.kind !== "lab" || inMask(mask, x.d))) }));
-        if (timed.some((c) => !c.groups.length)) continue;
-      }
-      const outside = (g) => g.times.reduce((a, x) => a + (inMask(mask, x.d) ? 0 : x.e - x.s), 0);
-      const solo = (g) => (p.id === "heavy" ? outside(g) : p.score(metrics(g.times)) * 0.01) + penalty(metrics(g.times), [g], prefs, p) * 0.08;
-      timed.sort((a, b) => a.groups.length - b.groups.length);
-      const order = timed.map((c) => c.groups.slice().sort((a, b) => solo(a) - solo(b)));
-      const start = performance.now();
-      const pick = [];
-      (function dfs(i) {
-        if (performance.now() - start > budgetEach) return;
-        if (i === timed.length) {
-          const m = metrics(pick.flatMap((g) => g.times));
-          const score = p.score(m) + penalty(m, pick, prefs, p) * 0.08;
-          if (!best || score < best.score) best = { score, m, sig: "F" + pick.map((g) => g.code + g.key).join("/"), groups: pick.slice() };
-          return;
-        }
-        for (const g of order[i]) {
-          if (!pick.every((h) => !timesClash(h.times, g.times))) continue;
-          pick.push(g);
-          dfs(i + 1);
-          pick.pop();
-        }
-      })(0);
-    }
-    return best ? { sol: best, untimed } : null;
-  }
-  // which of your answers a plan crosses
+  // which of your answers a timetable crosses
   function bendsOf(o, prefs) {
     const m = o.m, out = [];
+    const ks = o.ids.map((i) => CLASSES[i]);
     if (prefs.max8 < 9 && m.earlyDays > prefs.max8) out.push(`${m.earlyDays} days with 8 AM (you said ${prefs.max8})`);
+    if (prefs.labFree > 0 && m.noLabDays < prefs.labFree) out.push(`${m.noLabDays} lab-free days (you wanted ${prefs.labFree})`);
+    if (prefs.maxLabs < 9 && m.maxLabsDay > prefs.maxLabs) out.push(`${m.maxLabsDay} labs on one day (you said up to ${prefs.maxLabs})`);
+    if (prefs.labs === "am") {
+      const wrong = ks.filter((k) => k.times.length && (k.group === "lab" ? halfOf(k) !== "am" : halfOf(k) !== "pm"));
+      if (wrong.length) out.push(`${wrong.map((k) => `${k.code} ${k.slots}`).join(", ")} not in the morning-labs pattern`);
+    }
     if (prefs.max9 < 9 && m.nineDays > prefs.max9) out.push(`${m.nineDays} days starting 9–10 AM (you said ${prefs.max9})`);
     if (prefs.lunchSkip < 99 && m.lunchDays > prefs.lunchSkip) out.push(`${m.lunchDays} days without lunch (you said ${prefs.lunchSkip})`);
     if (prefs.endBy < 99 && m.lastEnd > prefs.endBy * 60) out.push(`ends at ${fmt(m.lastEnd)} (you said by ${prefs.endBy - 12} PM)`);
-    const outPRP = o.ids.filter((i) => CLASSES[i].times.length && !CLASSES[i].prp).length;
+    if (prefs.labStretch === "prefer" && m.labGap > 30) out.push(`labs not back-to-back on some days (${Math.round(m.labGap / 60 * 10) / 10} h between labs)`);
+    const outPRP = ks.filter((k) => k.times.length && !k.prp).length;
     if (prefs.prp === "all" && outPRP) out.push(`${outPRP} class${outPRP > 1 ? "es" : ""} outside PRP`);
     return out;
-  }
-
-  // pick the concrete classes for a set of timings: liked faculty, then PRP, never avoided
-  function materialize(sol, untimed) {
-    const ids = [], alt = {};
-    const rank = (o) => { const ks = optClasses(o); return ks.reduce((a, k) => a + facPref(k.faculty) * 10 + (effRating(k.faculty) - 2.5) * 3 + (k.prp ? 1 : 0), 0); };
-    sol.groups.forEach((g) => {
-      const sorted = g.opts.slice().sort((a, b) => rank(b) - rank(a));
-      ids.push(...sorted[0]);
-      alt[g.code] = sorted.slice(1).filter((o) => rank(o) >= 0).map((o) => titleCase(CLASSES[o[0]].faculty));
-    });
-    untimed.forEach((c) => {
-      const sorted = c.groups.flatMap((g) => g.opts).sort((a, b) => rank(b) - rank(a));
-      ids.push(...sorted[0]);
-      alt[c.code] = [];
-    });
-    return { ...sol, ids, alt };
-  }
-  const diffCount = (a, b) => { const mb = new Map(b.groups.map((g) => [g.code, g.key])); return a.groups.filter((g) => mb.get(g.code) !== g.key).length; };
-
-  function generateScenario(codes, prefs) {
-    let res = search(codes, prefs, true, 300);
-    let relaxed = false;
-    if (res.missing || !res.results.some((l) => l.length)) { res = search(codes, prefs, false, 300); relaxed = true; }
-    // extra searches for an all-morning-labs and an all-evening-labs version of each plan
-    const labRuns = ["am", "pm"].map((half) => {
-      const lp = Object.assign({}, prefs, { labs: half });
-      let r = search(codes, lp, true, 110);
-      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 110); r.bestFit = true; }
-      return r.missing ? null : r;
-    });
-    if (res.missing) return { error: `No options left for ${res.missing.map((c) => COURSES[c].title).join(", ")}.` };
-    if (!res.results.some((l) => l.length)) return { error: "These courses can't all fit without a clash. Try removing one." };
-    const taken = new Set();
-    const plans = PROF.map((p, pi) => {
-      const list = res.results[pi];
-      const focused = p.id === "labdays" || p.id === "heavy";
-      const fb = focused ? bestFocused(codes, prefs, p, null, 30) : null;
-      const main = (fb && fb.sol) || list.find((r) => !taken.has(r.sig));
-      if (!main) return null;
-      taken.add(main.sig);
-      // variations keep the plan's core and change one or two courses
-      const vars = [];
-      for (const r of list) {
-        if (vars.length === 2) break;
-        if (taken.has(r.sig)) continue;
-        const d = diffCount(r, main);
-        if (d >= 1 && d <= 2 && vars.every((v) => diffCount(v, r) >= 1)) { vars.push(r); taken.add(r.sig); }
-      }
-      for (const r of list) { if (vars.length === 2) break; if (!taken.has(r.sig)) { vars.push(r); taken.add(r.sig); } }
-      const missingLab = [];
-      const opts = [main, vars[0]].filter(Boolean).map((s, j) => Object.assign(materialize(s, j === 0 && fb ? fb.untimed : res.untimed), { label: j ? "Variation 2" : "Main" }));
-      labRuns.forEach((lr, li) => {
-        const half = li ? "pm" : "am";
-        const share = (r) => { const gs = r.groups.filter((g) => g.labHalf); return gs.length ? gs.filter((g) => g.labHalf === half).length / gs.length : 0; };
-        const pick = lr && lr.results[pi] && lr.results[pi].find((r) => !taken.has(r.sig) && !opts.some((o) => o.sig === r.sig) && (!lr.bestFit || share(r) >= 0.6));
-        if (!pick) { missingLab.push(li ? "evening" : "morning"); return; }
-        if (pick) { taken.add(pick.sig); opts.push(Object.assign(materialize(pick, lr.untimed), { label: (li ? "Evening labs" : "Morning labs") + (lr.bestFit ? "*" : "") })); }
-      });
-      // Backup plans B and C: same goals, but no teacher from the earlier plans
-      const backups = [];
-      const excl = new Set(opts[0].ids.map((id) => CLASSES[id].faculty));
-      for (let b = 0; b < 2; b++) {
-        if (focused) {
-          const f = bestFocused(codes, prefs, p, excl, 12);
-          if (!f) { backups.push({ missing: ["clash"] }); break; }
-          const mo = Object.assign(materialize(f.sol, f.untimed), { label: "Backup " + "BC"[b], fit: true });
-          backups.push(mo);
-          mo.ids.forEach((id) => excl.add(CLASSES[id].faculty));
-          continue;
-        }
-        let r = search(codes, prefs, true, 100, pi, excl);
-        let fit = true;
-        if (r.missing || !r.results[pi].length) { r = search(codes, prefs, false, 100, pi, excl); fit = false; }
-        if (r.missing) { backups.push({ missing: r.missing }); break; }
-        const best = r.results[pi][0];
-        if (!best) { backups.push({ missing: ["clash"] }); break; }
-        const mo = Object.assign(materialize(best, r.untimed), { label: "Backup " + "BC"[b], fit });
-        backups.push(mo);
-        mo.ids.forEach((id) => excl.add(CLASSES[id].faculty));
-      }
-      return { profile: p, options: opts, missingLab, backups };
-    }).filter(Boolean);
-    const broken = [];
-    const m0 = plans[0] && plans[0].options[0].m;
-    if (relaxed && m0) {
-      if (prefs.max8 < 9 && m0.earlyDays > prefs.max8) broken.push(`more than ${prefs.max8} day${prefs.max8 === 1 ? "" : "s"} with 8 AM`);
-      if (prefs.lunchSkip < 99 && m0.lunchDays > prefs.lunchSkip) broken.push(prefs.lunchSkip ? `at most ${prefs.lunchSkip} day${prefs.lunchSkip > 1 ? "s" : ""} without lunch` : "lunch break on every day");
-      if (prefs.endBy < 99 && m0.lastEnd > prefs.endBy * 60) broken.push(`finishing by ${prefs.endBy - 12} PM`);
-      if (prefs.prp === "all" && plans[0].options[0].ids.some((i) => CLASSES[i].times.length && !CLASSES[i].prp)) broken.push("all classes in PRP");
-      if (prefs.labs !== "any") broken.push(`${prefs.labs === "am" ? "morning" : "afternoon"} labs for every course`);
-      if (prefs.max9 < 9 && m0.nineDays > prefs.max9) broken.push("9–10 AM starts");
-      if (!broken.length) broken.push("some of your teacher choices");
-    }
-    return { plans, count: res.count, relaxed, broken, credits: codes.reduce((a, c) => a + credits(c), 0) };
   }
 
   // Plan 7: Plan 3 ("Discrete + Chinese") from ffcs-board.vercel.app with Chinese dropped.
@@ -965,28 +673,77 @@
     [...new Set(ks.map((k) => k.code))].forEach((code) => {
       const key = ks.filter((k) => k.code === code).map((k) => k.slots).join("|");
       alt[code] = COURSES[code].options.filter((o) => optClasses(o).map((k) => k.slots).join("|") === key && !o.some((i) => ids.includes(i)))
-        .map((o) => titleCase(CLASSES[o[0]].faculty));
+        .map((o) => CLASSES[o[0]].faculty);
     });
-    return { profile: BOARD, options: [{ ids, m: metrics(ks.flatMap((k) => k.times)), alt, groups: [], label: "Main", sig: "board" }], missingLab: [], backups: [], boardMissing: missing };
+    return { profile: BOARD, options: [{ ids, m: metrics(ks.flatMap((k) => k.times)), alt, label: "Main", sig: "board" }], backups: [], boardMissing: missing };
   }
 
-  function generatePlans() {
+  // run the planner in the background so the page stays responsive
+  const VER = (document.currentScript && document.currentScript.src.split("?")[1]) || "";
+  let worker = null;
+  function runPlanner(codes, label) {
+    return new Promise((resolve) => {
+      if (worker) worker.terminate();
+      worker = new Worker("planner-worker.js" + (VER ? "?" + VER : ""));
+      worker.onmessage = (e) => {
+        const d = e.data;
+        if (d.type === "progress") setProgress(d.msg + label, d.pct);
+        else { worker.terminate(); worker = null; resolve(d.res); }
+      };
+      worker.onerror = (err) => { resolve({ error: "The planner hit a problem: " + (err.message || "unknown error") + ". Try again." }); };
+      const fac = {};
+      Object.entries(state.fac || {}).forEach(([n, v]) => { fac[n] = { pref: v.pref || 0, rating: v.rating || 0 }; });
+      worker.postMessage({ codes, prefs: genPrefs(), fac });
+    });
+  }
+  function setProgress(msg, pct) {
+    const el = $("#gen-progress");
+    if (!el) return;
+    el.querySelector(".gp-msg").textContent = msg;
+    el.querySelector(".gp-bar i").style.width = Math.max(3, Math.min(100, pct)) + "%";
+  }
+  // add display details (week metrics) to what the worker sent back
+  function dressScenario(res, codes, withBoard) {
+    if (res.error) return res;
+    const dress = (o) => { if (!o || o.missing) return o; o.m = metrics(o.ids.flatMap((i) => CLASSES[i].times)); return o; };
+    res.plans.forEach((p) => { p.options.forEach(dress); p.backups.forEach(dress); });
+    if (withBoard) res.plans.push(boardPlan(codes));
+    res.credits = codes.reduce((a, c) => a + credits(c), 0);
+    return res;
+  }
+  async function generateAll() {
+    const codes = state.genCourses.filter((c) => COURSES[c]);
     const prefs = genPrefs();
-    PROF = (hasReviews() ? PROFILES.concat(RATED) : PROFILES).concat([LABDAYS, HEAVY]);
-    const base = state.genCourses.filter((c) => COURSES[c]);
-    const out = { base: generateScenario(base, prefs), extra: null, extraCode: null, view: "base" };
-    if (out.base.plans) out.base.plans.push(boardPlan(base));
-    if (prefs.extra && COURSES[prefs.extra] && !base.includes(prefs.extra)) {
-      out.extraCode = prefs.extra;
-      out.extra = null; // built when you open the "With" tab, to keep things quick
-    }
-    return out;
+    genResult = { loading: true };
+    render();
+    const out = $("#gen-out"); if (out) out.scrollIntoView({ behavior: "smooth", block: "start" });
+    const res = dressScenario(await runPlanner(codes, ""), codes, true);
+    genResult = { base: res, extra: null, extraCode: prefs.extra && COURSES[prefs.extra] && !codes.includes(prefs.extra) ? prefs.extra : null, view: "base" };
+    for (const k in genSel) delete genSel[k];
+    for (const k in genBk) delete genBk[k];
+    render();
+  }
+  async function generateExtra() {
+    const codes = state.genCourses.filter((c) => COURSES[c]).concat(genResult.extraCode);
+    genResult.view = "extra";
+    genResult.extraLoading = true;
+    render();
+    genResult.extra = dressScenario(await runPlanner(codes, ` (with ${COURSES[genResult.extraCode].title})`), codes, false);
+    genResult.extraLoading = false;
+    render();
   }
 
   let genResult = null;
   const genSel = {}; // which variation is shown per plan card
   const seg = (name, value, opts) => `<div class="qseg">${opts.map(([v, label]) =>
     `<button class="tab ${String(value) === String(v) ? "active" : ""}" data-act="gpref" data-k="${name}" data-v="${v}">${label}</button>`).join("")}</div>`;
+
+  function splitText(nLabs, labDays, maxPer) {
+    if (!labDays) return "";
+    const per = Math.floor(nLabs / labDays), extra = nLabs % labDays;
+    const parts = Array.from({ length: labDays }, (_, i) => per + (i < extra ? 1 : 0)).filter((x) => x > 0);
+    return parts.join("-");
+  }
 
   function pagePlans() {
     const gc = state.genCourses.filter((c) => COURSES[c]);
@@ -995,38 +752,48 @@
     const pr = genPrefs();
     const liked = Object.values(state.fac || {}).filter((f) => f.pref > 0).length;
     const avoided = Object.values(state.fac || {}).filter((f) => f.pref < 0).length;
+    const nLabs = labCount(gc);
+    const labDays = pr.labFree > 0 ? 5 - pr.labFree : null;
+    const fitsSplit = !labDays || pr.maxLabs >= 9 || pr.maxLabs * labDays >= nLabs;
     return `
       ${topbar("Plans")}
       <section class="card" style="background:var(--lime)">
         <h2 class="section-title" style="font-size:19px;justify-content:flex-start;gap:8px">${icon("spark", 22, 2.6)} Smart Plans</h2>
-        <p style="margin:0 0 12px;font-weight:600">Pick your courses, answer a few questions, and I'll build clash-free timetables, each with variations including morning-lab and evening-lab versions.</p>
+        <p style="margin:0 0 12px;font-weight:600">Pick your courses and answer the questions. The planner checks every possible clash-free timetable, then gives you 6 clearly different plans (plus Plan 7 from FFCS Board), each with a variation and two backups that use completely different teachers.</p>
         <div class="chips" style="margin-bottom:10px">
           ${gc.map((c) => `<span class="chip big" style="background:var(--white)">${esc(COURSES[c].title)} · ${credits(c)} cr <button class="x" data-act="genrm" data-code="${c}" aria-label="Remove ${esc(COURSES[c].title)}">✕</button></span>`).join("")}
         </div>
         <div class="toolbar" style="margin-bottom:6px">
           <select class="input" id="genadd"><option value="">+ Add a course…</option>${addable.map((c) => `<option value="${c.code}">${esc(c.code)} · ${esc(c.title)}</option>`).join("")}</select>
         </div>
-        <div style="text-align:right"><span class="chip big ${totalCr === 25 ? "mint" : "peach"}">${totalCr} credits*</span></div>
+        <div style="text-align:right"><span class="chip big ${totalCr === 25 ? "mint" : "peach"}">${totalCr} credits*</span> <span class="chip big">${nLabs} lab sessions a week</span></div>
       </section>
 
       <section class="card questions" style="margin-top:14px">
-        <h2 class="section-title">A few questions</h2>
-        <div class="q"><div class="q-l">How many days can have an 8 AM class?</div>${seg("max8", pr.max8, [[0, "None"], [1, "1 day"], [2, "2 days"], [9, "Any"]])}</div>
-        <div class="q"><div class="q-l">How many days can start between 9 and 10 AM (like 9:50 labs)?</div>${seg("max9", pr.max9, [[0, "None"], [1, "1"], [2, "2"], [3, "3"], [9, "Any"]])}</div>
-        <div class="q"><div class="q-l">Do you prefer morning labs or evening labs?</div>${seg("labs", pr.labs, [["am", "Morning labs"], ["pm", "Evening labs"], ["any", "Either"]])}
-          <div class="q-h">Morning labs mean afternoon theory, and evening labs mean morning theory.</div></div>
-        <div class="q"><div class="q-l">When should your classes end at the latest?</div>${seg("endBy", pr.endBy, [[18, "By 6 PM"], [19, "By 7 PM"], [99, "Any time"]])}
-          <div class="q-h">"By 6 PM" rules out the 5:40 PM labs and 6 PM theory. "By 7 PM" allows those but not the 6:30 PM labs or 7 PM slots.</div></div>
-        <div class="q"><div class="q-l">How many days can you skip lunch?</div>${seg("lunchSkip", pr.lunchSkip, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3"], [99, "Any"]])}
-          <div class="q-h">Skipping lunch means a 12:30–1:20 lab right before a 2 PM class.</div></div>
+        <h2 class="section-title">Must-haves</h2>
+        <p class="small muted" style="margin:-4px 0 4px">Every plan keeps these. If nothing fits, the planner tells you which one it had to loosen.</p>
         <div class="q"><div class="q-l">All classes in PRP, or hybrid?</div>${seg("prp", pr.prp, [["all", "All PRP"], ["hybrid", "Hybrid is OK"]])}
-          <div class="q-h">Hybrid lets a few classes sit in other blocks (TT, SJT…) when it gives a better timetable.</div></div>
+          <div class="q-h">Courses with no PRP classes at all (like Spanish) are the only exception.</div></div>
+        <div class="q"><div class="q-l">How many days can have an 8 AM class?</div>${seg("max8", pr.max8, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3 days"], [9, "Any"]])}</div>
+        <div class="q"><div class="q-l">Morning labs only?</div>${seg("labs", pr.labs, [["am", "Yes, morning labs"], ["any", "Either is fine"]])}
+          <div class="q-h">Morning labs put every lab before lunch and every theory class (including Maths) after lunch.</div></div>
+        <div class="q"><div class="q-l">How many weekdays do you want with no labs at all?</div>${seg("labFree", pr.labFree, [[0, "No rule"], [1, "1 day"], [2, "2 days"], [3, "3 days"]])}
+          ${labDays ? `<div class="q-h">That puts your ${nLabs} lab sessions on ${labDays} day${labDays > 1 ? "s" : ""}.</div>` : ""}</div>
+        <div class="q"><div class="q-l">How should the labs be split? (most labs on one day)</div>${seg("maxLabs", pr.maxLabs, [[1, "1 a day"], [2, `2 a day${labDays ? ` (${splitText(nLabs, labDays)})` : ""}`], [3, `3 a day${labDays && labDays <= 2 ? ` (${splitText(nLabs, Math.ceil(nLabs / 3))})` : ""}`], [9, "No limit"]])}
+          <div class="q-h">${labDays ? `With ${labDays} lab days: 2 a day gives a ${splitText(nLabs, labDays)} split, 3 a day allows ${splitText(nLabs, Math.ceil(nLabs / 3))}.` : "Caps how many lab sessions can land on the same day."}${fitsSplit ? "" : ` <b>${labDays} days × ${pr.maxLabs} = ${labDays * pr.maxLabs} labs can't hold all ${nLabs}, so one of these will be loosened.</b>`}</div></div>
+        <h2 class="section-title" style="margin-top:16px">Nice-to-haves</h2>
+        <p class="small muted" style="margin:-4px 0 4px">Plans try hard to keep these, but Plan 5 and Plan 6 may bend them to reach their goal. Each plan lists anything it bends.</p>
+        <div class="q"><div class="q-l">Keep a day's labs back-to-back?</div>${seg("labStretch", pr.labStretch, [["prefer", "Yes, in one stretch"], ["any", "Gaps are fine"]])}</div>
+        <div class="q"><div class="q-l">How many days can you skip lunch?</div>${seg("lunchSkip", pr.lunchSkip, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3"], [99, "Any"]])}
+          <div class="q-h">Skipping lunch means a lab ending at 1:20 right before a 2 PM class.</div></div>
+        <div class="q"><div class="q-l">How many days can start between 9 and 10 AM?</div>${seg("max9", pr.max9, [[0, "None"], [1, "1"], [2, "2"], [3, "3"], [9, "Any"]])}</div>
+        <div class="q"><div class="q-l">When should your classes end at the latest?</div>${seg("endBy", pr.endBy, [[18, "By 6 PM"], [19, "By 7 PM"], [99, "Any time"]])}</div>
         <div class="q"><div class="q-l">Also show how it looks with one more course?</div>
           <select class="input" id="genextra"><option value="">No comparison</option>${addable.map((c) => `<option value="${c.code}" ${pr.extra === c.code ? "selected" : ""}>${esc(c.title)} (+${credits(c.code)} cr)</option>`).join("")}</select></div>
         <div class="q" style="border-bottom:0"><div class="q-l">Teachers you want or want to avoid</div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="chip mint">${liked} preferred</span><span class="chip salmon">${avoided} avoided</span>
-          <a class="btn sm lav" href="#/teachers">Pick teachers & add reviews</a></div></div>
-        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length ? "" : "disabled"}>${icon("spark", 16)} Make 7 plans</button>
+          <a class="btn sm lav" href="#/teachers">Pick teachers & see reviews</a></div></div>
+        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length && !(genResult && genResult.loading) ? "" : "disabled"}>${icon("spark", 16)} ${genResult && genResult.loading ? "Working…" : "Make my plans"}</button>
       </section>
       <div id="gen-out">${genResult ? renderGen(genResult) : ""}</div>
       <hr class="rule">
@@ -1043,6 +810,7 @@
               ${cl ? `<span class="chip salmon">${cl} clash${cl > 1 ? "es" : ""}</span>` : ""}${on ? `<span class="chip lime">Active</span>` : ""}</div></div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
               ${on ? "" : `<button class="btn sm lime" data-act="pactive" data-p="${p.id}">Use</button>`}
+              ${p.sel.length ? `<a class="icon-btn" href="${viewLink(p.sel, p.name)}" target="_blank" rel="noopener" aria-label="Open full timetable">${icon("cal", 16)}</a>` : ""}
               <button class="icon-btn" data-act="pcopy" data-p="${p.id}" aria-label="Duplicate">${icon("copy", 16)}</button>
               <button class="icon-btn lav" data-act="prename" data-p="${p.id}" aria-label="Rename">${icon("pen", 16)}</button>
               ${state.plans.length > 1 ? `<button class="icon-btn salmon" data-act="pdel" data-p="${p.id}" aria-label="Delete">${icon("trash", 16)}</button>` : ""}
@@ -1058,8 +826,13 @@
       <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
   }
 
+  const progressCard = (msg) => `<div class="card" id="gen-progress" style="margin-top:18px">
+    <div class="gp-msg" style="font-weight:800;margin-bottom:10px">${esc(msg)}</div>
+    <div class="gp-bar bar" style="height:18px"><i style="width:3%"></i></div>
+    <p class="small muted" style="margin:10px 0 0">Every clash-free timetable is being checked, so this can take a little while with many courses.</p></div>`;
+
   function renderGen(res) {
-    const scen = res.view === "extra" && res.extra ? res.extra : res.base;
+    if (res.loading) return progressCard("Starting the planner…");
     const xName = res.extraCode ? COURSES[res.extraCode].title : "";
     let html = '<div style="margin-top:18px">';
     if (res.extraCode) {
@@ -1067,35 +840,52 @@
       html += `<div class="seg" style="margin-bottom:12px">
         <button class="tab ${res.view !== "extra" ? "active" : ""}" data-act="gview" data-v="base">Without ${esc(xName)} · ${res.base.credits || 0} cr</button>
         <button class="tab ${res.view === "extra" ? "active" : ""}" data-act="gview" data-v="extra">With ${esc(xName)} · ${xcr} cr</button></div>`;
-      if (res.extra) html += compareTable(res, xName);
+      if (res.extraLoading) return html + progressCard(`Planning with ${xName}…`) + "</div>";
+      if (res.extra && !res.extra.error && !res.base.error) html += compareTable(res, xName);
     }
+    const scen = res.view === "extra" && res.extra ? res.extra : res.base;
     if (scen.error) return html + `<div class="card" style="background:#fff3f3"><b>${esc(scen.error)}</b></div></div>`;
-    if (scen.relaxed) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> no timetable could meet everything, so these bend on: ${esc(scen.broken.join(", "))}. The plans below get as close as possible.</div>`;
-    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.count.toLocaleString("en-IN")} clash-free timetables. Each plan has a main version, a small variation, and all-morning-labs and all-evening-labs versions where they fit.</p>`;
+    const notes = [];
+    if (scen.relaxed.length) notes.push(`No timetable could keep every must-have, so the planner loosened: <b>${esc(scen.relaxed.join(", then "))}</b>.`);
+    if (scen.noPRP.length) notes.push(`${esc(scen.noPRP.map((c) => COURSES[c].title).join(", "))} ${scen.noPRP.length > 1 ? "have" : "has"} no PRP classes, so ${scen.noPRP.length > 1 ? "they sit" : "it sits"} in another block.`);
+    const L = scen.limits || {};
+    const pr = genPrefs();
+    const unavoid = [];
+    if (pr.lunchSkip < 99 && L.lunchDays > pr.lunchSkip) unavoid.push(`skipping lunch on ${L.lunchDays} days (you said ${pr.lunchSkip})`);
+    if (pr.endBy < 99 && L.lastEnd > pr.endBy * 60) unavoid.push(`finishing after ${pr.endBy - 12} PM (earliest possible ${fmt(L.lastEnd)})`);
+    if (pr.labStretch === "prefer" && L.labGap > 30) unavoid.push("a gap between labs on some day");
+    if (unavoid.length) notes.push(`With your must-haves, every possible timetable means ${esc(unavoid.join(" and "))}, so no plan can avoid that. Loosening a must-have (for example one more 8 AM day) can fix it.`);
+    if (scen.amMiss.length) notes.push(`${esc(scen.amMiss.map((c) => COURSES[c].title).join(", "))} can't follow the morning-labs pattern, so it keeps its other timing.`);
+    if (notes.length) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> ${notes.join(" ")}</div>`;
+    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked all ${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;
     html += `<div class="gen-grid">${scen.plans.map((p, i) => genCard(p, i, res.view === "extra" ? "x" : "b")).join("")}</div>`;
     return html + "</div>";
   }
   function compareTable(res, xName) {
-    const row = (p, i) => {
-      const a = res.base.plans && res.base.plans[i], b = res.extra.plans && res.extra.plans[i];
-      const cell = (pl) => pl ? `${pl.options[0].m.hours} h/wk · ${pl.options[0].m.earlyDays}× 8 AM · ends ${fmt(pl.options[0].m.lastEnd)}` : "Doesn't fit";
-      return `<tr><th>${esc(p.name)}</th><td>${cell(a)}</td><td>${cell(b)}</td></tr>`;
-    };
+    const n = Math.min(res.base.plans.length, res.extra.plans.length);
+    const cell = (pl) => pl ? `${pl.options[0].m.hours} h/wk · ${pl.options[0].m.earlyDays}× 8 AM · ${pl.options[0].m.noLabDays} lab-free · ends ${fmt(pl.options[0].m.lastEnd)}` : "Doesn't fit";
+    let rows = "";
+    for (let i = 0; i < n; i++) rows += `<tr><th>${esc(res.base.plans[i].profile.name)}</th><td>${cell(res.base.plans[i])}</td><td>${cell(res.extra.plans[i])}</td></tr>`;
     return `<div class="card tight" style="margin-bottom:14px"><div class="scroll-x"><table class="cmp">
       <thead><tr><th></th><th>Without ${esc(xName)}</th><th>With ${esc(xName)}</th></tr></thead>
-      <tbody>${PROF.map(row).join("")}</tbody></table></div></div>`;
+      <tbody>${rows}</tbody></table></div></div>`;
   }
   const genBk = {};
   const backupTabs = (p, key, bk) => (p.backups && p.backups.length ? `<div class="seg bk-seg" style="margin-bottom:10px">${["Plan A", ...p.backups.map((b) => b.label || "Backup")].map((lab, j) =>
     `<button class="tab ${j === bk ? "active" : ""}" data-act="gbk" data-key="${key}" data-j="${j}">${esc(lab)}</button>`).join("")}</div>` : "");
+  function labSplitChip(m) {
+    const days = [0, 1, 2, 3, 4].filter((d) => m.labsPerDay[d] > 0);
+    return days.length ? `<span class="chip cyan">Labs ${days.map((d) => `${DAYS[d]} ${m.labsPerDay[d]}`).join(" · ")}</span>` : "";
+  }
   function genCard(p, i, scenKey) {
     const key = scenKey + i;
     const bk = Math.min(genBk[key] || 0, (p.backups || []).length);
     const vi = bk ? 0 : Math.min(genSel[key] || 0, p.options.length - 1);
     const bkOpt = bk ? p.backups[bk - 1] : null;
+    const head = `<div class="gen-head" style="background:${p.profile.color}">
+        <div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div>`;
     if (bkOpt && bkOpt.missing) {
-      return `<div class="card gen"><div class="gen-head" style="background:${p.profile.color}"><div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div></div>
-        ${backupTabs(p, key, bk)}<p class="small" style="font-weight:700">No backup without Plan A's teachers: ${bkOpt.missing[0] === "clash" ? "the remaining teachers' slots all clash." : `every remaining teacher for ${esc(bkOpt.missing.map((c) => COURSES[c] ? COURSES[c].title : c).join(", "))} is already used.`}</p></div>`;
+      return `<div class="card gen">${head}</div>${backupTabs(p, key, bk)}<p class="small" style="font-weight:700">No ${esc(bkOpt.label)}: once the earlier plans' teachers are left out, the remaining teachers' slots can't fit together with your must-haves.</p></div>`;
     }
     const o = bkOpt || p.options[vi];
     const ks = o.ids.map((id) => CLASSES[id]);
@@ -1103,46 +893,118 @@
     const cr = codes.reduce((a, c) => a + credits(c), 0);
     const outside = ks.filter((k) => k.times.length && !k.prp);
     const lanes = [{ name: p.profile.name, color: p.profile.color, times: labelled(ks) }];
-    const base = p.options[0];
-    const baseKeys = new Map(base.groups.map((g) => [g.code, g.key]));
-    const changed = vi ? o.groups.filter((g) => baseKeys.get(g.code) !== g.key).map((g) => `${COURSES[g.code].title} → ${g.key.replace("|", " + ")}`) : [];
+    const changed = (o.changed || []).map(([c, k]) => `${COURSES[c].title} → ${k.replace("|", " + ")}`);
     const bends = bendsOf(o, genPrefs());
     const likedFac = [...new Set(ks.filter((k) => facPref(k.faculty) > 0).map((k) => k.faculty))];
+    const name = `Plan ${i + 1}${bk ? " " + o.label : vi ? " " + o.label : ""}: ${p.profile.name}`;
     return `<div class="card gen">
-      <div class="gen-head" style="background:${p.profile.color}">
-        <div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div>
-        <span class="chip big">${cr} cr</span>
-      </div>
-      <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}${p.boardMissing && p.boardMissing.length ? ` Couldn't fit ${esc(p.boardMissing.join(", "))} around it.` : ""}</p>
+      ${head}<span class="chip big">${cr} cr</span></div>
+      <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}${p.boardMissing && p.boardMissing.length ? ` Couldn't fit ${esc(p.boardMissing.join(", "))} around it.` : ""}${p.sameTiming ? " (Only a few timetables fit your must-haves, so this one shares a timing with another plan but uses other teachers.)" : ""}</p>
       ${backupTabs(p, key, bk)}
-      ${bk ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">Uses none of the teachers in Plan A${bk === 2 ? " or Backup B" : ""}, so you can switch to it whole if someone's full.${bkOpt.fit ? "" : " It had to bend one of your answers to fit."}</div>` : ""}
-      <div class="seg" style="margin-bottom:10px;${bk ? "display:none" : ""}">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(p.options[j].label || (j ? "Variation " + (j + 1) : "Main"))}</button>`).join("")}</div>
-      ${!bk && p.missingLab && p.missingLab.length ? `<div class="small muted" style="margin:-4px 0 8px">No ${p.missingLab.join(" or ")}-labs version fits your other answers (8 AM, lunch, end time, PRP).</div>` : ""}
-      ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">${/labs/.test(o.label) ? (/\*/.test(o.label) ? `Not every lab can go in the ${/Morning/.test(o.label) ? "morning" : "evening"} with your other answers, so this puts as many there as it can. ` : `Every lab is in the ${/Morning/.test(o.label) ? "morning, so theory moves to the afternoon" : "afternoon, so theory moves to the morning"}. `) : ""}Changes from main: ${esc(changed.join("; ")) || "different faculty"}</div>` : ""}
+      ${bk ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">Uses none of the teachers in Plan A${bk === 2 ? " or Backup B" : ""}${o.kept && o.kept.length ? ` (except ${esc(o.kept.map((c) => COURSES[c].title).join(", "))}, which has no other teacher)` : ""}, so you can switch to it whole if someone's full.</div>` : ""}
+      ${p.options.length > 1 ? `<div class="seg" style="margin-bottom:10px;${bk ? "display:none" : ""}">${p.options.map((x, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(x.label)}</button>`).join("")}</div>` : ""}
+      ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">${o.label === "Morning labs" ? "Every lab in the morning. " : ""}Changes from main: ${esc(changed.join("; ")) || "different teachers"}</div>` : ""}
       <div class="chips" style="margin-bottom:10px">
         <span class="chip ${o.m.earlyDays ? "peach" : "mint"}">${o.m.earlyDays} day${o.m.earlyDays === 1 ? "" : "s"} with 8 AM</span>
+        <span class="chip ${o.m.noLabDays ? "mint" : "lav"}">${o.m.noLabDays} lab-free weekday${o.m.noLabDays === 1 ? "" : "s"}</span>
+        ${labSplitChip(o.m)}
         <span class="chip ${o.m.lunchDays > genPrefs().lunchSkip ? "salmon" : o.m.lunchDays ? "peach" : "mint"}">${o.m.lunchDays ? o.m.lunchDays + " day" + (o.m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
         <span class="chip ${o.m.lastEnd > 18 * 60 ? "peach" : "mint"}">Ends by ${fmt(o.m.lastEnd)}</span>
         <span class="chip lav">${Math.round(o.m.gaps / 60)} h gaps</span>
-        ${p.profile.id === "labdays" ? `<span class="chip cyan">${o.m.noLabDays} lab-free weekday${o.m.noLabDays === 1 ? "" : "s"}</span>` : ""}
-        ${p.profile.id === "heavy" ? `<span class="chip peach">${o.m.perDay.slice(0, 5).map((x, d) => `${DAYS[d][0]} ${Math.round(x / 60)}h`).join(" · ")}</span>` : ""}
+        ${p.profile.id === "heavy" ? `<span class="chip peach">${o.m.perDay.slice(0, 5).map((x, d) => `${DAYS[d]} ${Math.round(x / 6) / 10}h`).join(" · ")}</span>` : ""}
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
         ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
       </div>
-      ${bends.length ? `<div class="bend">Crosses your limits: ${esc(bends.join("; "))}</div>` : ""}
+      ${bends.length ? `<div class="bend">Bends: ${esc(bends.join("; "))}</div>` : ""}
       <div class="card" style="padding:8px 6px;box-shadow:none">${gantt(lanes, activeDays([lanes[0].times]), { labels: true, compact: true })}</div>
+      <a class="btn cyan block" style="margin-top:10px" href="${viewLink(o.ids, name)}" target="_blank" rel="noopener">${icon("cal", 16)} Open full timetable</a>
       <details class="gen-list"><summary>Faculty and slots</summary>
         ${codes.map((code) => {
           const cs = ks.filter((k) => k.code === code);
-          const alt = o.alt[code] || [];
+          const alt = (o.alt && o.alt[code]) || [];
           return `<div class="gen-row"><b>${esc(COURSES[code].title)}</b>
             <div class="small">${commOf(cs[0].faculty) ? `<span class="chip pink" style="font-size:10.5px">${commOf(cs[0].faculty)[0]}/10</span> ` : ""}${facPref(cs[0].faculty) > 0 ? "♥ " : ""}${facRating(cs[0].faculty) ? "(" + facRating(cs[0].faculty) + "/5) " : ""}${esc(titleCase(cs[0].faculty))} · ${cs.map((k) => `${esc(k.slots === "NIL" ? "Online" : k.slots)}${k.times.length ? ` (${esc(k.venue)}${k.prp ? "" : ", outside PRP"})` : ""}`).join(" + ")}</div>
             ${cs.filter((k) => k.times.length).map((k) => `<div class="small muted">${k.group === "lab" ? "Lab" : "Theory"}: ${whenText(k.times)}</div>`).join("")}
-            ${alt.length ? `<div class="small muted">Same timing also with ${esc(alt.slice(0, 4).join(", "))}${alt.length > 4 ? ` +${alt.length - 4} more` : ""}</div>` : ""}</div>`;
+            ${alt.length ? `<div class="small muted">Same timing also with ${esc(alt.slice(0, 4).map(titleCase).join(", "))}${alt.length > 4 ? ` +${alt.length - 4} more` : ""}</div>` : ""}</div>`;
         }).join("")}
       </details>
       <button class="btn lime block" style="margin-top:12px" data-act="genuse" data-key="${key}" data-i="${i}" data-s="${scenKey}">Use this ${bk ? "backup" : vi ? "variation" : "plan"}</button>
     </div>`;
+  }
+
+  /* ======================= full timetable page ======================= */
+  const viewLink = (ids, name) => `#/view/${encode(ids)}/${encodeURIComponent(name || "")}`;
+  function pageView(code, name) {
+    const ids = decode(code) || [];
+    const ks = ids.map((i) => CLASSES[i]).filter(Boolean);
+    if (!ks.length) return `${topbar("Timetable", true)}<div class="card empty"><div class="big">Nothing to show</div><div class="muted">This link has no classes in it.</div></div>`;
+    const codes = [...new Set(ks.map((k) => k.code))];
+    const cr = codes.reduce((a, c) => a + credits(c), 0);
+    const m = metrics(ks.flatMap((k) => k.times));
+    const clashIds = new Set(allClashes(ks).flat().map((k) => k.id));
+    const days = activeDays([ks.flatMap((k) => k.times)]);
+    const START = 8 * 60, END = 20 * 60, PX = 1.25; // pixels per minute
+    const y = (min) => (min - START) * PX;
+    const hours = []; for (let h = 8; h <= 20; h++) hours.push(h);
+    // which days lose lunch (a lab ending 13:20 and a class at 14:00)
+    const noLunch = new Set();
+    days.forEach((d) => {
+      const bl = blocksOf(ks.flatMap((k) => k.times.filter((x) => x.d === d)));
+      if (bl.some((b) => b.e >= t("12:30") && b.e <= LUNCH_END) && bl.some((b) => b.s >= AFTERNOON && b.s < t("14:10"))) noLunch.add(d);
+    });
+    const col = (d) => {
+      const blocks = [];
+      ks.forEach((k) => blocksOf(k.times.filter((x) => x.d === d)).forEach((b) => blocks.push({ k, ...b })));
+      return `<div class="tv-day">
+        ${hours.map((h) => `<i class="tv-line" style="top:${y(h * 60)}px"></i>`).join("")}
+        <div class="tv-lunch ${noLunch.has(d) ? "lost" : ""}" style="top:${y(LUNCH_END)}px;height:${(AFTERNOON - LUNCH_END) * PX}px"><span>${noLunch.has(d) ? "No lunch" : "Lunch"}</span></div>
+        ${blocks.map(({ k, s, e }) => `<div class="tv-block ${clashIds.has(k.id) ? "clash" : k.group === "lab" ? "lab" : "th"}" style="top:${y(s)}px;height:${Math.max(30, (e - s) * PX - 3)}px">
+          <b>${esc(k.title)}</b>
+          <span>${fmt(s)}–${fmt(e)} · ${esc(k.group === "lab" ? "Lab" : "Theory")}</span>
+          <span>${esc(k.slots)} · ${esc(k.venue)}</span>
+          <span class="tv-fac">${esc(titleCase(k.faculty))}</span>
+        </div>`).join("")}
+      </div>`;
+    };
+    const bends = bendsOf({ m, ids }, genPrefs());
+    const online = ks.filter((k) => !k.times.length);
+    return `
+      <div class="tv-top">${topbar(name || "Timetable", true)}</div>
+      <div class="chips" style="justify-content:center;margin:-6px 0 14px">
+        <span class="chip lav big">${cr} credits</span><span class="chip lav big">${m.hours} h / week</span>
+        <span class="chip ${m.earlyDays ? "peach" : "mint"} big">${m.earlyDays} day${m.earlyDays === 1 ? "" : "s"} with 8 AM</span>
+        <span class="chip ${m.lunchDays ? "peach" : "mint"} big">${m.lunchDays ? m.lunchDays + " day" + (m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
+        <span class="chip lav big">Ends by ${fmt(m.lastEnd)}</span>
+        <span class="chip ${m.noLabDays ? "cyan" : "lav"} big">${m.noLabDays} lab-free weekday${m.noLabDays === 1 ? "" : "s"}</span>
+        ${clashIds.size ? `<span class="chip salmon big">Clash</span>` : ""}
+      </div>
+      ${bends.length ? `<div class="bend" style="max-width:720px;margin:0 auto 14px">Crosses your limits: ${esc(bends.join("; "))}</div>` : ""}
+      <div class="card tv-card"><div class="scroll-x"><div class="tv" style="--cols:${days.length}">
+        <div class="tv-head"><span></span>${days.map((d) => `<span>${DAYS[d]}<small>${Math.round(m.perDay[d] / 60 * 10) / 10} h</small></span>`).join("")}</div>
+        <div class="tv-body" style="height:${(END - START) * PX}px">
+          <div class="tv-times">${hours.map((h) => `<span style="top:${y(h * 60)}px">${h > 12 ? h - 12 : h}${h >= 12 ? " PM" : " AM"}</span>`).join("")}</div>
+          ${days.map(col).join("")}
+        </div>
+      </div></div></div>
+      <div class="chips" style="justify-content:center;margin:12px 0 4px"><span class="chip mint">Theory</span><span class="chip cyan">Lab</span><span class="chip">Lunch 1:20–2:00</span><span class="chip salmon">No lunch / clash</span></div>
+      ${online.length ? `<p class="footer-note" style="margin-top:6px">No fixed slot: ${online.map((k) => `${esc(k.title)} (${esc(titleCase(k.faculty))}, ${esc(TYPE_NAMES[k.type] || k.type)})`).join(", ")}</p>` : ""}
+      <hr class="rule">
+      <div class="card tight"><h2 class="section-title">Courses, teachers and slots</h2>
+        <div class="scroll-x"><table class="cmp tv-table">
+          <thead><tr><th>Course</th><th>Teacher</th><th>Theory</th><th>Lab</th><th>Rating</th></tr></thead>
+          <tbody>${codes.map((c) => {
+            const cs = ks.filter((k) => k.code === c);
+            const th = cs.find((k) => k.group !== "lab"), lb = cs.find((k) => k.group === "lab");
+            const cell = (k) => k ? `<b>${esc(k.slots === "NIL" ? "Online" : k.slots)}</b> · ${esc(k.venue)}<br><span class="muted">${whenText(k.times)}</span>` : "–";
+            const r = commOf(cs[0].faculty);
+            return `<tr><td><b>${esc(COURSES[c].title)}</b><br><span class="muted">${esc(c)} · ${credits(c)} cr</span></td><td>${esc(titleCase(cs[0].faculty))}</td><td>${cell(th)}</td><td>${cell(lb)}</td><td>${facRating(cs[0].faculty) ? `You: ${facRating(cs[0].faculty)}/5<br>` : ""}${r ? `${r[0]}/10 (${r[1]})` : "–"}</td></tr>`;
+          }).join("")}</tbody></table></div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
+        <button class="btn lime" data-act="viewuse" data-code="${esc(code)}" data-name="${esc(name || "")}">Use this plan</button>
+        <button class="btn lav" data-act="viewcopy">${icon("copy", 16)} Copy share link</button>
+        <button class="btn" data-act="print">Print</button>
+      </div>`;
   }
 
   /* ======================= teachers ======================= */
@@ -1158,7 +1020,7 @@
     return `
       ${topbar("Teachers", true)}
       <p class="page-sub">Mark teachers you want or want to avoid. Smart Plans uses this right away.</p>
-      <div class="card tight" style="background:var(--pink);margin-bottom:14px"><b>Pink chips</b> are ratings out of 10 from <a href="https://faculty-review-vit-vellore-dun.vercel.app/" target="_blank" rel="noopener">a VIT Vellore student review site</a> (${Object.keys(COMM).length} of your teachers found, fetched ${esc((window.FFCS_RATINGS || {}).fetched || "")}). Most have only 1–5 reviews, so treat them as a hint. Your own stars always win.</div>
+      <div class="card tight" style="background:var(--pink);margin-bottom:14px"><b>Pink chips</b> are ratings out of 10 from <a href="https://faculty-review-vit-vellore-dun.vercel.app/" target="_blank" rel="noopener">a VIT Vellore student review site</a>; <b>Board</b> chips are the picks from FFCS Board (study material first, then less strict) for CS103, CS104 and its Plan 3 teachers (${Object.keys(COMM).length} of your teachers found, fetched ${esc((window.FFCS_RATINGS || {}).fetched || "")}). Most have only 1–5 reviews, so treat them as a hint. Your own stars always win.</div>
       <div class="tabs">${gc.map((code) => `<button class="tab ${code === teachCourse ? "active" : ""}" data-act="tcourse" data-code="${code}">${esc(COURSES[code].title.length > 22 ? code : COURSES[code].title)}</button>`).join("")}</div>
       ${c ? `<div class="toolbar"><input class="input" id="tq" type="search" placeholder="Search ${esc(c.title)} teachers" value="${esc(teachQuery)}" autocomplete="off"></div>
       <div class="stack">${facs.filter((f) => !q || f.toLowerCase().includes(q)).map((f) => {
@@ -1301,11 +1163,12 @@
       case "schedule": html = pageSchedule(); break;
       case "plans": html = pagePlans(); break;
       case "teachers": html = pageTeachers(); break;
+      case "view": html = pageView(decodeURIComponent(arg || ""), decodeURIComponent(route()[2] || "")); break;
       default: html = pageHome();
     }
     app.innerHTML = html;
     if (r === "courses") renderCourseList();
-    const navKey = r === "course" ? "courses" : r === "teachers" ? "plans" : NAV.some((n) => n[0] === r) ? r : "home";
+    const navKey = r === "course" ? "courses" : r === "teachers" || r === "view" ? "plans" : NAV.some((n) => n[0] === r) ? r : "home";
     $("#nav").innerHTML = NAV.map(([k, label, ic]) =>
       `<a class="nav-item ${k === navKey ? "active" : ""}" href="#/${k}" ${k === navKey ? 'aria-current="page"' : ""}><span class="pill">${icon(ic, 19, k === navKey ? 2.8 : 2.2)}</span>${label}</a>`).join("");
     document.title = `${NAV.find((n) => n[0] === navKey)[1]} · FFCS Planner`;
@@ -1353,29 +1216,19 @@
         state.gen[el.dataset.k] = v === "true" ? true : v === "false" ? false : /^\d+$/.test(v) ? Number(v) : v;
         genResult = null; save(); render(); return;
       }
-      case "generate": {
-        el.disabled = true; el.textContent = "Thinking… (about 8 seconds)";
-        setTimeout(() => {
-          genResult = generatePlans();
-          for (const k in genSel) delete genSel[k];
-          for (const k in genBk) delete genBk[k];
-          render();
-          const out = $("#gen-out"); if (out) out.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 30);
-        return;
-      }
+      case "generate": generateAll(); return;
       case "gview": {
-        genResult.view = el.dataset.v;
-        if (el.dataset.v === "extra" && !genResult.extra) {
-          el.textContent = "Thinking…";
-          setTimeout(() => {
-            genResult.extra = generateScenario(state.genCourses.filter((c) => COURSES[c]).concat(genResult.extraCode), genPrefs());
-            render();
-          }, 30);
-          return;
-        }
-        render(); return;
+        if (el.dataset.v === "extra" && !genResult.extra) { generateExtra(); return; }
+        genResult.view = el.dataset.v; render(); return;
       }
+      case "viewuse": {
+        const ids = decode(el.dataset.code) || [];
+        const id = uid();
+        state.plans.push({ id, name: (el.dataset.name || "Plan from full view").slice(0, 48), sel: ids });
+        state.active = id; save(); toast("Saved and set as your active plan"); render(); return;
+      }
+      case "viewcopy": copy(location.href); return;
+      case "print": window.print(); return;
       case "gvar": genSel[el.dataset.key] = Number(el.dataset.j); render(); return;
       case "gbk": genBk[el.dataset.key] = Number(el.dataset.j); render(); return;
       case "genuse": {

@@ -1,0 +1,4 @@
+Sources for faculty ratings (2026-10-27/28):
+1. faculty-review-vit-vellore-dun.vercel.app - student review site for VIT Vellore, ratings out of 10 (matched 83 of 198 teachers on Pranav's courses). Most teachers have 1-5 reviews.
+2. ffcs-board.vercel.app (taken down by 2026-10-28) - marked teachers for BACSE103/104 with a star (recommended: shares study material, less strict), plain (okay) or ! (avoid). Captured before it went offline.
+Tried, no usable data: Reddit (blocked to Claude's tools), RateMyProfessors (no VIT school), ratemyvitprofs.vercel.app (paused), vmedia.onrender.com (empty), GitHub rating repos (VIT-AP/Bhopal/Chennai or empty), Collegedunia/Shiksha/Careers360 (campus-level only).

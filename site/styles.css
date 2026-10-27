@@ -368,6 +368,39 @@ table.cmp thead th { font-weight: 900; }
 
 .bend { font-size: 12px; font-weight: 700; background: #fff3f3; border: 2px solid var(--black); border-radius: 12px; padding: 6px 10px; margin-bottom: 10px; }
 
+/* ---------- planner progress ---------- */
+.gp-bar i { transition: width .2s ease; background: var(--lime); }
+
+/* ---------- full timetable page ---------- */
+.tv-card { padding: 10px; }
+.tv { min-width: calc(70px + var(--cols) * 170px); }
+.tv-head { display: grid; grid-template-columns: 70px repeat(var(--cols), 1fr); position: sticky; top: 0; z-index: 2; }
+.tv-head span { text-align: center; font-family: var(--display); font-weight: 900; font-size: 15px; padding: 8px 0; background: var(--sky); border: 2px solid var(--black); border-radius: 12px; margin: 0 3px 8px; }
+.tv-head span:first-child { background: none; border: 0; }
+.tv-head small { display: block; font-family: var(--body); font-size: 11px; font-weight: 700; }
+.tv-body { display: grid; grid-template-columns: 70px repeat(var(--cols), 1fr); position: relative; }
+.tv-times { position: relative; }
+.tv-times span { position: absolute; right: 8px; transform: translateY(-50%); font-size: 11.5px; font-weight: 800; }
+.tv-day { position: relative; border-left: 2px solid var(--black); margin: 0 0; }
+.tv-day:last-child { border-right: 2px solid var(--black); }
+.tv-line { position: absolute; left: 0; right: 0; border-top: 1px dashed rgba(0,0,0,.25); }
+.tv-lunch { position: absolute; left: 0; right: 0; background: repeating-linear-gradient(45deg, #f1f1df 0 6px, #e6e6cc 6px 12px); display: grid; place-items: center; font-size: 11px; font-weight: 800; color: #555; }
+.tv-lunch.lost { background: repeating-linear-gradient(45deg, #ffd6d6 0 6px, #ffbcbc 6px 12px); color: #900; }
+.tv-block { position: absolute; left: 4px; right: 4px; border: 2px solid var(--black); border-radius: 12px; padding: 5px 7px; overflow: hidden; box-shadow: 2px 2px 0 var(--black); display: flex; flex-direction: column; gap: 1px; }
+.tv-block.th { background: var(--mint); }
+.tv-block.lab { background: var(--cyan); }
+.tv-block.clash { background: var(--salmon); }
+.tv-block b { font-size: 12.5px; line-height: 1.15; }
+.tv-block span { font-size: 11px; font-weight: 700; line-height: 1.2; }
+.tv-block .tv-fac { font-weight: 800; }
+.tv-table td, .tv-table th { vertical-align: top; }
+@media print {
+  .bottom-nav, .toast, .tv-top .back, [data-act="viewuse"], [data-act="viewcopy"], [data-act="print"] { display: none !important; }
+  body { background: #fff; }
+  .page { padding: 0; max-width: none; }
+  .scroll-x { overflow: visible; }
+}
+
 /* ---------- plans ---------- */
 .plan { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; }
 .plan.active { background: #f3ffc0; }

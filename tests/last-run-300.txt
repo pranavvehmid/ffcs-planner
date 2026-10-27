@@ -1,0 +1,5 @@
+run 0: 89 ms, 1548 timetables, min apart 3
+run 10: 9398 ms, 70798 timetables, min apart 3
+run 20: 619 ms, 3904 timetables, min apart 2
+run 30: 14 ms, 156 timetables, min apart 3
+run 40: 6512 ms, 148926 timetables, min apart 3
