@@ -449,7 +449,7 @@
       ${parts.map(({ k, clash }) => `<div class="opt-part">
         <div class="chips"><span class="chip ${k.group === "lab" ? "cyan" : k.group === "th" ? "mint" : "peach"}">${k.group === "lab" ? "Lab" : k.group === "th" ? "Theory" : TYPE_NAMES[k.type] || k.type}</span>
           <span class="chip lav"><b>${esc(k.slots === "NIL" ? "No slot" : k.slots)}</b></span><span class="chip ${k.prp || !k.times.length ? "peach" : "salmon"}">${esc(k.venue === "NIL" ? "Online" : k.venue)}</span></div>
-        <div class="when">${whenText(k.times)}</div>
+        <div class="when">${whenText(k.times)}${k.group === "lab" && blocksOf(k.times).length > 1 ? ` <span class="chip cyan">${blocksOf(k.times).length} labs a week</span>` : ""}</div>
         ${clash.length && !on ? `<div class="why">✕ Clashes with ${clash.map((o2) => `<b>${esc(o2.title)}</b> (${esc(o2.slots)}, ${esc(whenText(o2.times.filter((y) => k.times.some((z) => overlaps(y, z)))))})`).join("; ")}</div>` : ""}
       </div>`).join("")}
       ${notPRP.length ? `<div class="note">Note: ${notPRP.map((k) => `${k.group === "lab" ? "lab" : "theory"} is in ${esc(k.venue)}`).join(", ")}, outside PRP.</div>` : ""}
