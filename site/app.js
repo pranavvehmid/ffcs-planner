@@ -616,8 +616,12 @@
 
   /* ======================= smart plan generator ======================= */
   // Preferences asked on the Plans page.
-  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "any", lunch: true, prp: "all", endBy: 99, extra: "BAESP101" };
-  const genPrefs = () => Object.assign({}, GEN_DEFAULTS, state.gen || {});
+  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "any", lunchSkip: 1, prp: "all", endBy: 99, extra: "BAESP101" };
+  const genPrefs = () => {
+    const p = Object.assign({}, GEN_DEFAULTS, state.gen || {});
+    if (state.gen && state.gen.lunchSkip === undefined && state.gen.lunch !== undefined) p.lunchSkip = state.gen.lunch ? 0 : 99;
+    return p;
+  };
   const facPref = (name) => (state.fac && state.fac[name] && state.fac[name].pref) || 0;
   const LUNCH_END = t("13:20"), AFTERNOON = t("14:00");
 
@@ -716,7 +720,7 @@
     if (prefs.max8 < 9) p += Math.max(0, m.earlyDays - prefs.max8) * 1500;
     if (prefs.endBy < 99) p += (prefs.endBy === 18 ? m.after6 : m.after7) * 900;
     if (prefs.max9 < 9) p += Math.max(0, m.nineDays - prefs.max9) * 700;
-    if (prefs.lunch) p += m.lunchDays * 1200;
+    if (prefs.lunchSkip < 99) p += Math.max(0, m.lunchDays - prefs.lunchSkip) * 1200;
     groups.forEach((g) => {
       if (!g.prpOK) p += prefs.prp === "all" ? 900 : 25;
       if (g.liked) p -= 200;
@@ -748,7 +752,7 @@
         if (performance.now() - start > budget) return;
         if (strict) {
           if (prefs.max8 < 9 && bits(m8) > prefs.max8) return;
-          if (prefs.lunch && (e13 & s14)) return;
+          if (prefs.lunchSkip < 99 && bits(e13 & s14) > prefs.lunchSkip) return;
         }
         if (i === timed.length) {
           const sig = pick.map((g) => g.n).join("/");
@@ -836,7 +840,7 @@
     const m0 = plans[0] && plans[0].options[0].m;
     if (relaxed && m0) {
       if (prefs.max8 < 9 && m0.earlyDays > prefs.max8) broken.push(`more than ${prefs.max8} day${prefs.max8 === 1 ? "" : "s"} with 8 AM`);
-      if (prefs.lunch && m0.lunchDays) broken.push("lunch break on every day");
+      if (prefs.lunchSkip < 99 && m0.lunchDays > prefs.lunchSkip) broken.push(prefs.lunchSkip ? `at most ${prefs.lunchSkip} day${prefs.lunchSkip > 1 ? "s" : ""} without lunch` : "lunch break on every day");
       if (prefs.endBy < 99 && m0.lastEnd > prefs.endBy * 60) broken.push(`finishing by ${prefs.endBy - 12} PM`);
       if (prefs.prp === "all" && plans[0].options[0].ids.some((i) => CLASSES[i].times.length && !CLASSES[i].prp)) broken.push("all classes in PRP");
       if (prefs.labs !== "any") broken.push(`${prefs.labs === "am" ? "morning" : "afternoon"} labs for every course`);
@@ -892,7 +896,8 @@
           <div class="q-h">Morning labs mean afternoon theory, and evening labs mean morning theory.</div></div>
         <div class="q"><div class="q-l">When should your classes end at the latest?</div>${seg("endBy", pr.endBy, [[18, "By 6 PM"], [19, "By 7 PM"], [99, "Any time"]])}
           <div class="q-h">"By 6 PM" rules out the 5:40 PM labs and 6 PM theory. "By 7 PM" allows those but not the 6:30 PM labs or 7 PM slots.</div></div>
-        <div class="q"><div class="q-l">Keep a lunch break? (no 12:30–1:20 lab right before a 2 PM class)</div>${seg("lunch", pr.lunch, [[true, "Yes, protect lunch"], [false, "Don't mind"]])}</div>
+        <div class="q"><div class="q-l">How many days can you skip lunch?</div>${seg("lunchSkip", pr.lunchSkip, [[0, "None"], [1, "1 day"], [2, "2 days"], [3, "3"], [99, "Any"]])}
+          <div class="q-h">Skipping lunch means a 12:30–1:20 lab right before a 2 PM class.</div></div>
         <div class="q"><div class="q-l">All classes in PRP, or hybrid?</div>${seg("prp", pr.prp, [["all", "All PRP"], ["hybrid", "Hybrid is OK"]])}
           <div class="q-h">Hybrid lets a few classes sit in other blocks (TT, SJT…) when it gives a better timetable.</div></div>
         <div class="q"><div class="q-l">Also show how it looks with one more course?</div>
@@ -981,7 +986,7 @@
       ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">${/labs/.test(o.label) ? (/\*/.test(o.label) ? `Not every lab can go in the ${/Morning/.test(o.label) ? "morning" : "evening"} with your other answers, so this puts as many there as it can. ` : `Every lab is in the ${/Morning/.test(o.label) ? "morning, so theory moves to the afternoon" : "afternoon, so theory moves to the morning"}. `) : ""}Changes from main: ${esc(changed.join("; ")) || "different faculty"}</div>` : ""}
       <div class="chips" style="margin-bottom:10px">
         <span class="chip ${o.m.earlyDays ? "peach" : "mint"}">${o.m.earlyDays} day${o.m.earlyDays === 1 ? "" : "s"} with 8 AM</span>
-        <span class="chip ${o.m.lunchDays ? "salmon" : "mint"}">${o.m.lunchDays ? o.m.lunchDays + " day" + (o.m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
+        <span class="chip ${o.m.lunchDays > genPrefs().lunchSkip ? "salmon" : o.m.lunchDays ? "peach" : "mint"}">${o.m.lunchDays ? o.m.lunchDays + " day" + (o.m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
         <span class="chip ${o.m.lastEnd > 18 * 60 ? "peach" : "mint"}">Ends by ${fmt(o.m.lastEnd)}</span>
         <span class="chip lav">${Math.round(o.m.gaps / 60)} h gaps</span>
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
