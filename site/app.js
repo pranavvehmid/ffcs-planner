@@ -947,11 +947,35 @@
     return { plans, count: res.count, relaxed, broken, credits: codes.reduce((a, c) => a + credits(c), 0) };
   }
 
+  // Plan 7: Plan 3 ("Discrete + Chinese") from ffcs-board.vercel.app with Chinese dropped.
+  // Class ids point into data.js; each was matched by course, slots and venue.
+  const BOARD = { id: "board", name: "FFCS Board Plan 3, no Chinese", color: "var(--sky)",
+    blurb: "The same timetable as Plan 3 on ffcs-board.vercel.app (Discrete, not Calculus), with Chinese taken out and its slots left empty." };
+  const BOARD_IDS = [397, 440, 492, 560, 564, 615, 685, 724, 273, 274, 926];
+  function boardPlan(codes) {
+    const ids = BOARD_IDS.filter((i) => CLASSES[i] && codes.includes(CLASSES[i].code));
+    const missing = [];
+    codes.filter((c) => !ids.some((i) => CLASSES[i].code === c)).forEach((c) => {
+      const taken = ids.flatMap((i) => CLASSES[i].times);
+      const o = COURSES[c].options.find((op) => !(COURSES[c].embedded && op.length < 2) && !timesClash(optTimes(op), taken));
+      if (o) ids.push(...o); else missing.push(c);
+    });
+    const ks = ids.map((i) => CLASSES[i]);
+    const alt = {};
+    [...new Set(ks.map((k) => k.code))].forEach((code) => {
+      const key = ks.filter((k) => k.code === code).map((k) => k.slots).join("|");
+      alt[code] = COURSES[code].options.filter((o) => optClasses(o).map((k) => k.slots).join("|") === key && !o.some((i) => ids.includes(i)))
+        .map((o) => titleCase(CLASSES[o[0]].faculty));
+    });
+    return { profile: BOARD, options: [{ ids, m: metrics(ks.flatMap((k) => k.times)), alt, groups: [], label: "Main", sig: "board" }], missingLab: [], backups: [], boardMissing: missing };
+  }
+
   function generatePlans() {
     const prefs = genPrefs();
     PROF = (hasReviews() ? PROFILES.concat(RATED) : PROFILES).concat([LABDAYS, HEAVY]);
     const base = state.genCourses.filter((c) => COURSES[c]);
     const out = { base: generateScenario(base, prefs), extra: null, extraCode: null, view: "base" };
+    if (out.base.plans) out.base.plans.push(boardPlan(base));
     if (prefs.extra && COURSES[prefs.extra] && !base.includes(prefs.extra)) {
       out.extraCode = prefs.extra;
       out.extra = null; // built when you open the "With" tab, to keep things quick
@@ -1002,7 +1026,7 @@
         <div class="q" style="border-bottom:0"><div class="q-l">Teachers you want or want to avoid</div>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><span class="chip mint">${liked} preferred</span><span class="chip salmon">${avoided} avoided</span>
           <a class="btn sm lav" href="#/teachers">Pick teachers & add reviews</a></div></div>
-        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length ? "" : "disabled"}>${icon("spark", 16)} Make 6 plans</button>
+        <button class="btn block" style="margin-top:6px;background:var(--black);color:var(--lime)" data-act="generate" ${gc.length ? "" : "disabled"}>${icon("spark", 16)} Make 7 plans</button>
       </section>
       <div id="gen-out">${genResult ? renderGen(genResult) : ""}</div>
       <hr class="rule">
@@ -1089,7 +1113,7 @@
         <div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div>
         <span class="chip big">${cr} cr</span>
       </div>
-      <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}</p>
+      <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}${p.boardMissing && p.boardMissing.length ? ` Couldn't fit ${esc(p.boardMissing.join(", "))} around it.` : ""}</p>
       ${backupTabs(p, key, bk)}
       ${bk ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">Uses none of the teachers in Plan A${bk === 2 ? " or Backup B" : ""}, so you can switch to it whole if someone's full.${bkOpt.fit ? "" : " It had to bend one of your answers to fit."}</div>` : ""}
       <div class="seg" style="margin-bottom:10px;${bk ? "display:none" : ""}">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(p.options[j].label || (j ? "Variation " + (j + 1) : "Main"))}</button>`).join("")}</div>
