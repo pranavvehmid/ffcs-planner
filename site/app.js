@@ -443,7 +443,7 @@
     const ids = o.join(",");
     return `<div class="opt ${on ? "sel" : clashN ? "clash" : ""}">
       <div class="opt-head">
-        <div class="opt-fac">${facPref(ks[0].faculty) > 0 ? "♥ " : ""}${esc(fac)}${facRating(ks[0].faculty) ? ` <span class="chip lav">${facRating(ks[0].faculty)}/5</span>` : ""}${facPref(ks[0].faculty) < 0 ? ' <span class="chip salmon">Avoid</span>' : ""}</div>
+        <div class="opt-fac">${facPref(ks[0].faculty) > 0 ? "♥ " : ""}${esc(fac)}${facRating(ks[0].faculty) ? ` <span class="chip lav">You: ${facRating(ks[0].faculty)}/5</span>` : ""}${commChip(ks[0].faculty)}${facPref(ks[0].faculty) < 0 ? ' <span class="chip salmon">Avoid</span>' : ""}</div>
         <button class="icon-btn" data-act="compare" data-code="${esc(code)}" data-ids="${ids}" aria-label="Compare on your week" title="Compare on your week">${icon("eye", 17)}</button>
       </div>
       ${parts.map(({ k, clash }) => `<div class="opt-part">
@@ -616,7 +616,7 @@
 
   /* ======================= smart plan generator ======================= */
   // Preferences asked on the Plans page.
-  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "any", lunch: true, prp: "all", extra: "BAESP101" };
+  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "any", lunch: true, prp: "all", endBy: 99, extra: "BAESP101" };
   const genPrefs = () => Object.assign({}, GEN_DEFAULTS, state.gen || {});
   const facPref = (name) => (state.fac && state.fac[name] && state.fac[name].pref) || 0;
   const LUNCH_END = t("13:20"), AFTERNOON = t("14:00");
@@ -637,12 +637,13 @@
         if (avoided) return;
         if (lab && c.embedded && prefs.labs !== "any" && halfOf(lab) !== prefs.labs) return;
       }
+      if (strict && prefs.endBy < 99 && optTimes(o).some((x) => x.e > prefs.endBy * 60)) return;
       const key = ks.map((k) => k.slots).join("|");
       const g = groups[key] || (groups[key] = { key, code, times: optTimes(o), opts: [], prpOK: false, liked: false, labHalf: lab ? halfOf(lab) : null, avoidedOnly: true });
       g.opts.push(o);
       if (allPRP) g.prpOK = true;
       if (ks.some((k) => facPref(k.faculty) > 0)) g.liked = true;
-      g.rating = Math.max(g.rating || 0, facRating(ks[0].faculty));
+      g.rating = Math.max(g.rating || 0, effRating(ks[0].faculty));
       if (!avoided) g.avoidedOnly = false;
     });
     return Object.values(groups).map((g) => {
@@ -679,7 +680,9 @@
     const nineDays = Object.values(first).filter((s) => s >= t("09:00") && s <= t("10:00")).length;
     const lunchDays = [...ends1320].filter((d) => starts14.has(d)).length;
     const hours = Math.round(blocks.reduce((a, b) => a + b.e - b.s, 0) / 60);
-    return { gaps, early, late, days: days.size, earlyDays: earlyDays.size, nineDays, lunchDays, hours };
+    const lastEnd = blocks.reduce((a, b) => Math.max(a, b.e), 0);
+    const after = (h) => blocks.filter((b) => b.e > h * 60).length;
+    return { gaps, early, late, days: days.size, earlyDays: earlyDays.size, nineDays, lunchDays, hours, lastEnd, after6: after(18), after7: after(19) };
   }
   const PROFILES = [
     { id: "compact", name: "Compact days", blurb: "Fewest gaps between classes, so you're not waiting around campus.", color: "var(--lime)",
@@ -691,19 +694,33 @@
   ];
   const RATED = { id: "rated", name: "Top-rated teachers", blurb: "Picks the best-reviewed teachers you rated, then keeps the days tidy.", color: "var(--pink)",
     score: (m) => m.gaps * 0.3 + m.early * 5 + m.late * 5 };
+  const commChip = (name) => { const c = commOf(name); return c ? ` <span class="chip pink" title="Student review site rating">${c[0]}/10 · ${c[1]} review${c[1] > 1 ? "s" : ""}</span>` : ""; };
   const facRating = (name) => { const f = state.fac && state.fac[name]; return f && f.rating ? Number(f.rating) : 0; };
-  const hasReviews = () => Object.values(state.fac || {}).some((f) => f.rating || f.pref > 0);
+  // Community ratings (out of 10) from a student review site; used when you haven't rated someone.
+  const COMM = (window.FFCS_RATINGS && window.FFCS_RATINGS.faculty) || {};
+  const commOf = (name) => COMM[name] || null;
+  // effective score out of 5, 2.5 = neutral / unknown
+  const effRating = (name) => {
+    const mine = facRating(name);
+    if (mine) return mine;
+    const c = commOf(name);
+    if (!c) return 2.5;
+    const conf = Math.min(1, c[1] / 4); // few reviews count for less
+    return Math.max(1, Math.min(5, 2.5 + (c[0] - 5) * 1.6 * conf));
+  };
+  const hasReviews = () => Object.keys(COMM).length > 0 || Object.values(state.fac || {}).some((f) => f.rating || f.pref > 0);
   let PROF = PROFILES;
   function penalty(m, groups, prefs, prof) {
     let p = 0;
-    if (prof && prof.id === "rated") groups.forEach((g) => { p -= (g.rating || 0) * 120 + (g.liked ? 150 : 0); });
+    if (prof && prof.id === "rated") groups.forEach((g) => { p -= ((g.rating || 2.5) - 2.5) * 220 + (g.liked ? 150 : 0); });
     if (prefs.max8 < 9) p += Math.max(0, m.earlyDays - prefs.max8) * 1500;
+    if (prefs.endBy < 99) p += (prefs.endBy === 18 ? m.after6 : m.after7) * 900;
     if (prefs.max9 < 9) p += Math.max(0, m.nineDays - prefs.max9) * 700;
     if (prefs.lunch) p += m.lunchDays * 1200;
     groups.forEach((g) => {
       if (!g.prpOK) p += prefs.prp === "all" ? 900 : 25;
       if (g.liked) p -= 200;
-      p -= (g.rating || 0) * 40;
+      p -= ((g.rating || 2.5) - 2.5) * 40;
       if (g.avoidedOnly) p += 2000;
       if (prefs.labs !== "any" && g.labHalf && g.labHalf !== prefs.labs) p += 500;
     });
@@ -761,7 +778,7 @@
   // pick the concrete classes for a set of timings: liked faculty, then PRP, never avoided
   function materialize(sol, untimed) {
     const ids = [], alt = {};
-    const rank = (o) => { const ks = optClasses(o); return ks.reduce((a, k) => a + facPref(k.faculty) * 10 + facRating(k.faculty) * 3 + (k.prp ? 1 : 0), 0); };
+    const rank = (o) => { const ks = optClasses(o); return ks.reduce((a, k) => a + facPref(k.faculty) * 10 + (effRating(k.faculty) - 2.5) * 3 + (k.prp ? 1 : 0), 0); };
     sol.groups.forEach((g) => {
       const sorted = g.opts.slice().sort((a, b) => rank(b) - rank(a));
       ids.push(...sorted[0]);
@@ -777,9 +794,16 @@
   const diffCount = (a, b) => a.groups.filter((g, i) => g !== b.groups[i]).length;
 
   function generateScenario(codes, prefs) {
-    let res = search(codes, prefs, true, 450);
+    let res = search(codes, prefs, true, 350);
     let relaxed = false;
-    if (res.missing || !res.results.some((l) => l.length)) { res = search(codes, prefs, false, 450); relaxed = true; }
+    if (res.missing || !res.results.some((l) => l.length)) { res = search(codes, prefs, false, 350); relaxed = true; }
+    // extra searches for an all-morning-labs and an all-evening-labs version of each plan
+    const labRuns = ["am", "pm"].map((half) => {
+      const lp = Object.assign({}, prefs, { labs: half });
+      let r = search(codes, lp, true, 200);
+      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 200); r.bestFit = true; }
+      return r.missing ? null : r;
+    });
     if (res.missing) return { error: `No options left for ${res.missing.map((c) => COURSES[c].title).join(", ")}.` };
     if (!res.results.some((l) => l.length)) return { error: "These courses can't all fit without a clash. Try removing one." };
     const taken = new Set();
@@ -797,15 +821,26 @@
         if (d >= 1 && d <= 2 && vars.every((v) => diffCount(v, r) >= 1)) { vars.push(r); taken.add(r.sig); }
       }
       for (const r of list) { if (vars.length === 2) break; if (!taken.has(r.sig)) { vars.push(r); taken.add(r.sig); } }
-      return { profile: p, options: [main, ...vars].map((s) => materialize(s, res.untimed)) };
+      const missingLab = [];
+      const opts = [main, vars[0]].filter(Boolean).map((s, j) => Object.assign(materialize(s, res.untimed), { label: j ? "Variation 2" : "Main" }));
+      labRuns.forEach((lr, li) => {
+        const half = li ? "pm" : "am";
+        const share = (r) => { const gs = r.groups.filter((g) => g.labHalf); return gs.length ? gs.filter((g) => g.labHalf === half).length / gs.length : 0; };
+        const pick = lr && lr.results[pi] && lr.results[pi].find((r) => !taken.has(r.sig) && !opts.some((o) => o.sig === r.sig) && (!lr.bestFit || share(r) >= 0.6));
+        if (!pick) { missingLab.push(li ? "evening" : "morning"); return; }
+        if (pick) { taken.add(pick.sig); opts.push(Object.assign(materialize(pick, lr.untimed), { label: (li ? "Evening labs" : "Morning labs") + (lr.bestFit ? "*" : "") })); }
+      });
+      return { profile: p, options: opts, missingLab };
     }).filter(Boolean);
     const broken = [];
     const m0 = plans[0] && plans[0].options[0].m;
     if (relaxed && m0) {
       if (prefs.max8 < 9 && m0.earlyDays > prefs.max8) broken.push(`more than ${prefs.max8} day${prefs.max8 === 1 ? "" : "s"} with 8 AM`);
       if (prefs.lunch && m0.lunchDays) broken.push("lunch break on every day");
-      if (prefs.prp === "all") broken.push("all classes in PRP");
+      if (prefs.endBy < 99 && m0.lastEnd > prefs.endBy * 60) broken.push(`finishing by ${prefs.endBy - 12} PM`);
+      if (prefs.prp === "all" && plans[0].options[0].ids.some((i) => CLASSES[i].times.length && !CLASSES[i].prp)) broken.push("all classes in PRP");
       if (prefs.labs !== "any") broken.push(`${prefs.labs === "am" ? "morning" : "afternoon"} labs for every course`);
+      if (prefs.max9 < 9 && m0.nineDays > prefs.max9) broken.push("9–10 AM starts");
       if (!broken.length) broken.push("some of your teacher choices");
     }
     return { plans, count: res.count, relaxed, broken, credits: codes.reduce((a, c) => a + credits(c), 0) };
@@ -839,7 +874,7 @@
       ${topbar("Plans")}
       <section class="card" style="background:var(--lime)">
         <h2 class="section-title" style="font-size:19px;justify-content:flex-start;gap:8px">${icon("spark", 22, 2.6)} Smart Plans</h2>
-        <p style="margin:0 0 12px;font-weight:600">Pick your courses, answer a few questions, and I'll build three clash-free timetables, each with three variations.</p>
+        <p style="margin:0 0 12px;font-weight:600">Pick your courses, answer a few questions, and I'll build clash-free timetables, each with variations including morning-lab and evening-lab versions.</p>
         <div class="chips" style="margin-bottom:10px">
           ${gc.map((c) => `<span class="chip big" style="background:var(--white)">${esc(COURSES[c].title)} · ${credits(c)} cr <button class="x" data-act="genrm" data-code="${c}" aria-label="Remove ${esc(COURSES[c].title)}">✕</button></span>`).join("")}
         </div>
@@ -855,6 +890,8 @@
         <div class="q"><div class="q-l">How many days can start between 9 and 10 AM (like 9:50 labs)?</div>${seg("max9", pr.max9, [[0, "None"], [1, "1"], [2, "2"], [3, "3"], [9, "Any"]])}</div>
         <div class="q"><div class="q-l">Do you prefer morning labs or evening labs?</div>${seg("labs", pr.labs, [["am", "Morning labs"], ["pm", "Evening labs"], ["any", "Either"]])}
           <div class="q-h">Morning labs mean afternoon theory, and evening labs mean morning theory.</div></div>
+        <div class="q"><div class="q-l">When should your classes end at the latest?</div>${seg("endBy", pr.endBy, [[18, "By 6 PM"], [19, "By 7 PM"], [99, "Any time"]])}
+          <div class="q-h">"By 6 PM" rules out the 5:40 PM labs and 6 PM theory. "By 7 PM" allows those but not the 6:30 PM labs or 7 PM slots.</div></div>
         <div class="q"><div class="q-l">Keep a lunch break? (no 12:30–1:20 lab right before a 2 PM class)</div>${seg("lunch", pr.lunch, [[true, "Yes, protect lunch"], [false, "Don't mind"]])}</div>
         <div class="q"><div class="q-l">All classes in PRP, or hybrid?</div>${seg("prp", pr.prp, [["all", "All PRP"], ["hybrid", "Hybrid is OK"]])}
           <div class="q-h">Hybrid lets a few classes sit in other blocks (TT, SJT…) when it gives a better timetable.</div></div>
@@ -907,14 +944,14 @@
     }
     if (scen.error) return html + `<div class="card" style="background:#fff3f3"><b>${esc(scen.error)}</b></div></div>`;
     if (scen.relaxed) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> no timetable could meet everything, so these bend on: ${esc(scen.broken.join(", "))}. The plans below get as close as possible.</div>`;
-    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.count.toLocaleString("en-IN")} clash-free timetables. Each plan has 3 variations that keep its core and change one or two courses.</p>`;
+    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.count.toLocaleString("en-IN")} clash-free timetables. Each plan has a main version, a small variation, and all-morning-labs and all-evening-labs versions where they fit.</p>`;
     html += `<div class="gen-grid">${scen.plans.map((p, i) => genCard(p, i, res.view === "extra" ? "x" : "b")).join("")}</div>`;
     return html + "</div>";
   }
   function compareTable(res, xName) {
     const row = (p, i) => {
       const a = res.base.plans && res.base.plans[i], b = res.extra.plans && res.extra.plans[i];
-      const cell = (pl) => pl ? `${pl.options[0].m.hours} h/wk · ${pl.options[0].m.earlyDays}× 8 AM · ${pl.options[0].m.late} after 5` : "Doesn't fit";
+      const cell = (pl) => pl ? `${pl.options[0].m.hours} h/wk · ${pl.options[0].m.earlyDays}× 8 AM · ends ${fmt(pl.options[0].m.lastEnd)}` : "Doesn't fit";
       return `<tr><th>${esc(p.name)}</th><td>${cell(a)}</td><td>${cell(b)}</td></tr>`;
     };
     return `<div class="card tight" style="margin-bottom:14px"><div class="scroll-x"><table class="cmp">
@@ -939,12 +976,13 @@
         <span class="chip big">${cr} cr</span>
       </div>
       <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}</p>
-      <div class="seg" style="margin-bottom:10px">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${j ? "Variation " + (j + 1) : "Main"}</button>`).join("")}</div>
-      ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">Changes from main: ${esc(changed.join("; ")) || "different faculty"}</div>` : ""}
+      <div class="seg" style="margin-bottom:10px">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(p.options[j].label || (j ? "Variation " + (j + 1) : "Main"))}</button>`).join("")}</div>
+      ${p.missingLab && p.missingLab.length ? `<div class="small muted" style="margin:-4px 0 8px">No ${p.missingLab.join(" or ")}-labs version fits your other answers (8 AM, lunch, end time, PRP).</div>` : ""}
+      ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">${/labs/.test(o.label) ? (/\*/.test(o.label) ? `Not every lab can go in the ${/Morning/.test(o.label) ? "morning" : "evening"} with your other answers, so this puts as many there as it can. ` : `Every lab is in the ${/Morning/.test(o.label) ? "morning, so theory moves to the afternoon" : "afternoon, so theory moves to the morning"}. `) : ""}Changes from main: ${esc(changed.join("; ")) || "different faculty"}</div>` : ""}
       <div class="chips" style="margin-bottom:10px">
         <span class="chip ${o.m.earlyDays ? "peach" : "mint"}">${o.m.earlyDays} day${o.m.earlyDays === 1 ? "" : "s"} with 8 AM</span>
         <span class="chip ${o.m.lunchDays ? "salmon" : "mint"}">${o.m.lunchDays ? o.m.lunchDays + " day" + (o.m.lunchDays > 1 ? "s" : "") + " no lunch" : "Lunch every day"}</span>
-        <span class="chip ${o.m.late ? "peach" : "mint"}">${o.m.late} after 5 PM</span>
+        <span class="chip ${o.m.lastEnd > 18 * 60 ? "peach" : "mint"}">Ends by ${fmt(o.m.lastEnd)}</span>
         <span class="chip lav">${Math.round(o.m.gaps / 60)} h gaps</span>
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
         ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
@@ -955,7 +993,7 @@
           const cs = ks.filter((k) => k.code === code);
           const alt = o.alt[code] || [];
           return `<div class="gen-row"><b>${esc(COURSES[code].title)}</b>
-            <div class="small">${facPref(cs[0].faculty) > 0 ? "♥ " : ""}${facRating(cs[0].faculty) ? "(" + facRating(cs[0].faculty) + "/5) " : ""}${esc(titleCase(cs[0].faculty))} · ${cs.map((k) => `${esc(k.slots === "NIL" ? "Online" : k.slots)}${k.times.length ? ` (${esc(k.venue)}${k.prp ? "" : ", outside PRP"})` : ""}`).join(" + ")}</div>
+            <div class="small">${commOf(cs[0].faculty) ? `<span class="chip pink" style="font-size:10.5px">${commOf(cs[0].faculty)[0]}/10</span> ` : ""}${facPref(cs[0].faculty) > 0 ? "♥ " : ""}${facRating(cs[0].faculty) ? "(" + facRating(cs[0].faculty) + "/5) " : ""}${esc(titleCase(cs[0].faculty))} · ${cs.map((k) => `${esc(k.slots === "NIL" ? "Online" : k.slots)}${k.times.length ? ` (${esc(k.venue)}${k.prp ? "" : ", outside PRP"})` : ""}`).join(" + ")}</div>
             ${cs.filter((k) => k.times.length).map((k) => `<div class="small muted">${k.group === "lab" ? "Lab" : "Theory"}: ${whenText(k.times)}</div>`).join("")}
             ${alt.length ? `<div class="small muted">Same timing also with ${esc(alt.slice(0, 4).join(", "))}${alt.length > 4 ? ` +${alt.length - 4} more` : ""}</div>` : ""}</div>`;
         }).join("")}
@@ -977,13 +1015,14 @@
     return `
       ${topbar("Teachers", true)}
       <p class="page-sub">Mark teachers you want or want to avoid. Smart Plans uses this right away.</p>
+      <div class="card tight" style="background:var(--pink);margin-bottom:14px"><b>Pink chips</b> are ratings out of 10 from <a href="https://faculty-review-vit-vellore-dun.vercel.app/" target="_blank" rel="noopener">a VIT Vellore student review site</a> (${Object.keys(COMM).length} of your teachers found, fetched ${esc((window.FFCS_RATINGS || {}).fetched || "")}). Most have only 1–5 reviews, so treat them as a hint. Your own stars always win.</div>
       <div class="tabs">${gc.map((code) => `<button class="tab ${code === teachCourse ? "active" : ""}" data-act="tcourse" data-code="${code}">${esc(COURSES[code].title.length > 22 ? code : COURSES[code].title)}</button>`).join("")}</div>
       ${c ? `<div class="toolbar"><input class="input" id="tq" type="search" placeholder="Search ${esc(c.title)} teachers" value="${esc(teachQuery)}" autocomplete="off"></div>
       <div class="stack">${facs.filter((f) => !q || f.toLowerCase().includes(q)).map((f) => {
         const v = (state.fac || {})[f] || {};
         const slots = c.ids.map((i) => CLASSES[i]).filter((k) => k.faculty === f).map((k) => k.slots).join(", ");
         return `<div class="card tight teacher ${v.pref > 0 ? "liked" : v.pref < 0 ? "avoid" : ""}">
-          <div class="t-row"><div><b>${esc(titleCase(f))}</b><div class="small muted">${esc(slots)}</div></div>
+          <div class="t-row"><div><b>${esc(titleCase(f))}</b>${commChip(f)}<div class="small muted">${esc(slots)}</div></div>
             <div style="display:flex;gap:6px">
               <button class="btn sm ${v.pref > 0 ? "mint" : ""}" data-act="tpref" data-name="${esc(f)}" data-v="1">♥ Want</button>
               <button class="btn sm ${v.pref < 0 ? "salmon" : ""}" data-act="tpref" data-name="${esc(f)}" data-v="-1">Avoid</button>
