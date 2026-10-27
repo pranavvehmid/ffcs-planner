@@ -627,11 +627,12 @@
 
   // Each course's options are grouped by their exact times, so the search only
   // looks at distinct timings; the faculty is picked afterwards.
-  function timingGroups(code, prefs, strict) {
+  function timingGroups(code, prefs, strict, excl) {
     const c = COURSES[code];
     const groups = {};
     c.options.forEach((o) => {
       const ks = optClasses(o);
+      if (excl && ks.some((k) => excl.has(k.faculty))) return; // teachers used by an earlier plan
       if (c.embedded && o.length < 2) return; // unpaired leftovers
       const allPRP = ks.every((k) => k.prp || !k.times.length);
       const avoided = ks.some((k) => facPref(k.faculty) < 0);
@@ -743,8 +744,8 @@
     return p;
   }
 
-  function search(codes, prefs, strict, budget) {
-    const courses = codes.map((code) => ({ code, groups: timingGroups(code, prefs, strict) }));
+  function search(codes, prefs, strict, budget, only, excl) {
+    const courses = codes.map((code) => ({ code, groups: timingGroups(code, prefs, strict, excl) }));
     const missing = courses.filter((c) => !c.groups.length).map((c) => c.code);
     if (missing.length) return { missing };
     const timed = courses.filter((c) => c.groups.some((g) => g.times.length));
@@ -755,7 +756,8 @@
     const ok = all.map((a) => all.map((b) => !timesClash(a.times, b.times)));
     const results = PROF.map(() => []);
     const seen = new Set();
-    PROF.forEach((p) => {
+    PROF.forEach((p, pIdx) => {
+      if (only !== undefined && pIdx !== only) return;
       const own = (g) => p.score(metrics(g.times)) + penalty(metrics(g.times), [g], prefs, p);
       const order = timed.map((c) => c.groups.slice().sort((a, b) => own(a) - own(b)));
       const start = performance.now();
@@ -816,8 +818,8 @@
     // extra searches for an all-morning-labs and an all-evening-labs version of each plan
     const labRuns = ["am", "pm"].map((half) => {
       const lp = Object.assign({}, prefs, { labs: half });
-      let r = search(codes, lp, true, 140);
-      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 140); r.bestFit = true; }
+      let r = search(codes, lp, true, 110);
+      if (r.missing || !r.results.some((l) => l.length)) { r = search(codes, lp, false, 110); r.bestFit = true; }
       return r.missing ? null : r;
     });
     if (res.missing) return { error: `No options left for ${res.missing.map((c) => COURSES[c].title).join(", ")}.` };
@@ -846,7 +848,21 @@
         if (!pick) { missingLab.push(li ? "evening" : "morning"); return; }
         if (pick) { taken.add(pick.sig); opts.push(Object.assign(materialize(pick, lr.untimed), { label: (li ? "Evening labs" : "Morning labs") + (lr.bestFit ? "*" : "") })); }
       });
-      return { profile: p, options: opts, missingLab };
+      // Backup plans B and C: same goals, but no teacher from the earlier plans
+      const backups = [];
+      const excl = new Set(opts[0].ids.map((id) => CLASSES[id].faculty));
+      for (let b = 0; b < 2; b++) {
+        let r = search(codes, prefs, true, 100, pi, excl);
+        let fit = true;
+        if (r.missing || !r.results[pi].length) { r = search(codes, prefs, false, 100, pi, excl); fit = false; }
+        if (r.missing) { backups.push({ missing: r.missing }); break; }
+        const best = r.results[pi][0];
+        if (!best) { backups.push({ missing: ["clash"] }); break; }
+        const mo = Object.assign(materialize(best, r.untimed), { label: "Backup " + "BC"[b], fit });
+        backups.push(mo);
+        mo.ids.forEach((id) => excl.add(CLASSES[id].faculty));
+      }
+      return { profile: p, options: opts, missingLab, backups };
     }).filter(Boolean);
     const broken = [];
     const m0 = plans[0] && plans[0].options[0].m;
@@ -975,10 +991,19 @@
       <thead><tr><th></th><th>Without ${esc(xName)}</th><th>With ${esc(xName)}</th></tr></thead>
       <tbody>${PROF.map(row).join("")}</tbody></table></div></div>`;
   }
+  const genBk = {};
+  const backupTabs = (p, key, bk) => (p.backups && p.backups.length ? `<div class="seg bk-seg" style="margin-bottom:10px">${["Plan A", ...p.backups.map((b) => b.label || "Backup")].map((lab, j) =>
+    `<button class="tab ${j === bk ? "active" : ""}" data-act="gbk" data-key="${key}" data-j="${j}">${esc(lab)}</button>`).join("")}</div>` : "");
   function genCard(p, i, scenKey) {
     const key = scenKey + i;
-    const vi = Math.min(genSel[key] || 0, p.options.length - 1);
-    const o = p.options[vi];
+    const bk = Math.min(genBk[key] || 0, (p.backups || []).length);
+    const vi = bk ? 0 : Math.min(genSel[key] || 0, p.options.length - 1);
+    const bkOpt = bk ? p.backups[bk - 1] : null;
+    if (bkOpt && bkOpt.missing) {
+      return `<div class="card gen"><div class="gen-head" style="background:${p.profile.color}"><div><div class="gen-k">Plan ${i + 1}</div><h3>${esc(p.profile.name)}</h3></div></div>
+        ${backupTabs(p, key, bk)}<p class="small" style="font-weight:700">No backup without Plan A's teachers: ${bkOpt.missing[0] === "clash" ? "the remaining teachers' slots all clash." : `every remaining teacher for ${esc(bkOpt.missing.map((c) => COURSES[c] ? COURSES[c].title : c).join(", "))} is already used.`}</p></div>`;
+    }
+    const o = bkOpt || p.options[vi];
     const ks = o.ids.map((id) => CLASSES[id]);
     const codes = [...new Set(ks.map((k) => k.code))];
     const cr = codes.reduce((a, c) => a + credits(c), 0);
@@ -993,8 +1018,10 @@
         <span class="chip big">${cr} cr</span>
       </div>
       <p class="small" style="margin:10px 0 8px;font-weight:600">${esc(p.profile.blurb)}</p>
-      <div class="seg" style="margin-bottom:10px">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(p.options[j].label || (j ? "Variation " + (j + 1) : "Main"))}</button>`).join("")}</div>
-      ${p.missingLab && p.missingLab.length ? `<div class="small muted" style="margin:-4px 0 8px">No ${p.missingLab.join(" or ")}-labs version fits your other answers (8 AM, lunch, end time, PRP).</div>` : ""}
+      ${backupTabs(p, key, bk)}
+      ${bk ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">Uses none of the teachers in Plan A${bk === 2 ? " or Backup B" : ""}, so you can switch to it whole if someone's full.${bkOpt.fit ? "" : " It had to bend one of your answers to fit."}</div>` : ""}
+      <div class="seg" style="margin-bottom:10px;${bk ? "display:none" : ""}">${p.options.map((_, j) => `<button class="tab ${j === vi ? "active" : ""}" data-act="gvar" data-key="${key}" data-j="${j}">${esc(p.options[j].label || (j ? "Variation " + (j + 1) : "Main"))}</button>`).join("")}</div>
+      ${!bk && p.missingLab && p.missingLab.length ? `<div class="small muted" style="margin:-4px 0 8px">No ${p.missingLab.join(" or ")}-labs version fits your other answers (8 AM, lunch, end time, PRP).</div>` : ""}
       ${vi ? `<div class="small" style="font-weight:700;margin:-4px 0 8px">${/labs/.test(o.label) ? (/\*/.test(o.label) ? `Not every lab can go in the ${/Morning/.test(o.label) ? "morning" : "evening"} with your other answers, so this puts as many there as it can. ` : `Every lab is in the ${/Morning/.test(o.label) ? "morning, so theory moves to the afternoon" : "afternoon, so theory moves to the morning"}. `) : ""}Changes from main: ${esc(changed.join("; ")) || "different faculty"}</div>` : ""}
       <div class="chips" style="margin-bottom:10px">
         <span class="chip ${o.m.earlyDays ? "peach" : "mint"}">${o.m.earlyDays} day${o.m.earlyDays === 1 ? "" : "s"} with 8 AM</span>
@@ -1017,7 +1044,7 @@
             ${alt.length ? `<div class="small muted">Same timing also with ${esc(alt.slice(0, 4).join(", "))}${alt.length > 4 ? ` +${alt.length - 4} more` : ""}</div>` : ""}</div>`;
         }).join("")}
       </details>
-      <button class="btn lime block" style="margin-top:12px" data-act="genuse" data-key="${key}" data-i="${i}" data-s="${scenKey}">Use this ${vi ? "variation" : "plan"}</button>
+      <button class="btn lime block" style="margin-top:12px" data-act="genuse" data-key="${key}" data-i="${i}" data-s="${scenKey}">Use this ${bk ? "backup" : vi ? "variation" : "plan"}</button>
     </div>`;
   }
 
@@ -1230,10 +1257,11 @@
         genResult = null; save(); render(); return;
       }
       case "generate": {
-        el.disabled = true; el.textContent = "Thinking…";
+        el.disabled = true; el.textContent = "Thinking… (about 10 seconds)";
         setTimeout(() => {
           genResult = generatePlans();
           for (const k in genSel) delete genSel[k];
+          for (const k in genBk) delete genBk[k];
           render();
           const out = $("#gen-out"); if (out) out.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 30);
@@ -1241,14 +1269,17 @@
       }
       case "gview": genResult.view = el.dataset.v; render(); return;
       case "gvar": genSel[el.dataset.key] = Number(el.dataset.j); render(); return;
+      case "gbk": genBk[el.dataset.key] = Number(el.dataset.j); render(); return;
       case "genuse": {
         const scen = el.dataset.s === "x" ? genResult.extra : genResult.base;
         const i = Number(el.dataset.i);
         const p = scen.plans[i];
-        const vi = Math.min(genSel[el.dataset.key] || 0, p.options.length - 1);
+        const bk = Math.min(genBk[el.dataset.key] || 0, (p.backups || []).length);
+        const vi = bk ? 0 : Math.min(genSel[el.dataset.key] || 0, p.options.length - 1);
+        const chosen = bk ? p.backups[bk - 1] : p.options[vi];
         const id = uid();
         const suffix = el.dataset.s === "x" ? ` + ${COURSES[genResult.extraCode].title.split(" ")[0]}` : "";
-        state.plans.push({ id, name: `Plan ${i + 1}${vi ? "." + (vi + 1) : ""}: ${p.profile.name}${suffix}`.slice(0, 48), sel: p.options[vi].ids.slice() });
+        state.plans.push({ id, name: `Plan ${i + 1}${bk ? "BC"[bk - 1] : vi ? "." + (vi + 1) : ""}: ${p.profile.name}${suffix}`.slice(0, 48), sel: chosen.ids.slice() });
         state.active = id; save(); location.hash = "#/timetable"; toast(`Now using ${p.profile.name}`);
         return;
       }
