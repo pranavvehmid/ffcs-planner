@@ -1,0 +1,376 @@
+category,category_name,course_code,title,course_type,slots,venue,faculty
+UCC,UCC - University Core Courses,BAARB101,Arabic Level I,ETH,TAA1,PRP134,MOHD SAQIB
+UCC,UCC - University Core Courses,BAARB101,Arabic Level I,ELA,L31+L32,PRP555,MOHD SAQIB
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ETH,TAA2,TT204,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ELA,L27+L28,PRP555,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ELA,L47+L48,TT318,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ETH,TAA1,TT630,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP329,SASIKUMAR S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP425,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP223,THENMOZHI K
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP329,VIJAYARAGHAVAN R
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP425,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP424,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP426,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP427,MADHVESH PATHAK
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP429,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP112,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP426,MADHUMITHA G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP427,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP230,KARPAGAM S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRP408A,BARNALI MAITI
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRP408A,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L27+L28,PRP408A,SARVESWARI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRPG07,SAI SARASWATHI V
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L9+L10,PRP408A,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRPG07,MARY SARAL A
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRPG07,DIVYA BHARATHI J
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRP408A,KAMINI MISHRA
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L31+L32,PRP408A,U. VIJAYALAKSHMI
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRP408A,RAJAGOPAL D
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRPG07,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L9+L10,PRP408A,KARPAGAM S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRPG07,VIJAYARAGHAVAN R
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRP408A,MADHVESH PATHAK
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRPG07,THENMOZHI K
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRP408A,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRP408A,SAI SARASWATHI V
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRPG07,SASIKUMAR S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRP408A,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L31+L32,PRP408A,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRP408A,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRPG07,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRP408A,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L27+L28,PRP408A,MADHUMITHA G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRPG07,SREELEKHA U
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRPG07,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACLE105,Disaster Mitigation and Management,TH,G1+TG1,CDMM402,GANAPATHY G.P
+UCC,UCC - University Core Courses,BACLE105,Disaster Mitigation and Management,TH,G2+TG2,CDMM402,ARUNAVA RAY
+UCC,UCC - University Core Courses,BACSE101,Problem Solving using Python,LO,L37+L38+L51+L52,PRP231,PARTHASARATHY G
+UCC,UCC - University Core Courses,BACSE101,Problem Solving using Python,LO,L1+L2+L11+L12,PRP138,VIVEK DUBEY
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ELA,L43+L44,TT344,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ELA,L21+L22,TT344,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ETH,A1+TA1,TT104,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ETH,E2+TE2,TT104,ANBARASAN P
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SMV109,MD. SAHUL HAMEED M A
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB306A,SUNITHA V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB307A,SANKAR G
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB307A,SUSHANT KISHORE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,SMV109,GANDHIMATHI S.N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB306,ANIL PREMRAJ J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SMVG10,GAYATHRI N
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,SMVG10,SUJATHA ARAVINDAKSHAN MENON
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB307,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB306A,RAKESH KUMAR PANKAJ
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB307,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,PRP123,AJANTA SIRCAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,PRP112,ANITHA DEVI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,PRP125,RUKMINI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,PRP122,SENTHIL BABU M K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP732,PRASANTHA KUMAR N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP105,ANU BAISEL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,SJT105,PRAJEESH TOMY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP104,DHUMAL SURAJ NANDKUMAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP107,MATHUMATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SJT115,SARAVANAN V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT524,LAXMI DHAR DWIVEDI
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT303,VISHNU PRIYA N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT530,PANKAJ KUMAR VERMA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,SJT112,SANGEETA MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT530A,SENGUTTUVAN M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT304,YADAMALA SREENIVASULU
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT530,VIDHYA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT303,BHUVANESWARI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT619,VIJAYAKUMAR M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT531A,MEERA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT531,G CHRISTOPHER
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT619,SOUMEN MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,MB224,SRIJANI CHOWDHURY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,MB224,MEENAKSHI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB224,EVANGELINE PRISCILLA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB224,SHEEJA RAJAGOPAL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP250,DENISH RAJA DURAI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB306,SREEJITH VARMA R
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT530,CHRISTOPHER RAJASEKARAN W
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT524,VARSHA K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT413,DWIJA BAI A K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT414,MEENU B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,SMVG16,MD. SAHUL HAMEED M A
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT104,SNEHA MISHRA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT201,JAISHREE JAIKRISHNAN
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L29+L30,SMVG15,GANDHIMATHI S.N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,SMVG15,GAYATHRI N
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,TT306,SANKAR G
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,TT306,SUNITHA V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,TT116,ANIL PREMRAJ J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L29+L30,TT432,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT306,SUSHANT KISHORE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,TT432,RAKESH KUMAR PANKAJ
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L5+L6,TT306,SHEEJA RAJAGOPAL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L57+L58,TT306,EVANGELINE PRISCILLA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,TT306,MEENAKSHI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT306,SRIJANI CHOWDHURY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L55+L56,TT306,SOUMEN MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT116,MEERA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L5+L6,TT432,VIJAYAKUMAR M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT432,BHUVANESWARI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT116,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L25+L26,TT116,VISHNU PRIYA N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,TT432,LAXMI DHAR DWIVEDI
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,TT432,VIDHYA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,TT306,SENGUTTUVAN M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L9+L10,SMVG16,SUJATHA ARAVINDAKSHAN MENON
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,TT306,DWIJA BAI A K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,TT306,PANKAJ KUMAR VERMA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,TT432,CHRISTOPHER RAJASEKARAN W
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L49+L50,TT306,SREEJITH VARMA R
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L25+L26,TT432,YADAMALA SREENIVASULU
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L7+L8,TT432,G CHRISTOPHER
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,PRP554,DENISH RAJA DURAI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L57+L58,SJT519,SANGEETA MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,PRP554,MATHUMATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,PRP554,DHUMAL SURAJ NANDKUMAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L55+L56,PRP554,ANU BAISEL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,PRP554,AJANTA SIRCAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,SJT519,SARAVANAN V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L49+L50,PRP554,PRASANTHA KUMAR N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,PRP554,RUKMINI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,SJT519,PRAJEESH TOMY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,PRP554,SENTHIL BABU M K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,PRP552,ANITHA DEVI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,TT116,JAISHREE JAIKRISHNAN
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,TT116,VARSHA K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT432,MEENU B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,TT432,SNEHA MISHRA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT404,SARASWATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,TT306,SARASWATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,PRP249,SUGANTHAN C
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP111,SUGANTHAN C
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L3+L4,PRP555,GAURAV SUSHANT
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TC2,SJT522,GAURAV SUSHANT
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TG2,SJT115,BAISHALI CHOUDHURI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L15+L16,PRP555,BAISHALI CHOUDHURI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TAA1,SJT124,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L49+L50,PRP555,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TCC1,SJT513,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L51+L52,PRP555,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TG2,SMV109,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L23+L24,PRP555,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TDD2,SJT102,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L7+L8,TT318,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TBB2,SJT513,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L1+L2,TT318,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L59+L60,TT318,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TD1,SMV128,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L1+L2,PRP555,CALAIVANANE R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TBB2,PRP104,CALAIVANANE R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TCC1,SMV102,ANTOINETTE DANIEL
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L55+L56,PRP555,ANTOINETTE DANIEL
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L29+L30,PRP555,SHANTANU SHANDILYA
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TAA1,SJT102,VISALAKSHI R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L37+L38,PRP555,VISALAKSHI R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TAA1,SMV112,MALATHY O
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L33+L34,PRP555,MALATHY O
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TCC1,TT335,COUMARAN G
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L45+L46,PRP555,COUMARAN G
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TG2,PRP425,SHANTANU SHANDILYA
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L59+L60,PRP555,ABHIJIT KR DARBEY
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L53+L54,PRP555,AMIT KUMAR SAINI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L7+L8,PRP555,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TAA1,SJT505,DHANANJAY KUMAR
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L57+L58,PRP555,DHANANJAY KUMAR
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TBB2,SJT124,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TAA2,SJT302,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L19+L20,TT116,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L57+L58,TT116,ADAIKALAM ARULANANDAM
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,TT416,ADAIKALAM ARULANANDAM
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,SJT324,ABHIJIT KR DARBEY
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,SJT607,AMIT KUMAR SAINI
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,AQUIB PARVEZ
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SHAHID HAMID RAINA
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SARAVANA BHAVAN N
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,BANGALORE MORARJI
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,MULUGU S NEELOTPAL
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,RAMNATH REGHUNADHAN
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,RIZWAN AHMAD
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SUDHEER C V
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,ADIL AHMAD SHAH
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B1+TB1,SJT103,RAHUL SHUKLA
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B2+TB2,SJT124,RAHUL SHUKLA
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B1+TB1,SJT408,BALAMURUGAN J
+UCC,UCC - University Core Courses,BAHUM110,Sustainability and Society,TH,B2+TB2,TT415,KUBENDRAN A
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B1+TB1,TT620,BHUVANESWARI M
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SMV214,BHUVANESWARI M
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SJT104,MOHD OWAIS KHAN
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SJT105,POONAM SHARMA
+UCC,UCC - University Core Courses,BAHUM119,International Relations,TH,B1+TB1,SMV235,BANGALORE MORARJI
+UCC,UCC - University Core Courses,BAHUM126,Popular Culture and Visual Narratives,TH,E1+TE1,PRP125,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAHUM127,"Reading, Writing, and Cognition",TH,B1+TB1,SMVG21,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAHUM129,Literatures in the Digital Age,TH,B2+TB2,PRP127,MEENU B
+UCC,UCC - University Core Courses,BAHUM130,The Art of Public Speaking and Presentation,TH,B2+TB2,PRP128,MEERA B
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TCC2,SJT501,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L19+L20,PRP555,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TAA2,TT206,HIYA MUKHERJEE
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L25+L26,PRP555,HIYA MUKHERJEE
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L7+L8,TT116,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TDD2,SJT508,KHANJAN
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A1+TA1,MB305,UMA K
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A1+TA1,PRP126,MELLACHERUVU NAGA SRINIVASU
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A2+TA2,PRP124,KAVITHA A
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A2+TA2,SMV122,SHOBANA DEVI N
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L31+L32,PRP450,UMA K
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L49+L50,PRP450,MELLACHERUVU NAGA SRINIVASU
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L3+L4,PRP119,SHOBANA DEVI N
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L3+L4,PRP450,KAVITHA A
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L3+L4,TT436,PANKAJ SHEORAN
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG06,GOPAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG03,MURALI R
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L51+L52,PRPG17,MURALI R
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG06,VISHNUDATH K N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L35+L36,PRPG17,VISHNUDATH K N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG25,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L53+L54,PRPG17,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG03,PANKAJ SHEORAN
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L1+L2,PRPG17,GOPAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG08,PREMKUMAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L7+L8,PRPG17,PREMKUMAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG21,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L49+L50,TT436,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG21,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L5+L6,PRPG17,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG25,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L11+L12,PRPG17,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L31+L32,PRPG17,ABHISHEK KUMAR SINGH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG23,UMMAL MOMEEN M
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L39+L40,PRPG17,UMMAL MOMEEN M
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L23+L24,PRPG17,BALAKRISHNAN S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP104,RAMBABU YALAVARTHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG10,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L37+L38,PRPG17,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP105,KURAGANTI VASU
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L13+L14,TT436,LAXMI NARAYAN TRIPATHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L13+L14,PRPG17,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP110,SANGEM RAJESH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP116,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L27+L28,TT436,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L27+L28,PRPG17,SHAIK KALEEMULLA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP120,SANDEEP CHAKRABORTY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L47+L48,PRPG17,SANDEEP CHAKRABORTY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L5+L6,TT436,KURAGANTI VASU
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP104,ABHISHEK KUMAR SINGH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG08,DEEPAK BHAT
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L41+L42,PRPG17,DEEPAK BHAT
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG23,BALAKRISHNAN S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L3+L4,PRPG17,RAMBABU YALAVARTHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP109,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L21+L22,PRPG17,SANGEM RAJESH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP110,SRIDHAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP111,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L49+L50,PRPG17,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP111,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP115,SASMITA MOHAKUD
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L43+L44,TT436,SASMITA MOHAKUD
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L29+L30,PRPG17,DHRITIMAN GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L55+L56,TT436,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG10,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L9+L10,PRPG17,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP107,LAXMI NARAYAN TRIPATHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L43+L44,PRPG17,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L37+L38,TT436,SRIDHAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP105,DHANOJ GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L45+L46,PRPG17,DHANOJ GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP115,DHRITIMAN GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP109,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L19+L20,PRPG17,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP116,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP120,SHAIK KALEEMULLA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP122,MITESH KUMAR BEHERA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L15+L16,PRPG17,MITESH KUMAR BEHERA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP122,SHAGUN KAUSHAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP124,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L57+L58,TT436,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP124,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L57+L58,PRPG17,SHAGUN KAUSHAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L15+L16,TT436,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP125,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L55+L56,PRPG17,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP125,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L25+L26,PRPG17,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP123,VASU DEV
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L59+L60,PRPG17,VASU DEV
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP107,KRISHNA CHANDAR N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L33+L34,PRPG17,KRISHNA CHANDAR N
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP304,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP309,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP224,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP306,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP306,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP224,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP313,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP318,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP304,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP308,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP308,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP313,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP309,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP318,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP411,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP332,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP333,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP339,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP323,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP414,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP333,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP319,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP319,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP320,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP322,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP322,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP323,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP411,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP414,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP332,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP334,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP339,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP320,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP334,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SMV116,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SMV101,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,TT204,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,TT204,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SMV116,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB213,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB213,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,CDMM103,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,TT201,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB212,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT224,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB214,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB214,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB211,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB211,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB212,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SMV101,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,CDMM103,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,TT201,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT224,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT221,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT222,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT223,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT215,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG32,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP134,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT215,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT221,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT223,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT222,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP238,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP238A,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG32,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG33,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG34,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP238,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG33,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG34,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP134,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP238A,TIME (APT)

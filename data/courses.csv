@@ -1,0 +1,67 @@
+category,course_code,title,course_types,num_classes
+UCC,BAARB101,Arabic Level I,ELA/ETH,2
+UCC,BACHI101,Chinese Level I,ELA/ETH,4
+UCC,BACHY105,Applied Chemistry,ELA/ETH,39
+UCC,BACLE105,Disaster Mitigation and Management,TH,2
+UCC,BACSE101,Problem Solving using Python,LO,2
+UCC,BAEEE101,Basic Engineering,ELA/ETH,4
+UCC,BAENG101,Technical English Communication,ELA/ETH,94
+UCC,BAESP101,Spanish Level I,ELA/ETH,16
+UCC,BAFRE101,French Level I,ELA/ETH,12
+UCC,BAGER101,German Level I,ELA/ETH,12
+UCC,BAHUM101,India Studies,OC,9
+UCC,BAHUM109,Principles of Sociology,TH,3
+UCC,BAHUM110,Sustainability and Society,TH,1
+UCC,BAHUM111,Introduction to Psychology,TH,4
+UCC,BAHUM119,International Relations,TH,1
+UCC,BAHUM126,Popular Culture and Visual Narratives,TH,1
+UCC,BAHUM127,"Reading, Writing, and Cognition",TH,1
+UCC,BAHUM129,Literatures in the Digital Age,TH,1
+UCC,BAHUM130,The Art of Public Speaking and Presentation,TH,1
+UCC,BAJAP101,Japanese Level I,ELA/ETH,6
+UCC,BAMAT101,Multivariable Calculus and Differential Equations,ELA/ETH,8
+UCC,BAPHY105,Engineering Physics,ELA/ETH,78
+UCC,BASTS102,Qualitative and Quantitative Skills Practice II,SS,74
+PCC,BACSE103,Computation Structures,ELA/ETH,94
+PCC,BACSE104,Structured and Object-Oriented Programming,ELA/ETH,92
+PCC,BACSE105,Data Structures and Algorithms,ELA/ETH,92
+PCC,BACSE106,Operating Systems,ELA/ETH,94
+PCC,BACSE201,Models of Computation,TH,34
+PCC,BACSE204,Software Engineering,ELA/ETH,78
+PCC,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA/ETH,60
+PCC,BAMAT205,Discrete Mathematics and Linear Algebra,TH,44
+CON,BACSE324,Embedded Systems Architecture,ELA/ETH,4
+CON,BACSE325,Full Stack Development,ELA/ETH,46
+OEC,BABIT103,Cell and Molecular Biology,ELA/ETH,12
+OEC,BABIT303,Biochemical Engineering,TH,3
+OEC,BABIT310,Plant Biotechnology,TH,3
+OEC,BACHE320,Chemical Product Design,TH,1
+OEC,BACHE326,Fuels and Combustion,TH,1
+OEC,BACHE333,Transport Phenomena,TH,1
+OEC,BACHE334,Chemical Sensors for Industrial Applications,TH,1
+OEC,BACLE301,Construction Materials and Techniques,TH,1
+OEC,BACLE316,Solid Waste Management,TH,1
+OEC,BACLE319,Essentials for Data Science and AI for Civil Engineers,TH,1
+OEC,BACLE402,Engineering Geology,TH,2
+OEC,BACLE417,Sustainability Practices in Design of Buildings,TH,1
+OEC,BACSE301,Exploratory Data Analysis,ELA/ETH,32
+OEC,BACSE302,Machine Learning and Optimization,ELA/ETH,2
+OEC,BACSE305,Foundations of Data Science,ELA/ETH,4
+OEC,BACSE320,Penetration Testing and Vulnerability Assessment,ELA/ETH,10
+OEC,BAFRE201,French for Engineers: Language and Communication Lab,ELA/ETH,2
+OEC,BAGER201,German Level II,ELA/ETH,2
+OEC,BAHIN101,Prathamik Hindi,TH,1
+OEC,BAHIN102,Prayojanmulak Hindi,ELA/ETH,2
+OEC,BAHST305,Bio-MEMS and Bio-NEMS,TH,1
+OEC,BAHST306,Preclinical and Clinical Trial Design for Medical Devices,TH,1
+OEC,BAHST308,Tissue Engineering and Regenerative Medicine,ELA/ETH,2
+OEC,BAHST310,Bioinspired Engineering and Biomimetic Technologies,TH,1
+OEC,BAHST313,Virtual Reality and Immersive Technologies in Healthcare,ELA/ETH,2
+OEC,BAHST315,Precision/Personalized Medicine,TH,1
+OEC,BAHUM226,Indian Classical Music,TH,1
+OEC,BAHUM238,Environmental Economics,TH,1
+OEC,BAITE311,Introduction to Finance,TH,2
+OEC,BAITE312,Financial Analytics,TH,2
+OEC,BAJAP201,Japanese Level II,ETH,1
+OEC,BAMAT208,Operations Research,ELA/ETH,2
+OEC,BAMGT301,Financial and Cost Accounting,TH,2

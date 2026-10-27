@@ -1,0 +1,103 @@
+category,category_name,course_code,title,course_type,slots,venue,faculty
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F1+TF1,SMV112,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F2+TF2,SMV111,SHAHILA PARWEEN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F1+TF1,SMV111,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F2+TF2,SMV112,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV212,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV212,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV225,SHAHILA PARWEEN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV225,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV225,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV212,SUDESH R
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV212,KANAGAVEL DEEPANKUMAR
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV225,MANJUBALA I
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C1+TC1+TCC1,SMV121,RAMANATHAN K
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C1+TC1+TCC1,SMV122,SHANTHI V
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C2+TC2+TCC2,SMV121,THIRUPATHI KUMARA RAJA S
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A1+TA1+TAA1,SMV121,SIVA R
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A1+TA1+TAA1,SMV122,SUNANTHA G
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A2+TA2+TAA2,SMV121,ARKAJYOTI DUTTA
+OEC,OEC - Open Elective Courses,BACHE320,Chemical Product Design,TH,C1+TC1+TCC1,SMV101,ANAND VEERABADRA PRASAD GURUMOORTHY
+OEC,OEC - Open Elective Courses,BACHE326,Fuels and Combustion,TH,C2+TC2+TCC2,SMV101,CHITRA D
+OEC,OEC - Open Elective Courses,BACHE333,Transport Phenomena,TH,C1+TC1+TCC1,SMV109,SHISHIR KUMAR BEHERA
+OEC,OEC - Open Elective Courses,BACHE334,Chemical Sensors for Industrial Applications,TH,C2+TC2+TCC2,SMV109,SHANKAR RAMAN DHANUSHKODI
+OEC,OEC - Open Elective Courses,BACLE301,Construction Materials and Techniques,TH,C1+TC1+TCC1,CDMM103,SUGANYA OM
+OEC,OEC - Open Elective Courses,BACLE316,Solid Waste Management,TH,B2+TB2+TBB2,CDMM103,AMIT B MAHINDRAKAR
+OEC,OEC - Open Elective Courses,BACLE319,Essentials for Data Science and AI for Civil Engineers,TH,E2,CDMM104,NANDINI S
+OEC,OEC - Open Elective Courses,BACLE402,Engineering Geology,TH,A1+TA1+TAA1,CDMM103,DILLIP KUMAR BARIK
+OEC,OEC - Open Elective Courses,BACLE402,Engineering Geology,TH,A2+TA2+TAA2,CDMM103,PARIMALA RENGANAYAKI S
+OEC,OEC - Open Elective Courses,BACLE417,Sustainability Practices in Design of Buildings,TH,C2+TC2+TCC2,CDMM103,MALATHI PRIYA N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP318,KALYANARAMAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP320,SARAVANAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP319,ANNY LEEMA A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP318,RAJKUMAR R
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP320,KARTHIKEYAN A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP309,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP313,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP309,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP322,JAYALAKSHMI M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP323,KATHIRAVAN S
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP322,JAYAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP313,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP323,PRAKASH M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP411,SUBRAMANIYASWAMY V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP411,SWETHA V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP319,BALAKRISHNAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L23+L24,PRP354,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L9+L10,PRP354,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L51+L52,PRP354,KALYANARAMAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L43+L44,PRP354,KARTHIKEYAN A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L31+L32,PRP354,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L7+L8,PRP354,JAYAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L35+L36,PRP354,KATHIRAVAN S
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L5+L6,PRP354,PRAKASH M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L3+L4,PRP354,SARAVANAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L15+L16,PRP354,ANNY LEEMA A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L13+L14,PRP354,RAJKUMAR R
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L39+L40,PRP354,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L45+L46,PRP354,BALAKRISHNAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L55+L56,PRP354,JAYALAKSHMI M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L31+L32,PRP655,SUBRAMANIYASWAMY V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L27+L28,PRP655,SWETHA V
+OEC,OEC - Open Elective Courses,BACSE302,Machine Learning and Optimization,ETH,B1+TB1,PRP330,ANITHA E
+OEC,OEC - Open Elective Courses,BACSE302,Machine Learning and Optimization,ELA,L35+L36,SJT418,ANITHA E
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ETH,B2+TB2,PRP332,LAKSHMI S
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ETH,B1+TB1,PRP332,SANTHI K
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ELA,L47+L48,PRP354,SANTHI K
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ELA,L21+L22,PRP354,LAKSHMI S
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B1+TB1,PRP334,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP414,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP334,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP308,ROHITH R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B1+TB1,PRP414,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L43+L44,PRP350,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L23+L24,PRP350,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L45+L46,PRP350,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L21+L22,PRP350,ROHITH R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L29+L30,PRP350,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BAFRE201,French for Engineers: Language and Communication Lab,ETH,E1,SJT101,VISALAKSHI R
+OEC,OEC - Open Elective Courses,BAFRE201,French for Engineers: Language and Communication Lab,ELA,L13+L14,PRP555,VISALAKSHI R
+OEC,OEC - Open Elective Courses,BAGER201,German Level II,ETH,E1,TT332,ADAIKALAM ARULANANDAM
+OEC,OEC - Open Elective Courses,BAGER201,German Level II,ELA,L39+L40,PRP555,ADAIKALAM ARULANANDAM
+OEC,OEC - Open Elective Courses,BAHIN101,Prathamik Hindi,TH,D1+TD1,TT334,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHIN102,Prayojanmulak Hindi,ELA,L11+L12,TT432,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHIN102,Prayojanmulak Hindi,ETH,E2,SMV104,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHST305,Bio-MEMS and Bio-NEMS,TH,A1+TA1+TAA1,PRP250,VIJAYALAKSHMI S
+OEC,OEC - Open Elective Courses,BAHST306,Preclinical and Clinical Trial Design for Medical Devices,TH,C2+TC2+TCC2,PRP250,RAJARATHINAM THENMOZHI
+OEC,OEC - Open Elective Courses,BAHST308,Tissue Engineering and Regenerative Medicine,ELA,L37+L38,PRP147,PRIYADARSHINI B
+OEC,OEC - Open Elective Courses,BAHST308,Tissue Engineering and Regenerative Medicine,ETH,G1+TG1,PRP250,GEETHA MANIVASAGAM
+OEC,OEC - Open Elective Courses,BAHST310,Bioinspired Engineering and Biomimetic Technologies,TH,A2+TA2+TAA2,PRP250,YOGENDRA PRATAP SINGH
+OEC,OEC - Open Elective Courses,BAHST313,Virtual Reality and Immersive Technologies in Healthcare,ELA,L41+L42,PRP247,KISHOR LAKSHMI NARAYANAN
+OEC,OEC - Open Elective Courses,BAHST313,Virtual Reality and Immersive Technologies in Healthcare,ETH,F1+TF1,PRP250,KISHOR LAKSHMI NARAYANAN
+OEC,OEC - Open Elective Courses,BAHST315,Precision/Personalized Medicine,TH,B2+TB2+TBB2,PRP250,ARUN KUMAR P
+OEC,OEC - Open Elective Courses,BAHUM226,Indian Classical Music,TH,B2+TB2,SJT603,SUDHEER C V
+OEC,OEC - Open Elective Courses,BAHUM238,Environmental Economics,TH,B2+TB2,SJT118,SALMAN HAIDER
+OEC,OEC - Open Elective Courses,BAITE311,Introduction to Finance,TH,A1+TA1+TAA1,SJT201,PALANIAPPAN S
+OEC,OEC - Open Elective Courses,BAITE311,Introduction to Finance,TH,A2+TA2+TAA2,PRP125,PALANIAPPAN S
+OEC,OEC - Open Elective Courses,BAITE312,Financial Analytics,TH,B2+TB2+TBB2,SJT602,PRASANNA S
+OEC,OEC - Open Elective Courses,BAITE312,Financial Analytics,TH,B2+TB2+TBB2,SJT405,THAYYIB P V
+OEC,OEC - Open Elective Courses,BAJAP201,Japanese Level II,ETH,C2,SJT522,SHILPI GUPTA
+OEC,OEC - Open Elective Courses,BAMAT208,Operations Research,ETH,B1+TB1,SJT604,MUBASHIR UNNISSA M
+OEC,OEC - Open Elective Courses,BAMAT208,Operations Research,ELA,L45+L46,PRP119,MUBASHIR UNNISSA M
+OEC,OEC - Open Elective Courses,BAMGT301,Financial and Cost Accounting,TH,A1+TA1+TAA1,PRP463,BHUMIKA BUNKAR
+OEC,OEC - Open Elective Courses,BAMGT301,Financial and Cost Accounting,TH,A2+TA2+TAA2,PRP462,BHUMIKA BUNKAR

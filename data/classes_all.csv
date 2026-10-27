@@ -1,0 +1,1116 @@
+category,category_name,course_code,title,course_type,slots,venue,faculty
+UCC,UCC - University Core Courses,BAARB101,Arabic Level I,ETH,TAA1,PRP134,MOHD SAQIB
+UCC,UCC - University Core Courses,BAARB101,Arabic Level I,ELA,L31+L32,PRP555,MOHD SAQIB
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ETH,TAA2,TT204,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ELA,L27+L28,PRP555,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ELA,L47+L48,TT318,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHI101,Chinese Level I,ETH,TAA1,TT630,KHANA BAIDYA
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP329,SASIKUMAR S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP425,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP223,THENMOZHI K
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP329,VIJAYARAGHAVAN R
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP425,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP424,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP426,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP427,MADHVESH PATHAK
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP429,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C1+TC1,PRP112,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP426,MADHUMITHA G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP427,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ETH,C2+TC2,PRP230,KARPAGAM S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRP408A,BARNALI MAITI
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRP408A,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L27+L28,PRP408A,SARVESWARI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRPG07,SAI SARASWATHI V
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L9+L10,PRP408A,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRPG07,MARY SARAL A
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRPG07,DIVYA BHARATHI J
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRP408A,KAMINI MISHRA
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L31+L32,PRP408A,U. VIJAYALAKSHMI
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRP408A,RAJAGOPAL D
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRPG07,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L9+L10,PRP408A,KARPAGAM S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRPG07,VIJAYARAGHAVAN R
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRP408A,MADHVESH PATHAK
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRPG07,THENMOZHI K
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRP408A,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRP408A,SAI SARASWATHI V
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRPG07,SASIKUMAR S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L37+L38,PRP408A,MOHANA ROOPAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L31+L32,PRP408A,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L49+L50,PRP408A,BUVANESWARI G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L43+L44,PRPG07,KARTHIKEYAN S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L21+L22,PRP408A,SUMATHI S
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L27+L28,PRP408A,MADHUMITHA G
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRPG07,SREELEKHA U
+UCC,UCC - University Core Courses,BACHY105,Applied Chemistry,ELA,L19+L20,PRPG07,NAWAZ KHAN F
+UCC,UCC - University Core Courses,BACLE105,Disaster Mitigation and Management,TH,G1+TG1,CDMM402,GANAPATHY G.P
+UCC,UCC - University Core Courses,BACLE105,Disaster Mitigation and Management,TH,G2+TG2,CDMM402,ARUNAVA RAY
+UCC,UCC - University Core Courses,BACSE101,Problem Solving using Python,LO,L37+L38+L51+L52,PRP231,PARTHASARATHY G
+UCC,UCC - University Core Courses,BACSE101,Problem Solving using Python,LO,L1+L2+L11+L12,PRP138,VIVEK DUBEY
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ELA,L43+L44,TT344,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ELA,L21+L22,TT344,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ETH,A1+TA1,TT104,ANBARASAN P
+UCC,UCC - University Core Courses,BAEEE101,Basic Engineering,ETH,E2+TE2,TT104,ANBARASAN P
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SMV109,MD. SAHUL HAMEED M A
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB306A,SUNITHA V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB307A,SANKAR G
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB307A,SUSHANT KISHORE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,SMV109,GANDHIMATHI S.N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB306,ANIL PREMRAJ J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SMVG10,GAYATHRI N
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,SMVG10,SUJATHA ARAVINDAKSHAN MENON
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB307,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB306A,RAKESH KUMAR PANKAJ
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB307,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,PRP123,AJANTA SIRCAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,PRP112,ANITHA DEVI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,PRP125,RUKMINI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,PRP122,SENTHIL BABU M K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP732,PRASANTHA KUMAR N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP105,ANU BAISEL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,SJT105,PRAJEESH TOMY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP104,DHUMAL SURAJ NANDKUMAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP107,MATHUMATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,SJT115,SARAVANAN V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT524,LAXMI DHAR DWIVEDI
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT303,VISHNU PRIYA N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT530,PANKAJ KUMAR VERMA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,SJT112,SANGEETA MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT530A,SENGUTTUVAN M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT304,YADAMALA SREENIVASULU
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT530,VIDHYA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT303,BHUVANESWARI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT619,VIJAYAKUMAR M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT531A,MEERA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT531,G CHRISTOPHER
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,TT619,SOUMEN MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,MB224,SRIJANI CHOWDHURY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,MB224,MEENAKSHI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB224,EVANGELINE PRISCILLA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,MB224,SHEEJA RAJAGOPAL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,PRP250,DENISH RAJA DURAI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,MB306,SREEJITH VARMA R
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G2+TG2,TT530,CHRISTOPHER RAJASEKARAN W
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT524,VARSHA K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT413,DWIJA BAI A K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT414,MEENU B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,SMVG16,MD. SAHUL HAMEED M A
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B1+TB1,TT104,SNEHA MISHRA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT201,JAISHREE JAIKRISHNAN
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L29+L30,SMVG15,GANDHIMATHI S.N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,SMVG15,GAYATHRI N
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,TT306,SANKAR G
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,TT306,SUNITHA V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,TT116,ANIL PREMRAJ J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L29+L30,TT432,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT306,SUSHANT KISHORE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,TT432,RAKESH KUMAR PANKAJ
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L5+L6,TT306,SHEEJA RAJAGOPAL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L57+L58,TT306,EVANGELINE PRISCILLA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,TT306,MEENAKSHI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT306,SRIJANI CHOWDHURY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L55+L56,TT306,SOUMEN MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT116,MEERA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L5+L6,TT432,VIJAYAKUMAR M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT432,BHUVANESWARI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,TT116,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L25+L26,TT116,VISHNU PRIYA N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,TT432,LAXMI DHAR DWIVEDI
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,TT432,VIDHYA B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,TT306,SENGUTTUVAN M
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L9+L10,SMVG16,SUJATHA ARAVINDAKSHAN MENON
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L37+L38,TT306,DWIJA BAI A K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,TT306,PANKAJ KUMAR VERMA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,TT432,CHRISTOPHER RAJASEKARAN W
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L49+L50,TT306,SREEJITH VARMA R
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L25+L26,TT432,YADAMALA SREENIVASULU
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L7+L8,TT432,G CHRISTOPHER
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,PRP554,DENISH RAJA DURAI K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L57+L58,SJT519,SANGEETA MUKHERJEE
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L15+L16,PRP554,MATHUMATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,PRP554,DHUMAL SURAJ NANDKUMAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L55+L56,PRP554,ANU BAISEL
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,PRP554,AJANTA SIRCAR
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L33+L34,SJT519,SARAVANAN V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L49+L50,PRP554,PRASANTHA KUMAR N.S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,PRP554,RUKMINI S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L27+L28,SJT519,PRAJEESH TOMY
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,PRP554,SENTHIL BABU M K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L3+L4,PRP552,ANITHA DEVI V
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L13+L14,TT116,JAISHREE JAIKRISHNAN
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,TT116,VARSHA K
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L45+L46,TT432,MEENU B
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L43+L44,TT432,SNEHA MISHRA
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,B2+TB2,TT404,SARASWATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L21+L22,TT306,SARASWATHY S
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ELA,L31+L32,PRP249,SUGANTHAN C
+UCC,UCC - University Core Courses,BAENG101,Technical English Communication,ETH,G1+TG1,PRP111,SUGANTHAN C
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L3+L4,PRP555,GAURAV SUSHANT
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TC2,SJT522,GAURAV SUSHANT
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TG2,SJT115,BAISHALI CHOUDHURI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L15+L16,PRP555,BAISHALI CHOUDHURI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TAA1,SJT124,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L49+L50,PRP555,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TCC1,SJT513,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L51+L52,PRP555,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TG2,SMV109,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L23+L24,PRP555,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TDD2,SJT102,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L7+L8,TT318,NUPUR MANASI
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TBB2,SJT513,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L1+L2,TT318,SHILPI GUPTA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ELA,L59+L60,TT318,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAESP101,Spanish Level I,ETH,TD1,SMV128,SABYASACHI MISHRA
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L1+L2,PRP555,CALAIVANANE R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TBB2,PRP104,CALAIVANANE R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TCC1,SMV102,ANTOINETTE DANIEL
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L55+L56,PRP555,ANTOINETTE DANIEL
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L29+L30,PRP555,SHANTANU SHANDILYA
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TAA1,SJT102,VISALAKSHI R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L37+L38,PRP555,VISALAKSHI R
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TAA1,SMV112,MALATHY O
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L33+L34,PRP555,MALATHY O
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TCC1,TT335,COUMARAN G
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ELA,L45+L46,PRP555,COUMARAN G
+UCC,UCC - University Core Courses,BAFRE101,French Level I,ETH,TG2,PRP425,SHANTANU SHANDILYA
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L59+L60,PRP555,ABHIJIT KR DARBEY
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L53+L54,PRP555,AMIT KUMAR SAINI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L7+L8,PRP555,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TAA1,SJT505,DHANANJAY KUMAR
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L57+L58,PRP555,DHANANJAY KUMAR
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TBB2,SJT124,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TAA2,SJT302,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L19+L20,TT116,ARATI KUMARI
+UCC,UCC - University Core Courses,BAGER101,German Level I,ELA,L57+L58,TT116,ADAIKALAM ARULANANDAM
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,TT416,ADAIKALAM ARULANANDAM
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,SJT324,ABHIJIT KR DARBEY
+UCC,UCC - University Core Courses,BAGER101,German Level I,ETH,TCC1,SJT607,AMIT KUMAR SAINI
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,AQUIB PARVEZ
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SHAHID HAMID RAINA
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SARAVANA BHAVAN N
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,BANGALORE MORARJI
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,MULUGU S NEELOTPAL
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,RAMNATH REGHUNADHAN
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,RIZWAN AHMAD
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,SUDHEER C V
+UCC,UCC - University Core Courses,BAHUM101,India Studies,OC,NIL,NIL,ADIL AHMAD SHAH
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B1+TB1,SJT103,RAHUL SHUKLA
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B2+TB2,SJT124,RAHUL SHUKLA
+UCC,UCC - University Core Courses,BAHUM109,Principles of Sociology,TH,B1+TB1,SJT408,BALAMURUGAN J
+UCC,UCC - University Core Courses,BAHUM110,Sustainability and Society,TH,B2+TB2,TT415,KUBENDRAN A
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B1+TB1,TT620,BHUVANESWARI M
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SMV214,BHUVANESWARI M
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SJT104,MOHD OWAIS KHAN
+UCC,UCC - University Core Courses,BAHUM111,Introduction to Psychology,TH,B2+TB2,SJT105,POONAM SHARMA
+UCC,UCC - University Core Courses,BAHUM119,International Relations,TH,B1+TB1,SMV235,BANGALORE MORARJI
+UCC,UCC - University Core Courses,BAHUM126,Popular Culture and Visual Narratives,TH,E1+TE1,PRP125,RAJALEKSHMI K
+UCC,UCC - University Core Courses,BAHUM127,"Reading, Writing, and Cognition",TH,B1+TB1,SMVG21,MARY JENNIFER J
+UCC,UCC - University Core Courses,BAHUM129,Literatures in the Digital Age,TH,B2+TB2,PRP127,MEENU B
+UCC,UCC - University Core Courses,BAHUM130,The Art of Public Speaking and Presentation,TH,B2+TB2,PRP128,MEERA B
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TCC2,SJT501,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L19+L20,PRP555,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TAA2,TT206,HIYA MUKHERJEE
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L25+L26,PRP555,HIYA MUKHERJEE
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ELA,L7+L8,TT116,KHANJAN
+UCC,UCC - University Core Courses,BAJAP101,Japanese Level I,ETH,TDD2,SJT508,KHANJAN
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A1+TA1,MB305,UMA K
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A1+TA1,PRP126,MELLACHERUVU NAGA SRINIVASU
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A2+TA2,PRP124,KAVITHA A
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ETH,A2+TA2,SMV122,SHOBANA DEVI N
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L31+L32,PRP450,UMA K
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L49+L50,PRP450,MELLACHERUVU NAGA SRINIVASU
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L3+L4,PRP119,SHOBANA DEVI N
+UCC,UCC - University Core Courses,BAMAT101,Multivariable Calculus and Differential Equations,ELA,L3+L4,PRP450,KAVITHA A
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L3+L4,TT436,PANKAJ SHEORAN
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG06,GOPAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG03,MURALI R
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L51+L52,PRPG17,MURALI R
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG06,VISHNUDATH K N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L35+L36,PRPG17,VISHNUDATH K N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG25,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L53+L54,PRPG17,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG03,PANKAJ SHEORAN
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L1+L2,PRPG17,GOPAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG08,PREMKUMAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L7+L8,PRPG17,PREMKUMAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG21,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L49+L50,TT436,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG21,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L5+L6,PRPG17,SOUMYA CHAKRABARTI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG25,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L11+L12,PRPG17,SAMUEL P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L31+L32,PRPG17,ABHISHEK KUMAR SINGH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRPG23,UMMAL MOMEEN M
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L39+L40,PRPG17,UMMAL MOMEEN M
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L23+L24,PRPG17,BALAKRISHNAN S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP104,RAMBABU YALAVARTHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG10,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L37+L38,PRPG17,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP105,KURAGANTI VASU
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L13+L14,TT436,LAXMI NARAYAN TRIPATHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L13+L14,PRPG17,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP110,SANGEM RAJESH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP116,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L27+L28,TT436,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L27+L28,PRPG17,SHAIK KALEEMULLA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP120,SANDEEP CHAKRABORTY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L47+L48,PRPG17,SANDEEP CHAKRABORTY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L5+L6,TT436,KURAGANTI VASU
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP104,ABHISHEK KUMAR SINGH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRPG08,DEEPAK BHAT
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L41+L42,PRPG17,DEEPAK BHAT
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRPG23,BALAKRISHNAN S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L3+L4,PRPG17,RAMBABU YALAVARTHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP109,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L21+L22,PRPG17,SANGEM RAJESH
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP110,SRIDHAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP111,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L49+L50,PRPG17,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP111,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP115,SASMITA MOHAKUD
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L43+L44,TT436,SASMITA MOHAKUD
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L29+L30,PRPG17,DHRITIMAN GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L55+L56,TT436,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRPG10,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L9+L10,PRPG17,VIJAYA CHAMUNDEESWARI S P
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP107,LAXMI NARAYAN TRIPATHI
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L43+L44,PRPG17,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L37+L38,TT436,SRIDHAR S
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP105,DHANOJ GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L45+L46,PRPG17,DHANOJ GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP115,DHRITIMAN GUPTA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP109,KANHAIYA LAL PANDEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L19+L20,PRPG17,ABHINAV ANAND
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP116,SHOBANA M K
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP120,SHAIK KALEEMULLA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F2+TF2,PRP122,MITESH KUMAR BEHERA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L15+L16,PRPG17,MITESH KUMAR BEHERA
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP122,SHAGUN KAUSHAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP124,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L57+L58,TT436,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP124,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L57+L58,PRPG17,SHAGUN KAUSHAL
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L15+L16,TT436,AMRITA DEY
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP125,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L55+L56,PRPG17,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G2+TG2,PRP125,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L25+L26,PRPG17,KRISHNARJUN BANERJEE
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,F1+TF1,PRP123,VASU DEV
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L59+L60,PRPG17,VASU DEV
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ETH,G1+TG1,PRP107,KRISHNA CHANDAR N
+UCC,UCC - University Core Courses,BAPHY105,Engineering Physics,ELA,L33+L34,PRPG17,KRISHNA CHANDAR N
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP304,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP309,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP224,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP306,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP306,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP224,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP313,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP318,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP304,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP308,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP308,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP313,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP309,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP318,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP411,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP332,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP333,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP339,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP323,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP414,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP333,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP319,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP319,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP320,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP322,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP322,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP323,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP411,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP414,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP332,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP334,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP339,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D1+TD1,PRP320,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,D2+TD2,PRP334,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SMV116,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SMV101,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,TT204,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,TT204,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SMV116,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB213,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB213,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,CDMM103,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,TT201,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB212,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT224,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB214,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB214,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,MB211,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB211,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,MB212,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SMV101,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,CDMM103,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,TT201,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT224,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT221,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT222,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT223,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT215,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG32,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP134,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,SJT215,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT221,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT223,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,SJT222,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP238,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRP238A,TIME (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG32,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG33,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRPG34,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP238,SIXPHRASE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG33,ETHNUS (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E2+TE2,PRPG34,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP134,FACE (APT)
+UCC,UCC - University Core Courses,BASTS102,Qualitative and Quantitative Skills Practice II,SS,E1+TE1,PRP238A,TIME (APT)
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG03,CHRISTINA JOSEPHINE MALATHI A
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG03,CHRISTINA JOSEPHINE MALATHI A
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG08,RAJESH N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG10,NAVEEN MISHRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG10,NAVEEN MISHRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG06,AVINASH CHANDRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG06,AVINASH CHANDRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG08,RAJESH N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG21,ARUN DEV DHAR DWIVEDI
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG21,ARUN DEV DHAR DWIVEDI
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG26,SHANIDUL HOQUE
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG23,SIDHARTH GAUTAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG26,SHANIDUL HOQUE
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG23,SIDHARTH GAUTAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP105,KALYANBRATA GHOSH
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP109,VIJAYA DURGA CHINTALA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP109,VIJAYA DURGA CHINTALA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP116,NARASIMMAN S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP116,NARASIMMAN S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP122,PRABHU R
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP123,GAUTAM NARAYAN
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRPG25,JAFFINO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRPG25,JAFFINO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP104,SULTAN MAHMOOD CHOWDHURY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP115,ANIS FATEMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP115,ANIS FATEMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP120,RICHA DUBEY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP124,BISWAJIT DWIVEDY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP107,MOHIUL ISLAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP107,MOHIUL ISLAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP110,HEMALATHA K
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP110,HEMALATHA K
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP104,SULTAN MAHMOOD CHOWDHURY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP105,KALYANBRATA GHOSH
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP120,RICHA DUBEY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP122,PRABIN JOSE J
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP123,VIKAS VIJAYVARGIYA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP111,SUKANTA KUMAR TULO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP111,SUKANTA KUMAR TULO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C2+TC2,PRP124,SUBHRA SANKHA SARMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,C1+TC1,PRP330,ANISHKUMAR MANOHARAN
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D1+TD1,SJT715,KRISHNAMOORTHY N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D2+TD2,SJTG16,KRISHNAMOORTHY N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L7+L8,SJT212,KRISHNAMOORTHY N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L37+L38,SJT212,YUSUF AKHTAR
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D2+TD2,SJT715,AYESWARYA S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D1+TD1,SJT711,AYESWARYA S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L35+L36,SJT212,AYESWARYA S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L9+L10,SJT212,AYESWARYA S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L43+L44,SJT212,KRISHNAMOORTHY N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D1+TD1,SJT712,YUSUF AKHTAR
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ETH,D2+TD2,SJTG14,YUSUF AKHTAR
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L5+L6,SJT212,YUSUF AKHTAR
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L33+L34,PRP117,CHRISTINA JOSEPHINE MALATHI A
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L15+L16,PRP117,CHRISTINA JOSEPHINE MALATHI A
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L19+L20,PRP117a,NAVEEN MISHRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L37+L38,PRP117,ARUN DEV DHAR DWIVEDI
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L57+L58,PRP117a,SIDHARTH GAUTAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L3+L4,PRP117a,SIDHARTH GAUTAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L53+L54,PRP117a,SULTAN MAHMOOD CHOWDHURY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L23+L24,PRP117a,SULTAN MAHMOOD CHOWDHURY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L49+L50,PRP117,AVINASH CHANDRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L19+L20,PRP117,AVINASH CHANDRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L45+L46,PRP117,RAJESH N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L3+L4,PRP117,ARUN DEV DHAR DWIVEDI
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L23+L24,PRP117,JAFFINO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L31+L32,PRP117,SHANIDUL HOQUE
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L7+L8,PRP117,RAJESH N
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L49+L50,PRP117a,NAVEEN MISHRA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L53+L54,PRP117,JAFFINO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L29+L30,PRP117,SHANIDUL HOQUE
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L35+L36,PRP117a,VIJAYA DURGA CHINTALA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L5+L6,PRP117a,VIJAYA DURGA CHINTALA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L33+L34,PRP117a,SUKANTA KUMAR TULO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L51+L52,PRP117a,ANIS FATEMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L51+L52,PRP117,KALYANBRATA GHOSH
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L7+L8,PRP117a,KALYANBRATA GHOSH
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L35+L36,PRP117,MOHIUL ISLAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L5+L6,PRP117,MOHIUL ISLAM
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L21+L22,PRP232,HEMALATHA K
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L1+L2,PRP117,SUKANTA KUMAR TULO
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L47+L48,PRP117a,HEMALATHA K
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L29+L30,PRP118,ANIS FATEMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L37+L38,PRP117a,NARASIMMAN S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L21+L22,PRP117a,RICHA DUBEY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L57+L58,PRP117,PRABIN JOSE J
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L1+L2,PRP118,NARASIMMAN S
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L47+L48,PRP117,RICHA DUBEY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L41+L42,PRP117,GAUTAM NARAYAN
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L55+L56,PRP117,BISWAJIT DWIVEDY
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L11+L12,PRP117,SUBHRA SANKHA SARMA
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L39+L40,PRP117,ANISHKUMAR MANOHARAN
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L9+L10,PRP117,PRABHU R
+PCC,PCC - Programme Core Courses,BACSE103,Computation Structures,ELA,L13+L14,PRP117,VIKAS VIJAYVARGIYA
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG06,MOHAN K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG10,JABANJALIN HILDA J
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG21,RAMESH BABU VEMULURI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG03,SENTHIL KUMAR K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG08,RISHIN HALDAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG10,JABANJALIN HILDA J
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG21,RAMESH BABU VEMULURI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG03,ANURADHA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG06,MOHAN KUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG08,RISHIN HALDAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG26,GERALDINE BESSIE AMALI D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP105,NARAYANAN PRASANTH
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP107,VINILA JINNY
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP109,SARITHA MURALI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG23,NAGA RAJA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG23,NAGA RAJA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRPG25,ANURADHA D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG25,ANURADHA D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRPG26,GERALDINE BESSIE AMALI D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP104,CHANDRA MOHAN B
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP107,VINILA JINNY
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP104,CHANDRA MOHAN B
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP105,VIMALA DEVI K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP109,SARITHA MURALI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP111,SUNIL KUMAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP120,DEEPANRAMKUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP110,VISWANATHAN A
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP115,SRI PREETHAA K R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP116,GUNASEKAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP120,DEEPANRAMKUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP110,VISWANATHAN A
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP111,SUNIL KUMAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP112,DHIVYAA C R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP116,GUNASEKAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP123,BALA KRISHNAN R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP112,DHIVYAA C R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP115,SRI PREETHAA K R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D1,PRP122,PUSHPA LAKSHMI R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP122,PUSHPA LAKSHMI R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,D2,PRP123,MUCHENEDI HARI KISHOR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L5+L6+L21+L22,PRP234,GUNASEKAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L39+L40+L43+L44,PRP234,GUNASEKAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L11+L12+L27+L28,PRP118,VINILA JINNY
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L43+L44+L55+L56,PRP118,VINILA JINNY
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L15+L16+L25+L26,PRP118,SUNIL KUMAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L41+L42+L45+L46,PRP233,SUNIL KUMAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L13+L14+L29+L30,PRP234,DEEPANRAMKUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L31+L32+L43+L44,PRP117a,DEEPANRAMKUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F1,SJTG16,JENILA VINCENT M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L11+L12+L23+L24,SJTG19,JOHN SINGH K.
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L33+L34+L35+L36,SJT121,JENILA VINCENT M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F2,SJTG16,PRABHANANTHA KUMAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L15+L16+L29+L30,SJT121,PRABHANANTHA KUMAR M
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L35+L36+L39+L40,SJT122,JOHN SINGH K.
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F2,SJT223,NIVETHITHA K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L37+L38+L51+L52,SJT121,NIVETHITHA K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F2,SJT224,JOHN SINGH K.
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F1,SJTG08,JOHN SINGH K.
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ETH,F1,SJTG14,NIVETHITHA K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L37+L38+L55+L56,PRP234,SENTHIL KUMAR K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L31+L32+L47+L48,PRP118a,RISHIN HALDAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L21+L22+L27+L28,PRP117,RISHIN HALDAR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L3+L4+L19+L20,SJT122,NIVETHITHA K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L33+L34+L49+L50,PRP118,MOHAN KUMAR P
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L3+L4+L19+L20,PRP234,MOHAN K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L7+L8+L21+L22,PRP118,JABANJALIN HILDA J
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L37+L38+L57+L58,PRP118,JABANJALIN HILDA J
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L5+L6+L13+L14,PRP118,RAMESH BABU VEMULURI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L13+L14+L27+L28,PRP118a,NAGA RAJA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L43+L44+L53+L54,PRP118a,NAGA RAJA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L41+L42+L51+L52,PRP118,RAMESH BABU VEMULURI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L3+L4+L19+L20,PRP118a,ANURADHA G
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L9+L10+L15+L16,PRP117a,GERALDINE BESSIE AMALI D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L1+L2+L11+L12,PRP117a,CHANDRA MOHAN B
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L11+L12+L25+L26,PRP118a,NARAYANAN PRASANTH
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L3+L4+L19+L20,PRP118,MUCHENEDI HARI KISHOR
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L9+L10+L21+L22,PRP118a,ANURADHA D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L39+L40+L55+L56,PRP118a,ANURADHA D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L31+L32+L53+L54,PRP118,GERALDINE BESSIE AMALI D
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L39+L40+L47+L48,PRP118,CHANDRA MOHAN B
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L33+L34+L49+L50,PRP234,VIMALA DEVI K
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L37+L38+L45+L46,PRP118a,SARITHA MURALI
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L39+L40+L45+L46,PRP117a,VISWANATHAN A
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L11+L12+L27+L28,PRP234,DHIVYAA C R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L31+L32+L41+L42,PRP234,DHIVYAA C R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L23+L24+L29+L30,PRP118a,SRI PREETHAA K R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L9+L10+L15+L16,PRP234,VISWANATHAN A
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L41+L42+L51+L52,PRP118a,SRI PREETHAA K R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L33+L34+L49+L50,PRP118a,BALA KRISHNAN R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L9+L10+L23+L24,PRP118,PUSHPA LAKSHMI R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L35+L36+L45+L46,PRP118,PUSHPA LAKSHMI R
+PCC,PCC - Programme Core Courses,BACSE104,Structured and Object-Oriented Programming,ELA,L5+L6+L15+L16,PRP118a,SARITHA MURALI
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG03,SIVAPRASAD DARLA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG23,SUBRAMANYAM REDDY A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG03,SIVAPRASAD DARLA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG06,SARAVANARAJAN M C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG25,NALLIAH M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG10,SRIVANI A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG08,GOPINATH M.P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG21,SHARIEF BASHA S
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG25,NALLIAH M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG26,JAGALINGAM P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG06,SARAVANARAJAN M C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG08,GOPINATH M.P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG10,SRIVANI A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG21,SHARIEF BASHA S
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRPG23,SUBRAMANYAM REDDY A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRPG26,JAGALINGAM P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP105,ATHIRA K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP104,RAJA S P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP105,ATHIRA K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP109,BADRINATH N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP111,KANAGARAJ K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP115,RAJAN SHRIVASTAVA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP116,SIVARAJ C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP104,RAJA S P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP107,ADALINE SUJI R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP107,ADALINE SUJI R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP120,DEBI PRASANNA ACHARJYA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP123,ILANTHENRAL K P S K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP123,GOVINDA K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP109,BADRINATH N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP115,RAJAN SHRIVASTAVA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP116,SIVARAJ C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP120,SARAVANAN R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP124,SHALINI L
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP110,ANINDITA KUNDU
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP111,KANAGARAJ K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP122,NARAYANAMOORTHI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP122,JOSHVA DEVADAS T
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,PRP110,ANINDITA KUNDU
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,PRP124,GAYATHRI P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,SJT715,LAWANYA SHRI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L5+L6,SJT120,LAWANYA SHRI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L1+L2,SJTG17,VINOTHKUMAR V
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,SJT711,MYTHILI N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L49+L50,SJT122,MYTHILI N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L41+L42,SJTG20,LAWANYA SHRI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E1+TE1,SJT712,VINOTHKUMAR V
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L31+L32,SJT216,VINOTHKUMAR V
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,SJT712,LAWANYA SHRI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,SJT711,VINOTHKUMAR V
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ETH,E2+TE2,SJT710,MYTHILI N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L27+L28,SJT219,MYTHILI N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L5+L6,PRP135,SIVAPRASAD DARLA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L49+L50,PRP135,SIVAPRASAD DARLA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L3+L4,PRP135,SARAVANARAJAN M C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L45+L46,PRP232,SARAVANARAJAN M C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L11+L12,PRP135,GOPINATH M.P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L43+L44,PRP136,SRIVANI A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L45+L46,PRP135,SHARIEF BASHA S
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L1+L2,PRP136,NALLIAH M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L7+L8,PRP135,DEBI PRASANNA ACHARJYA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L57+L58,PRP135,GOPINATH M.P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L19+L20,PRP135,SHARIEF BASHA S
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L1+L2,PRP135,SUBRAMANYAM REDDY A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L41+L42,PRP135,NALLIAH M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L29+L30,PRP135,JAGALINGAM P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L31+L32,PRP135,JAGALINGAM P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L39+L40,PRP135,NARAYANAMOORTHI M
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L15+L16,PRP136,SRIVANI A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L47+L48,PRP135,SUBRAMANYAM REDDY A
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L37+L38,PRP135,ILANTHENRAL K P S K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L21+L22,PRP135,JOSHVA DEVADAS T
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L5+L6,PRP136,RAJA S P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L41+L42,PRP232,BADRINATH N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L33+L34,PRP135,ADALINE SUJI R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L31+L32,PRP136,ANINDITA KUNDU
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L35+L36,PRP231,RAJAN SHRIVASTAVA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L13+L14,PRP136,KANAGARAJ K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L33+L34,PRP136,KANAGARAJ K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L41+L42,PRP136,SIVARAJ C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L3+L4,PRP136,SIVARAJ C
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L51+L52,PRP136,SARAVANAN R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L35+L36,PRP135,SHALINI L
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L13+L14,PRP135,ADALINE SUJI R
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L11+L12,PRP136,ANINDITA KUNDU
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L27+L28,PRP135,GAYATHRI P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L15+L16,PRP135,ATHIRA K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L43+L44,PRP135,ATHIRA K
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L3+L4,PRP232,BADRINATH N
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L19+L20,PRP136,RAJAN SHRIVASTAVA
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L49+L50,PRP136,RAJA S P
+PCC,PCC - Programme Core Courses,BACSE105,Data Structures and Algorithms,ELA,L9+L10,PRP231,GOVINDA K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG03,SUDHA.S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG03,SUDHA.S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG06,MANOOV R
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG06,MANOOV R
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG10,SATYAJIT MOHANTY
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG10,SATYAJIT MOHANTY
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG08,VIJAYANAND C
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG21,HITESHWAR KUMAR AZAD
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG08,VIJAYANAND C
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP107,ARTHI M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP109,THIRUVENKADAM T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG25,KONATHAM SUMALATHA
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG26,EZHIL ARASI V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP107,ARTHI M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG21,HITESHWAR KUMAR AZAD
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG23,THIRUNAVUKKARASAN M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG25,KONATHAM SUMALATHA
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP104,YUVARAJ N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP104,YUVARAJ N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRPG26,EZHIL ARASI V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP105,SIVAKUMAR T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP109,THIRUVENKADAM T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRPG23,THIRUNAVUKKARASAN M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP105,SIVAKUMAR T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP115,UMADEVI K S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP110,MANIVANNAN P
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP111,AVISHEK NANDI
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP110,VIJAYASHERLY V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP115,KOPPERUNDEVI N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP116,ANUSHA N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP116,VIJAYA KUMAR K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP120,VIJAYARAJAN V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP125,RAJKUMAR S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP111,ANURADHA J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP120,BRISILLA R M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP122,NAGARAJA RAO A
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP123,VENKATA LAKSHMI NARAYANA K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP112,SIVAKUMAR. N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP124,PADMAVATHY T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B2+TB2,PRP124,PADMAVATHY T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G1+TG1,SJT224,ARIVUSELVAN K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L33+L34,SJTG18,ARIVUSELVAN K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L7+L8,SJT120,BALAJI E
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L13+L14,SJTG18,KUMAR P J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G1+TG1,SJT223,KUMAR P J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G2+TG2,SJT127,KUMAR P J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G2+TG2,SJT204,KRITHIKA L.B
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G2+TG2,SJT205,BALAJI E
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L43+L44,SJT120,KUMAR P J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,G1+TG1,SJT115,KRITHIKA L.B
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L25+L26,SJTG18,KRITHIKA L.B
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L47+L48,SJT216,KRITHIKA L.B
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L9+L10,PRP136,SUDHA.S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L27+L28,PRP232,VIJAYANAND C
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L15+L16,PRP232,MANOOV R
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L23+L24,PRP232,SATYAJIT MOHANTY
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L27+L28,PRP231,HITESHWAR KUMAR AZAD
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L29+L30,PRP136,KONATHAM SUMALATHA
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L19+L20,PRP232,KOPPERUNDEVI N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L11+L12,PRP232,THIRUNAVUKKARASAN M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L5+L6,PRP232,ANURADHA J
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L25+L26,PRP231,EZHIL ARASI V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L1+L2,PRP118a,SIVAKUMAR T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L13+L14,PRP231,THIRUVENKADAM T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L29+L30,PRP231,MANIVANNAN P
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L7+L8,PRP118a,VIJAYA KUMAR K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L5+L6,PRP233,BRISILLA R M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L23+L24,PRP231,VENKATA LAKSHMI NARAYANA K
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L25+L26,PRP117,PADMAVATHY T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L13+L14,PRP232,ARTHI M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L9+L10,PRP135,YUVARAJ N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L21+L22,PRP136,RAJKUMAR S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ETH,B1+TB1,PRP126,SENDHIL KUMAR K S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L57+L58,PRP136,SUDHA.S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L33+L34,PRP231,SENDHIL KUMAR K S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L55+L56,PRP232,MANOOV R
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L43+L44,PRP232,VIJAYANAND C
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L47+L48,PRP232,SATYAJIT MOHANTY
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L57+L58,PRP231,HITESHWAR KUMAR AZAD
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L53+L54,PRP232,THIRUNAVUKKARASAN M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L43+L44,PRP138,KONATHAM SUMALATHA
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L43+L44,PRP231,EZHIL ARASI V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L55+L56,PRP135,YUVARAJ N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L39+L40,PRP136,SIVAKUMAR T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L53+L54,PRP231,THIRUVENKADAM T
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L39+L40,PRP232,ARTHI M
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L37+L38,PRP136,VIJAYASHERLY V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L35+L36,PRP232,AVISHEK NANDI
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L45+L46,PRP234,UMADEVI K S
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L49+L50,PRP233,ANUSHA N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L37+L38,PRP232,VIJAYARAJAN V
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L33+L34,PRP232,NAGARAJA RAO A
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L51+L52,PRP232,SIVAKUMAR. N
+PCC,PCC - Programme Core Courses,BACSE106,Operating Systems,ELA,L55+L56,PRP117a,PADMAVATHY T
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP334,SATHIYA KUMAR C
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP224,JAYALAKSHMI M
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP304,NAGARAJA RAO A
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP306,RAJKUMAR S
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP309,KALAIVANI K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP308,ANAND BIHARI
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP308,ANAND BIHARI
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP309,KALAIVANI K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP304,BOOMINATHAN P
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP318,SATHYA K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP319,BASKARAN P
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP313,PARTHASARATHY G
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP322,ARUMUGA ARUN R
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP322,ARUMUGA ARUN R
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP306,GUNAVATHI C
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP334,RAJARAJAN G
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP313,DEBI PRASANNA ACHARJYA
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP318,SATHYA K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP319,BASKARAN P
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP332,KRISHNA RANI SAMAL K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP333,ISLABUDEEN M
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP320,UMA PRIYA D
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP323,ANITHA E
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP332,PRAKASH M
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP339,HASHIDA HAIDROS RAHIMA MANZIL
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP320,UMA PRIYA D
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP333,SOMASUNDARAM S K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP339,PARTHASARATHY G
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP323,ANITHA E
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP411,MANIVANNAN P
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP414,NIVITHA K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C1+TC1+TCC1,PRP424,NIVITHA K
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP411,KAPIL KUMAR SHARMA
+PCC,PCC - Programme Core Courses,BACSE201,Models of Computation,TH,C2+TC2+TCC2,PRP224,SHALINI L
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP224,SWATHI J.N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP304,ARCHANA T
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP224,SWATHI J.N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP306,JYOTISMITA CHAKI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP306,JYOTISMITA CHAKI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP304,ARCHANA T
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP313,SIVAKUMAR V
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP308,JUSTIN GOPINATH A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP308,JUSTIN GOPINATH A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP313,SIVAKUMAR V
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP322,SIVAPRAKASH S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP323,ARUNKUMAR S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP319,DEVIPRIYA A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP309,MADHAN E S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP318,PRIYANKA N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP318,PRIYANKA N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP319,DEVIPRIYA A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP309,MADHAN E S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP320,THANUJA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP320,THANUJA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP322,SIVAPRAKASH S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP323,ARUNKUMAR S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP411,DEEPAK RAJ D M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP332,LOKESH KUMAR R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP411,DEEPAK RAJ D M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP333,MARGRET ANOUNCIA S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP414,MADIAJAGAN M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP333,JAFAR ALI IBRAHIM S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP334,BASKARAN P
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP332,PEREPI RAJARAJESWARI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP339,SAMRIDDHI SARKAR
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP339,SAMRIDDHI SARKAR
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L1+L2,PRP353,ARCHANA T
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L15+L16,PRP353,SWATHI J.N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L5+L6,PRP353,JYOTISMITA CHAKI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L9+L10,PRP353,MADIAJAGAN M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L57+L58,PRP347,JYOTISMITA CHAKI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L53+L54,PRP353,LOKESH KUMAR R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L21+L22,PRP347,PEREPI RAJARAJESWARI
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L31+L32,PRP353,MADHAN E S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L27+L28,PRP353,MADHAN E S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L7+L8,PRP353,JAFAR ALI IBRAHIM S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E2+TE2,PRP334,KUMARESAN A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L55+L56,PRP353,SHASHANK MOULI SATAPATHY
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L23+L24,PRP347,KUMARESAN A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L3+L4,PRP347,SIVAKUMAR V
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L31+L32,PRP347,SIVAKUMAR V
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L33+L34,PRP347,BASKARAN P
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L35+L36,PRP347,SAMRIDDHI SARKAR
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L13+L14,PRP347,PRIYANKA N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L5+L6,PRP347,SAMRIDDHI SARKAR
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L45+L46,PRP347,JUSTIN GOPINATH A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L15+L16,PRP347,ARUNKUMAR S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L49+L50,PRP347,ARUNKUMAR S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L11+L12,PRP347,DEEPAK RAJ D M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L47+L48,PRP347,DEEPAK RAJ D M
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,G1+TG1,SJT215,PRABHU J
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L49+L50,PRP353,DEVIPRIYA A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L13+L14,PRP655,DEVIPRIYA A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L43+L44,PRP655,SIVAPRAKASH S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L19+L20,PRP655,SIVAPRAKASH S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L29+L30,PRP347,THANUJA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L41+L42,PRP353,PRIYANKA N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L47+L48,PRP137,THANUJA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,G2+TG2,SJT224,PRABHU J
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L49+L50,SJT219,PRABHU J
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,G1+TG1,SJT710,SUJATHA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L33+L34,SJT219,SUJATHA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L3+L4,SJT219,PRABHU J
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,G2+TG2,SJT712,SUJATHA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L29+L30,SJT219,SUJATHA R
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L39+L40,SJT121,BHAVANI S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,G1+TG1,SJT709,BHAVANI S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L43+L44,PRP353,MARGRET ANOUNCIA S
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L11+L12,PRP353,JUSTIN GOPINATH A
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L33+L34,PRP353,SWATHI J.N
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ELA,L45+L46,PRP353,ARCHANA T
+PCC,PCC - Programme Core Courses,BACSE204,Software Engineering,ETH,E1+TE1,PRP330,SHASHANK MOULI SATAPATHY
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP224,KAUSER AHMED P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP304,DEGA NAGARAJU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP306,NAGESHWAR RAO RAGI
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP309,BALAMURUGAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP224,KAUSER AHMED P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP309,BALAMURUGAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP318,EBENEZER JULIET S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP304,DEGA NAGARAJU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP306,NAGESHWAR RAO RAGI
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP308,MONASH P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP308,MONASH P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP313,CHELLATAMILAN T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP313,CHELLATAMILAN T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP319,SUGUMAR R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP318,EBENEZER JULIET S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP319,SUGUMAR R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP320,NATARAJAN P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP332,GUNAVATHI C
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP411,CHIRANJEEVI C
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP320,ARUNKUMAR T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP323,SANJIBAN SEKHAR ROY
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP332,SUDHAKARA PANDIAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP414,AKILA VICTOR
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP333,RAJAKUMAR K
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP322,RAJAY VEDARAJ I S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP322,VARALAKSHMI M
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP323,ANANDA KUMAR S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G1+TG1,PRP411,ANNAPURNA JONNALAGADDA
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP414,RADHAKRISHNAN DELHIBABU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ETH,G2+TG2,PRP330,MEHFOOZA
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L39+L40,SJT517,RAJAY VEDARAJ I S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L1+L2,SJT517,KAUSER AHMED P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L55+L56,SJT517,KAUSER AHMED P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L31+L32,SJT517,ANANDA KUMAR S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L49+L50,SJT517,ANNAPURNA JONNALAGADDA
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L33+L34,SJT517,AKILA VICTOR
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L15+L16,SJT517,DEGA NAGARAJU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L41+L42,SJT517,DEGA NAGARAJU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L51+L52,SJT517,GUNAVATHI C
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L45+L46,SJT517,MONASH P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L27+L28,SJT517,ARUNKUMAR T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L13+L14,SJT517,NAGESHWAR RAO RAGI
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L57+L58,SJT517,NAGESHWAR RAO RAGI
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L25+L26,SJT517,MONASH P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L29+L30,SJT517,BALAMURUGAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L53+L54,SJT517,BALAMURUGAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L3+L4,SJT517,SUGUMAR R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L7+L8,SJT517,VARALAKSHMI M
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L5+L6,SJT517,SUDHAKARA PANDIAN R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L11+L12,SJT517,MEHFOOZA
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L37+L38,SJT517,RAJAKUMAR K
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L47+L48,SJT517,SUGUMAR R
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L21+L22,SJT515,CHIRANJEEVI C
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L23+L24,SJT517,RADHAKRISHNAN DELHIBABU
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L19+L20,SJT517,SANJIBAN SEKHAR ROY
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L43+L44,SJT517,NATARAJAN P
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L13+L14,SJT515,CHELLATAMILAN T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L55+L56,SJT515,CHELLATAMILAN T
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L25+L26,SJT515,EBENEZER JULIET S
+PCC,PCC - Programme Core Courses,BACSE205,Fundamentals of Artificial Intelligence and Machine Learning,ELA,L43+L44,SJT515,EBENEZER JULIET S
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,TT715,PALLAVEE GUPTA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG03,SELVAKUMAR R
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG06,DURGA NAGARAJAN
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP110,RAMU GEDDAVALASA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP111,CHANDRASEKAR A
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG08,ABHISHEK DAS
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP105,PARTHIBAN A
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP107,TABINDA NAHID
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG10,VIJAYA KUMAR A.G
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG25,ROY.S
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP104,MURUGAN V
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP109,CLEMENT J
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG10,GAYATHRI R
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG21,RAGUKUMAR P
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG26,LAKSHMI NARAYAN MISHRA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG25,RACHNA BHATIA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG03,EZHILMARAN D
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP105,PRIYA DAS
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP107,ABDUL HAQ
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG23,RAMU GEDDAVALASA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRPG23,DEEPA G
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP104,PADIGEPATI NAVEEN
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG06,ARUNA K
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG21,ARUN CHOUDHARY
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG08,RAGHAVENDAR K
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRPG26,POORNIMA T
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP109,KARTHIKA K
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP112,YOGALAKSHMI T
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP110,GURUSAMY A
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP111,MONICA C
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP116,GAYATHRI R
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP120,ANIMESH ROY
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP116,DEBAROTI DAS
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP122,SUJASREE M
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP123,PALLAVEE GUPTA
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP112,RAJESH BHATT
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP115,REENU RANI
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP115,RAMESH KUMAR D
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP120,VALLAMPATI RAMACHANDRA PRASAD
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP123,VENKATESWARLU B
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP124,DEBAROTI DAS
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP122,ANIMESH ROY
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A1+TA1+TAA1,PRP127,PURUSOTHAM S
+PCC,PCC - Programme Core Courses,BAMAT205,Discrete Mathematics and Linear Algebra,TH,A2+TA2+TAA2,PRP126,DHARANI S
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ETH,B1+TB1,PRP224,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ETH,B2+TB2,PRP224,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ELA,L25+L26,SJT621,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ELA,L47+L48,SJT621,ROHIT MATHUR
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP304,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP318,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP320,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP323,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP224,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP224,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP306,NIHAAL AHMED K
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP308,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP308,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP318,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP319,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP320,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP323,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP304,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP306,SANMUGA PRIYA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP309,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP309,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP313,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP319,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP322,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP411,ARUN KUMAR G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP322,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP313,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L45+L46+L57+L58,PRP137,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L3+L4+L19+L20,PRP137,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L39+L40+L51+L52,PRP137,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L9+L10+L25+L26,PRP137,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L43+L44+L55+L56,PRP137,SANMUGA PRIYA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L1+L2+L13+L14,PRP137,NIHAAL AHMED K
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L45+L46+L49+L50,PRP356,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L21+L22+L27+L28,PRP137,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L39+L40+L57+L58,PRP356,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L11+L12+L15+L16,PRP137,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L49+L50+L57+L58,PRP655,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L5+L6+L15+L16,PRP655,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L31+L32+L47+L48,PRP356,ARUN KUMAR G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L37+L38+L49+L50,PRP137,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L5+L6+L7+L8,PRP356,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L33+L34+L41+L42,PRP356,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L3+L4+L15+L16,PRP356,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L41+L42+L57+L58,PRP354,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L9+L10+L29+L30,PRP355,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L37+L38+L51+L52,PRP355,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L21+L22+L29+L30,PRP356,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L51+L52+L55+L56,PRP356,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L11+L12+L19+L20,PRP356,BALASUBRAMANIAN C
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F1+TF1,SMV112,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F2+TF2,SMV111,SHAHILA PARWEEN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F1+TF1,SMV111,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ETH,F2+TF2,SMV112,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV212,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV212,NAVEEN KUMAR P
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV225,SHAHILA PARWEEN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV225,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV225,ANAND PREM RAJAN
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV212,SUDESH R
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L5+L6,SMV212,KANAGAVEL DEEPANKUMAR
+OEC,OEC - Open Elective Courses,BABIT103,Cell and Molecular Biology,ELA,L43+L44,SMV225,MANJUBALA I
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C1+TC1+TCC1,SMV121,RAMANATHAN K
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C1+TC1+TCC1,SMV122,SHANTHI V
+OEC,OEC - Open Elective Courses,BABIT303,Biochemical Engineering,TH,C2+TC2+TCC2,SMV121,THIRUPATHI KUMARA RAJA S
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A1+TA1+TAA1,SMV121,SIVA R
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A1+TA1+TAA1,SMV122,SUNANTHA G
+OEC,OEC - Open Elective Courses,BABIT310,Plant Biotechnology,TH,A2+TA2+TAA2,SMV121,ARKAJYOTI DUTTA
+OEC,OEC - Open Elective Courses,BACHE320,Chemical Product Design,TH,C1+TC1+TCC1,SMV101,ANAND VEERABADRA PRASAD GURUMOORTHY
+OEC,OEC - Open Elective Courses,BACHE326,Fuels and Combustion,TH,C2+TC2+TCC2,SMV101,CHITRA D
+OEC,OEC - Open Elective Courses,BACHE333,Transport Phenomena,TH,C1+TC1+TCC1,SMV109,SHISHIR KUMAR BEHERA
+OEC,OEC - Open Elective Courses,BACHE334,Chemical Sensors for Industrial Applications,TH,C2+TC2+TCC2,SMV109,SHANKAR RAMAN DHANUSHKODI
+OEC,OEC - Open Elective Courses,BACLE301,Construction Materials and Techniques,TH,C1+TC1+TCC1,CDMM103,SUGANYA OM
+OEC,OEC - Open Elective Courses,BACLE316,Solid Waste Management,TH,B2+TB2+TBB2,CDMM103,AMIT B MAHINDRAKAR
+OEC,OEC - Open Elective Courses,BACLE319,Essentials for Data Science and AI for Civil Engineers,TH,E2,CDMM104,NANDINI S
+OEC,OEC - Open Elective Courses,BACLE402,Engineering Geology,TH,A1+TA1+TAA1,CDMM103,DILLIP KUMAR BARIK
+OEC,OEC - Open Elective Courses,BACLE402,Engineering Geology,TH,A2+TA2+TAA2,CDMM103,PARIMALA RENGANAYAKI S
+OEC,OEC - Open Elective Courses,BACLE417,Sustainability Practices in Design of Buildings,TH,C2+TC2+TCC2,CDMM103,MALATHI PRIYA N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP318,KALYANARAMAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP320,SARAVANAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP319,ANNY LEEMA A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP318,RAJKUMAR R
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP320,KARTHIKEYAN A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP309,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP313,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP309,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP322,JAYALAKSHMI M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP323,KATHIRAVAN S
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP322,JAYAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP313,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP323,PRAKASH M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP411,SUBRAMANIYASWAMY V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B2+TB2,PRP411,SWETHA V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ETH,B1+TB1,PRP319,BALAKRISHNAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L23+L24,PRP354,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L9+L10,PRP354,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L51+L52,PRP354,KALYANARAMAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L43+L44,PRP354,KARTHIKEYAN A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L31+L32,PRP354,THIRUMOORTHY K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L7+L8,PRP354,JAYAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L35+L36,PRP354,KATHIRAVAN S
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L5+L6,PRP354,PRAKASH M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L3+L4,PRP354,SARAVANAKUMAR K
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L15+L16,PRP354,ANNY LEEMA A
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L13+L14,PRP354,RAJKUMAR R
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L39+L40,PRP354,PRABAKARAN N
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L45+L46,PRP354,BALAKRISHNAN P
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L55+L56,PRP354,JAYALAKSHMI M
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L31+L32,PRP655,SUBRAMANIYASWAMY V
+OEC,OEC - Open Elective Courses,BACSE301,Exploratory Data Analysis,ELA,L27+L28,PRP655,SWETHA V
+OEC,OEC - Open Elective Courses,BACSE302,Machine Learning and Optimization,ETH,B1+TB1,PRP330,ANITHA E
+OEC,OEC - Open Elective Courses,BACSE302,Machine Learning and Optimization,ELA,L35+L36,SJT418,ANITHA E
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ETH,B2+TB2,PRP332,LAKSHMI S
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ETH,B1+TB1,PRP332,SANTHI K
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ELA,L47+L48,PRP354,SANTHI K
+OEC,OEC - Open Elective Courses,BACSE305,Foundations of Data Science,ELA,L21+L22,PRP354,LAKSHMI S
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B1+TB1,PRP334,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP414,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP334,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B2+TB2,PRP308,ROHITH R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ETH,B1+TB1,PRP414,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L43+L44,PRP350,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L23+L24,PRP350,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L45+L46,PRP350,RAJASEKAR V R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L21+L22,PRP350,ROHITH R
+OEC,OEC - Open Elective Courses,BACSE320,Penetration Testing and Vulnerability Assessment,ELA,L29+L30,PRP350,SOMASUNDARAM R
+OEC,OEC - Open Elective Courses,BAFRE201,French for Engineers: Language and Communication Lab,ETH,E1,SJT101,VISALAKSHI R
+OEC,OEC - Open Elective Courses,BAFRE201,French for Engineers: Language and Communication Lab,ELA,L13+L14,PRP555,VISALAKSHI R
+OEC,OEC - Open Elective Courses,BAGER201,German Level II,ETH,E1,TT332,ADAIKALAM ARULANANDAM
+OEC,OEC - Open Elective Courses,BAGER201,German Level II,ELA,L39+L40,PRP555,ADAIKALAM ARULANANDAM
+OEC,OEC - Open Elective Courses,BAHIN101,Prathamik Hindi,TH,D1+TD1,TT334,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHIN102,Prayojanmulak Hindi,ELA,L11+L12,TT432,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHIN102,Prayojanmulak Hindi,ETH,E2,SMV104,JAYALAKSHMI K
+OEC,OEC - Open Elective Courses,BAHST305,Bio-MEMS and Bio-NEMS,TH,A1+TA1+TAA1,PRP250,VIJAYALAKSHMI S
+OEC,OEC - Open Elective Courses,BAHST306,Preclinical and Clinical Trial Design for Medical Devices,TH,C2+TC2+TCC2,PRP250,RAJARATHINAM THENMOZHI
+OEC,OEC - Open Elective Courses,BAHST308,Tissue Engineering and Regenerative Medicine,ELA,L37+L38,PRP147,PRIYADARSHINI B
+OEC,OEC - Open Elective Courses,BAHST308,Tissue Engineering and Regenerative Medicine,ETH,G1+TG1,PRP250,GEETHA MANIVASAGAM
+OEC,OEC - Open Elective Courses,BAHST310,Bioinspired Engineering and Biomimetic Technologies,TH,A2+TA2+TAA2,PRP250,YOGENDRA PRATAP SINGH
+OEC,OEC - Open Elective Courses,BAHST313,Virtual Reality and Immersive Technologies in Healthcare,ELA,L41+L42,PRP247,KISHOR LAKSHMI NARAYANAN
+OEC,OEC - Open Elective Courses,BAHST313,Virtual Reality and Immersive Technologies in Healthcare,ETH,F1+TF1,PRP250,KISHOR LAKSHMI NARAYANAN
+OEC,OEC - Open Elective Courses,BAHST315,Precision/Personalized Medicine,TH,B2+TB2+TBB2,PRP250,ARUN KUMAR P
+OEC,OEC - Open Elective Courses,BAHUM226,Indian Classical Music,TH,B2+TB2,SJT603,SUDHEER C V
+OEC,OEC - Open Elective Courses,BAHUM238,Environmental Economics,TH,B2+TB2,SJT118,SALMAN HAIDER
+OEC,OEC - Open Elective Courses,BAITE311,Introduction to Finance,TH,A1+TA1+TAA1,SJT201,PALANIAPPAN S
+OEC,OEC - Open Elective Courses,BAITE311,Introduction to Finance,TH,A2+TA2+TAA2,PRP125,PALANIAPPAN S
+OEC,OEC - Open Elective Courses,BAITE312,Financial Analytics,TH,B2+TB2+TBB2,SJT602,PRASANNA S
+OEC,OEC - Open Elective Courses,BAITE312,Financial Analytics,TH,B2+TB2+TBB2,SJT405,THAYYIB P V
+OEC,OEC - Open Elective Courses,BAJAP201,Japanese Level II,ETH,C2,SJT522,SHILPI GUPTA
+OEC,OEC - Open Elective Courses,BAMAT208,Operations Research,ETH,B1+TB1,SJT604,MUBASHIR UNNISSA M
+OEC,OEC - Open Elective Courses,BAMAT208,Operations Research,ELA,L45+L46,PRP119,MUBASHIR UNNISSA M
+OEC,OEC - Open Elective Courses,BAMGT301,Financial and Cost Accounting,TH,A1+TA1+TAA1,PRP463,BHUMIKA BUNKAR
+OEC,OEC - Open Elective Courses,BAMGT301,Financial and Cost Accounting,TH,A2+TA2+TAA2,PRP462,BHUMIKA BUNKAR

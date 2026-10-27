@@ -1,0 +1,51 @@
+category,category_name,course_code,title,course_type,slots,venue,faculty
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ETH,B1+TB1,PRP224,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ETH,B2+TB2,PRP224,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ELA,L25+L26,SJT621,ROHIT MATHUR
+CON,CON - Concentration,BACSE324,Embedded Systems Architecture,ELA,L47+L48,SJT621,ROHIT MATHUR
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP304,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP318,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP320,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP323,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP224,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP224,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP306,NIHAAL AHMED K
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP308,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP308,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP318,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP319,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP320,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP323,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP304,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP306,SANMUGA PRIYA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP309,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP309,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP313,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP319,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A2,PRP322,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP411,ARUN KUMAR G
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP322,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ETH,A1,PRP313,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L45+L46+L57+L58,PRP137,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L3+L4+L19+L20,PRP137,MEENAKSHI S P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L39+L40+L51+L52,PRP137,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L9+L10+L25+L26,PRP137,NALINI N
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L43+L44+L55+L56,PRP137,SANMUGA PRIYA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L1+L2+L13+L14,PRP137,NIHAAL AHMED K
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L45+L46+L49+L50,PRP356,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L21+L22+L27+L28,PRP137,LYDIA JANE G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L39+L40+L57+L58,PRP356,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L11+L12+L15+L16,PRP137,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L49+L50+L57+L58,PRP655,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L5+L6+L15+L16,PRP655,SAM NAVIN M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L31+L32+L47+L48,PRP356,ARUN KUMAR G
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L37+L38+L49+L50,PRP137,TAMIZHARASI T
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L5+L6+L7+L8,PRP356,PADMA PRIYA R
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L33+L34+L41+L42,PRP356,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L3+L4+L15+L16,PRP356,ARULKUMAR V
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L41+L42+L57+L58,PRP354,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L9+L10+L29+L30,PRP355,SARANYA P
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L37+L38+L51+L52,PRP355,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L21+L22+L29+L30,PRP356,SINTHUJA M
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L51+L52+L55+L56,PRP356,BALASUBRAMANIAN C
+CON,CON - Concentration,BACSE325,Full Stack Development,ELA,L11+L12+L19+L20,PRP356,BALASUBRAMANIAN C
