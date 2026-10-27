@@ -1,2 +1,4 @@
 .vercel
 *.pdf
+tests/last-run-*.txt
+wip/
