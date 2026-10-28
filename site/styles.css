@@ -366,6 +366,7 @@ table.cmp thead th { font-weight: 900; }
 
 .bk-seg .tab.active { background: var(--black); color: var(--lime); }
 
+.why-box { font-size: 12px; font-weight: 600; background: #f3ffc0; border: 2px solid var(--black); border-radius: 12px; padding: 6px 10px; margin-bottom: 10px; }
 .bend { font-size: 12px; font-weight: 700; background: #fff3f3; border: 2px solid var(--black); border-radius: 12px; padding: 6px 10px; margin-bottom: 10px; }
 
 /* ---------- planner progress ---------- */

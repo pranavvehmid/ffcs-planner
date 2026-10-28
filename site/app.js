@@ -865,6 +865,7 @@
     if (scen.amMiss.length) notes.push(`${esc(scen.amMiss.map((c) => COURSES[c].title).join(", "))} can't follow the morning-labs pattern, so it keeps its other timing.`);
     if (notes.length) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> ${notes.join(" ")}</div>`;
     html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.capped ? "" : "all "}${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;
+    whyNotes(scen.plans);
     html += `<div class="gen-grid">${scen.plans.map((p, i) => genCard(p, i, res.view === "extra" ? "x" : "b")).join("")}</div>`;
     return html + "</div>";
   }
@@ -876,6 +877,37 @@
     return `<div class="card tight" style="margin-bottom:14px"><div class="scroll-x"><table class="cmp">
       <thead><tr><th></th><th>Without ${esc(xName)}</th><th>With ${esc(xName)}</th></tr></thead>
       <tbody>${rows}</tbody></table></div></div>`;
+  }
+  // "Why this plan": what each plan does better than the others, worked out from the actual weeks
+  function whyNotes(plans) {
+    const ms = plans.map((p) => p.options[0].m);
+    const rateOf = (p) => { const ks = p.options[0].ids.map((i) => CLASSES[i]); const fs = [...new Set(ks.map((k) => k.faculty))];
+      return fs.reduce((a, f) => a + (facRating(f) ? facRating(f) * 2 : commOf(f) ? commOf(f)[0] : 5) + (BOARD_MARKS[f] ? (BOARD_MARKS[f][0] === "star" ? 2 : BOARD_MARKS[f][0] === "avoid" ? -2 : 0.5) : 0), 0) / fs.length; };
+    const rates = plans.map((p) => (typeof p.rate === "number" ? p.rate / 2 + 0 : rateOf(p) - 999));
+    const avgStart = (m) => m.startLate, endL = (m) => m.endLate;
+    const facts = [
+      { v: (m) => m.gaps, best: "min", text: (m) => `fewest gaps (${Math.round(m.gaps / 6) / 10} h a week)` },
+      { v: avgStart, best: "min", text: () => "latest mornings of all plans" },
+      { v: endL, best: "min", text: () => "earliest finishes of all plans" },
+      { v: (m) => m.noLabDays, best: "max", text: (m) => `most lab-free weekdays (${m.noLabDays})` },
+      { v: (m) => m.lightMins, best: "min", text: (m) => `lightest light days (${Math.round(m.lightMins / 6) / 10} h on your 3 easiest days)` },
+      { v: (m) => m.lunchDays, best: "min", text: (m) => (m.lunchDays ? `fewest lunch skips (${m.lunchDays})` : "lunch every day") },
+      { v: (m) => m.days, best: "min", text: (m) => `fewest days on campus (${m.days})` },
+    ];
+    plans.forEach((p, i) => {
+      const m = ms[i], out = [];
+      facts.forEach((f) => {
+        const vals = ms.map(f.v);
+        const target = f.best === "min" ? Math.min(...vals) : Math.max(...vals);
+        const winners = vals.filter((x) => x === target).length;
+        if (f.v(m) === target && winners <= 2 && winners < plans.length) out.push(f.text(m));
+      });
+      if (rates[i] === Math.max(...rates) && rates.filter((x) => x === rates[i]).length === 1) out.push("best-reviewed set of teachers");
+      const labDays = [0, 1, 2, 3, 4].filter((d) => m.labsPerDay[d] > 0).map((d) => DAYS[d]);
+      const sameLabs = ms.filter((x) => [0, 1, 2, 3, 4].filter((d) => x.labsPerDay[d] > 0).map((d) => DAYS[d]).join() === labDays.join()).length;
+      if (sameLabs === 1 && labDays.length) out.push(`the only plan with labs on ${labDays.join(", ")}`);
+      p.why = out.slice(0, 3);
+    });
   }
   const genBk = {};
   const backupTabs = (p, key, bk) => (p.backups && p.backups.length ? `<div class="seg bk-seg" style="margin-bottom:10px">${["Plan A", ...p.backups.map((b) => b.label || "Backup")].map((lab, j) =>
@@ -922,6 +954,7 @@
         <span class="chip ${outside.length ? "salmon" : "lav"}">${outside.length ? outside.length + " outside PRP" : "All PRP"}</span>
         ${likedFac.length ? `<span class="chip mint">♥ ${likedFac.length} preferred teacher${likedFac.length > 1 ? "s" : ""}</span>` : ""}
       </div>
+      ${!bk && !vi && p.why && p.why.length ? `<div class="why-box"><b>Why this plan:</b> ${esc(p.why.join("; "))}.</div>` : ""}
       ${bends.length ? `<div class="bend">Bends: ${esc(bends.join("; "))}</div>` : ""}
       <div class="card" style="padding:8px 6px;box-shadow:none">${gantt(lanes, activeDays([lanes[0].times]), { labels: true, compact: true })}</div>
       <a class="btn cyan block" style="margin-top:10px" href="${viewLink(o.ids, name)}" target="_blank" rel="noopener">${icon("cal", 16)} Open full timetable</a>

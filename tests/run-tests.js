@@ -23,6 +23,7 @@ const ALL_FAC = [...new Set(BASE.flatMap((c) => COURSES[c].ids.map((i) => CLASSE
 
 const failures = [];
 const layoutStats = [];
+const topicStats = {};
 const warnings = [];
 let checks = 0;
 const fail = (ctx, msg) => failures.push(`${ctx}: ${msg}`);
@@ -119,11 +120,13 @@ function runOne(r) {
   const mainLayouts = new Set(mainSols.map((s) => s.layout));
   if (layouts.size >= mainSols.length && mainLayouts.size < mainSols.length) warnings.push(`${ctx}: only ${mainLayouts.size} distinct lab layouts among the 6 plans though ${layouts.size} exist`);
   layoutStats.push(mainLayouts.size);
+  // judge: does each plan win (or nearly win) its own topic?
+  res.plans.forEach((p) => { topicStats[p.profile.id] = topicStats[p.profile.id] || { n: 0, exact: 0, worst: 0 }; const st = topicStats[p.profile.id]; st.n++; if (p.topicGap === 0) st.exact++; st.worst = Math.max(st.worst, p.topicGap || 0); });
   // plan goals: compare with the best possible over every timetable (first plan is unconstrained by diversity)
   const best = (f) => D.sols.reduce((a, s) => Math.min(a, f(s)), Infinity);
-  // "Two heavy days" picks first, so it must be the true best for its goal
+  // "Two heavy days" picks first, so it must reach the lightest possible light days
   const heavyIdx = P.PROFILES.findIndex((p) => p.id === "heavy");
-  ok(Math.abs(D.scoreFor(P.PROFILES[heavyIdx], mainSols[heavyIdx]) - best((s) => D.scoreFor(P.PROFILES[heavyIdx], s))) < 1e-6, ctx, "Two heavy days is not the best-scoring timetable for its goal");
+  ok(res.plans[heavyIdx].topicGap === 0, ctx, `Two heavy days is ${res.plans[heavyIdx].topicGap} min off the lightest possible week`);
   const labPlan = mainSols[4], heavyPlan = mainSols[5];
   const minLabDays = best((s) => s.m.labDays);
   if (labPlan.m.labDays > minLabDays) warnings.push(`${ctx}: Most lab-free days has ${labPlan.m.labDays} lab days, best possible ${minLabDays}`);
@@ -158,6 +161,7 @@ for (let r = 0; r < RUNS; r++) {
 }
 console.log(`\n${RUNS} runs, ${checks} checks, ${failures.length} failures, ${warnings.length} warnings, ${errors} no-fit answers, slowest ${slowest} ms, avg ${Math.round(total / RUNS)} ms, wall ${Math.round((Date.now() - t0) / 1000)} s`);
 console.log(`Distinct lab layouts across the 6 plans: avg ${(layoutStats.reduce((a, b) => a + b, 0) / Math.max(1, layoutStats.length)).toFixed(2)}, min ${Math.min(...layoutStats)}`);
+Object.entries(topicStats).forEach(([id, st]) => console.log(`Topic ${id.padEnd(9)}: best possible in ${st.exact}/${st.n} runs (${Math.round(100 * st.exact / st.n)}%), worst drift ${Math.round(st.worst * 10) / 10}`));
 const uniq = (a) => [...new Set(a)];
 if (failures.length) { console.log("\nFAILURES:"); uniq(failures).slice(0, 40).forEach((f) => console.log(" - " + f)); }
 if (warnings.length) { console.log("\nWARNINGS (sample):"); uniq(warnings).slice(0, 25).forEach((f) => console.log(" - " + f)); }

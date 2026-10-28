@@ -295,6 +295,8 @@
     }
     let minSplit = Infinity;
     for (const s2 of sols) if (s2.split < minSplit) minSplit = s2.split;
+    let minSoftKeep = Infinity;
+    for (const s2 of sols) if (s2.split <= minSplit && s2.soft + s2.stretch < minSoftKeep) minSoftKeep = s2.soft + s2.stretch;
     // every timetable lists its courses in the same order, so compare position by position
     const diffCount = (a, b) => { let d = 0; for (let i = 0; i < a.groups.length; i++) if (a.groups[i] !== b.groups[i]) d++; return d; };
     function scoreFor(p, s) {
@@ -333,7 +335,16 @@
 
     // Pass 1: pick each plan's main timetable. The two goal plans pick first so they get their
     // true best; every later plan must differ from all earlier ones by 3+ courses where possible.
-    const PICK_ORDER = ["heavy", "labdays", "compact", "mornings", "evenings", "rated"];
+    const PICK_ORDER = ["heavy", "labdays", "mornings", "evenings", "rated", "compact"];
+    // each plan's own topic, and how far from the best it may drift to stay different from the others
+    const PRIMARY = {
+      compact: (s) => s.m.gaps + s.m.days * 60, mornings: (s) => s.m.startLate, evenings: (s) => s.m.endLate,
+      rated: (s) => -s.rate, labdays: (s) => s.m.labDays, heavy: (s) => s.m.lightMins,
+    };
+    const TOL = {
+      compact: [0, 40, 90, 180, Infinity], mornings: [0, 30, 70, 150, Infinity], evenings: [0, 30, 70, 150, Infinity],
+      rated: [0, 0.3, 0.8, 2, Infinity], labdays: [0, 1, Infinity], heavy: [0, 60, 150, 300, Infinity],
+    };
     const byId = {};
     PROFILES.forEach((p) => { byId[p.id] = p; });
     const orders = {};
@@ -349,21 +360,29 @@
       orders[id] = order;
       const first = (fn) => { for (const i of order) if (fn(sols[i])) return sols[i]; return null; };
       // each plan gets its own lab layout (which days hold labs and how many) and differs in courses
-      let main = null, apart = 0, sameTiming = false;
+      let main = null, apart = 0, sameTiming = false, tolUsed = null;
       const needs = id === "labdays" ? [2, 1] : [3, 2, 1];
       const usedLayouts = new Set(mainList.map((o) => o.layout));
-      const bestScore = sc[order[0]];
       // plans 1-4 keep your lab split whenever any timetable can; Plan 5 and 6 may reshape it
       const goal = id === "labdays" || id === "heavy";
       const splitOk = (s) => goal || s.split <= minSplit;
+      // Each plan must actually win its own topic: its main measure (latest starts, fewest gaps, …)
+      // has to be at or near the best any timetable reaches. Variety is only chosen inside that band,
+      // and the band widens step by step only if no different-looking timetable fits in it.
+      const prim = PRIMARY[id];
+      // plans 1-4 first keep your lab split and your other answers as well as any timetable can,
+      // then win their topic inside that; Plan 5 and 6 put their topic first
+      const inPool = goal ? () => true : (s) => s.split <= minSplit && s.soft + s.stretch <= minSoftKeep + 1;
+      let bestPrim = Infinity;
+      for (const s of sols) if (inPool(s)) { const v = prim(s); if (v < bestPrim) bestPrim = v; }
+      // a new lab layout may cost a little on the topic; a repeated layout is the last resort
+      const phases = TOL[id].slice(0, 3).map((tol) => [tol, true]).concat(TOL[id].map((tol) => [tol, false]));
       search:
       for (const keep of goal ? [false] : [true, false]) {
-        for (const fresh of [true, false]) {
+        for (const [tol, fresh] of phases) {
           for (const need of needs) {
-            main = first((s) => !usedSigs.has(s.sig) && (!keep || splitOk(s)) && (!fresh || !usedLayouts.has(s.layout)) && mainList.every((o) => diffCount(s, o) >= need));
-            // don't take a new layout that wrecks the plan's own goal
-            if (main && fresh && sc[main.idx] - bestScore > 1500) main = null;
-            if (main) { apart = mainList.length ? need : 0; break search; }
+            main = first((s) => !usedSigs.has(s.sig) && (!keep || inPool(s)) && prim(s) <= bestPrim + tol && (!fresh || !usedLayouts.has(s.layout)) && mainList.every((o) => diffCount(s, o) >= need));
+            if (main) { apart = mainList.length ? need : 0; tolUsed = tol; break search; }
           }
         }
       }
@@ -372,7 +391,7 @@
       if (!main) { main = sols[order[0]]; sameTiming = true; } // fewer timetables than plans
       usedSigs.add(main.sig);
       mainList.push(main);
-      mains[id] = { main, apart, sameTiming };
+      mains[id] = { main, apart, sameTiming, tolUsed, gap: main ? PRIMARY[id](main) - bestPrim : null };
     });
 
     // Pass 2: teachers, variations and backups for each plan, in display order.
@@ -382,7 +401,7 @@
       progress(`Variations and backups for ${p.name}…`, 92 + (pi / PROFILES.length) * 7);
       const order = orders[p.id];
       const first = (fn, limit) => { let c = 0; for (const i of order) { if (limit && ++c > limit) break; if (fn(sols[i])) return sols[i]; } return null; };
-      const { main, apart, sameTiming } = mains[p.id];
+      const { main, apart, sameTiming, tolUsed, gap } = mains[p.id];
       const mo = materialize(main, usedFac);
       mo.label = "Main";
       if (sameTiming) mo.sig = main.sig + "~" + pi;
@@ -417,7 +436,7 @@
         backups.push(got);
         Object.values(got.fac).forEach((f) => excl.add(f));
       }
-      plans.push({ profile: { id: p.id, name: p.name, blurb: p.blurb, color: p.color }, options, backups, apart, sameTiming });
+      plans.push({ profile: { id: p.id, name: p.name, blurb: p.blurb, color: p.color }, options, backups, apart, sameTiming, topicGap: gap, rate: main.rate });
     });
     // the best any timetable can do on each softer answer, so the page can say when a bend is unavoidable
     const limits = { lunchDays: Infinity, nineDays: Infinity, lastEnd: Infinity, labGap: Infinity };
