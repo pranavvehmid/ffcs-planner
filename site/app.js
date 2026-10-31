@@ -999,7 +999,7 @@
     const m = metrics(ks.flatMap((k) => k.times));
     const clashIds = new Set(allClashes(ks).flat().map((k) => k.id));
     const days = activeDays([ks.flatMap((k) => k.times)]);
-    const START = 8 * 60, END = 20 * 60, PX = 1.25; // pixels per minute
+    const START = 8 * 60, END = 20 * 60, PX = 1.75; // pixels per minute
     const y = (min) => (min - START) * PX;
     const hours = []; for (let h = 8; h <= 20; h++) hours.push(h);
     // which days lose lunch (a lab ending 13:20 and a class at 14:00)
@@ -1217,7 +1217,7 @@
       case "course": html = pageCourse(decodeURIComponent(arg || "")); break;
       case "timetable": html = pageTimetable(); break;
       case "schedule": html = pageSchedule(); break;
-      case "plans": html = pagePlans(); break;
+      case "plans": html = pagePlans(); if (arg === "auto" && !genResult) setTimeout(generateAll, 50); break;
       case "teachers": html = pageTeachers(); break;
       case "view": html = pageView(decodeURIComponent(arg || ""), decodeURIComponent(route()[2] || "")); break;
       default: html = pageHome();

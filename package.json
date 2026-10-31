@@ -1,0 +1,13 @@
+{
+  "name": "ffcs-planner",
+  "version": "1.0.0",
+  "description": "Clash-free VIT FFCS timetable planner that checks every possible timetable and gives you six different plans.",
+  "private": true,
+  "scripts": {
+    "test": "node tests/run-tests.js 100",
+    "test:long": "node tests/run-tests.js 1000",
+    "serve": "cd site && python -m http.server 8000"
+  },
+  "keywords": ["vit", "vit-vellore", "ffcs", "timetable", "timetable-generator", "scheduler", "vtop"],
+  "license": "MIT"
+}
