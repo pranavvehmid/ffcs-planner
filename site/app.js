@@ -108,7 +108,7 @@
   const KEY = "ffcs-planner-w26";
   const FRIEND_COLORS = ["#FFD4E4", "#E0D0FF", "#A0E0FF", "#FFE0B0", "#70FFC0", "#FFA0A0"];
   const uid = () => Math.random().toString(36).slice(2, 9);
-  const DEFAULT_PICK = ["BAPHY105", "BAHUM101", "BACSE103", "BACSE104", "BACSE105", "BACSE106", "BAMAT205"];
+  const DEFAULT_PICK = [];
   let state = load();
   // Plan 1 on ffcs-medrid.vercel.app (same as FFCS Board Plan 3): matched by course, slots and venue.
   // Chinese is dropped; India Studies (online) is added so the credits match yours.
@@ -130,7 +130,10 @@
     if (!s.fac || typeof s.fac !== "object") s.fac = {};
     if (!s.gen || typeof s.gen !== "object") s.gen = {};
     // built-in: your friend's first plan from ffcs-medrid.vercel.app (Chinese left out)
-    if (!s.builtinRemoved && !s.plans.some((p) => p.builtin)) s.plans.push(makeFriendPlan());
+    // the old built-in friend's plan is gone; drop it from browsers that still have it
+    s.plans = s.plans.filter((p) => !p.builtin);
+    if (!s.plans.length) { const id = uid(); s.plans = [{ id, name: "Plan A", sel: [] }]; }
+    if (!s.plans.some((p) => p.id === s.active)) s.active = s.plans[0].id;
     return s;
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } }
@@ -330,7 +333,7 @@
             <h3 class="section-title" style="font-size:15px">Clashes</h3>
             ${clashes.map(([a, b]) => `<div class="small" style="font-weight:700;margin:4px 0">${esc(a.code)} ${esc(a.slots)} ✕ ${esc(b.code)} ${esc(b.slots)}</div>`).join("")}
           </div>` : ""}
-          <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates, since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.</p>
+          <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates, since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.<br>Look and feel inspired by Vitals, a VIT Vellore student app.</p>
         </section>
       </div>`;
   }
@@ -626,7 +629,7 @@
   }
 
   /* ======================= smart plans (engine in planner.js, run in a Web Worker) ======================= */
-  const GEN_DEFAULTS = { max8: 1, max9: 9, labs: "am", labFree: 2, maxLabs: 2, labStretch: "prefer", lunchSkip: 1, prp: "all", endBy: 99, extra: "BAESP101" };
+  const GEN_DEFAULTS = { max8: 9, max9: 9, labs: "any", labFree: 0, maxLabs: 9, labStretch: "any", lunchSkip: 99, prp: "hybrid", endBy: 99, extra: "" };
   const genPrefs = () => {
     const p = Object.assign({}, GEN_DEFAULTS, state.gen || {});
     if (state.gen && state.gen.lunchSkip === undefined && state.gen.lunch !== undefined) p.lunchSkip = state.gen.lunch ? 0 : 99;
@@ -718,7 +721,6 @@
     if (res.error) return res;
     const dress = (o) => { if (!o || o.missing) return o; o.m = metrics(o.ids.flatMap((i) => CLASSES[i].times)); return o; };
     res.plans.forEach((p) => { p.options.forEach(dress); p.backups.forEach(dress); });
-    if (withBoard) res.plans.push(boardPlan(codes));
     res.credits = codes.reduce((a, c) => a + credits(c), 0);
     return res;
   }
@@ -770,7 +772,7 @@
       ${topbar("Plans")}
       <section class="card" style="background:var(--lime)">
         <h2 class="section-title" style="font-size:19px;justify-content:flex-start;gap:8px">${icon("spark", 22, 2.6)} Smart Plans</h2>
-        <p style="margin:0 0 12px;font-weight:600">Pick your courses and answer the questions. The planner checks every possible clash-free timetable, then gives you 6 clearly different plans (plus Plan 7 from FFCS Board), each with a variation and two backups that use completely different teachers.</p>
+        <p style="margin:0 0 12px;font-weight:600">Pick your courses and answer the questions. The planner checks every possible clash-free timetable, then gives you 6 clearly different plans, each with a variation and two backups that use completely different teachers.</p>
         <div class="chips" style="margin-bottom:10px">
           ${gc.map((c) => `<span class="chip big" style="background:var(--white)">${esc(COURSES[c].title)} · ${credits(c)} cr <button class="x" data-act="genrm" data-code="${c}" aria-label="Remove ${esc(COURSES[c].title)}">✕</button></span>`).join("")}
         </div>
@@ -836,7 +838,6 @@
       <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
         <button class="btn lime" data-act="pnew">${icon("plus", 16, 3)} New plan</button>
         <button class="btn lav" data-act="pimport">Import a code</button>
-        ${state.plans.some((p) => p.builtin) ? "" : `<button class="btn" data-act="friendback">Add friend's plan back</button>`}
         ${plan().sel.length ? `<button class="btn salmon" data-act="pclear">Clear active plan</button>` : ""}
       </div>
       <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
@@ -880,7 +881,7 @@
     if (scen.capped) notes.push(`Your answers allow over ${scen.count.toLocaleString("en-IN")} timetables, so the planner stopped there to keep your phone from running out of memory. Tightening a must-have (like the 8 AM limit or morning labs) gives a complete check.`);
     if (scen.amMiss.length) notes.push(`${esc(scen.amMiss.map((c) => COURSES[c].title).join(", "))} can't follow the morning-labs pattern, so it keeps its other timing.`);
     if (notes.length) html += `<div class="card tight" style="background:var(--peach);margin-bottom:14px"><b>Heads up:</b> ${notes.join(" ")}</div>`;
-    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.capped ? "" : "all "}${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1)} courses.</p>`;
+    html += `<p class="small" style="font-weight:700;margin:0 2px 12px">Checked ${scen.capped ? "" : "all "}${scen.count.toLocaleString("en-IN")} clash-free timetables that keep your must-haves. Each plan below differs from every other plan in at least ${(() => { const a = Math.max(1, Math.min(...scen.plans.filter((p) => p.apart).map((p) => p.apart)) || 1); return a + (a === 1 ? " course" : " courses"); })()}.</p>`;
     whyNotes(scen.plans);
     html += `<div class="gen-grid">${scen.plans.map((p, i) => genCard(p, i, res.view === "extra" ? "x" : "b")).join("")}</div>`;
     return html + "</div>";

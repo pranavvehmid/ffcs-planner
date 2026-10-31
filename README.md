@@ -116,4 +116,10 @@ Please be kind and follow the [Code of Conduct](CODE_OF_CONDUCT.md).
 - Community ratings are a hint, not a verdict: many teachers have only a few reviews.
 - Not affiliated with VIT.
 
+## ✦ Credits
+
+- The look and feel (cream canvas, chunky outlines, pastel chips) is inspired by **Vitals**, an app made for VIT Vellore students. Thank you to its creator for the inspiration.
+- Slot grid and course allocation data: VTOP, VIT Vellore.
+- Community teacher ratings: a VIT Vellore student faculty-review site, credited in `site/ratings.js`.
+
 <p align="center"><b>If this saved you an FFCS headache, give it a ⭐ and share it with your batch.</b></p>

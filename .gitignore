@@ -2,3 +2,4 @@
 *.pdf
 tests/last-run-*.txt
 wip/
+profile/
