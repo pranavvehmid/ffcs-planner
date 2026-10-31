@@ -110,6 +110,15 @@
   const uid = () => Math.random().toString(36).slice(2, 9);
   const DEFAULT_PICK = ["BAPHY105", "BAHUM101", "BACSE103", "BACSE104", "BACSE105", "BACSE106", "BAMAT205"];
   let state = load();
+  // Plan 1 on ffcs-medrid.vercel.app (same as FFCS Board Plan 3): matched by course, slots and venue.
+  // Chinese is dropped; India Studies (online) is added so the credits match yours.
+  function makeFriendPlan() { return { id: "friend-medrid", builtin: true, name: "Friend's plan (FFCS Medrid #1)", sel: [397, 440, 492, 560, 564, 615, 685, 724, 273, 274, 926, 187] }; }
+  // which Spanish sections fit around a plan without a clash
+  function spanishFits(sel) {
+    const sp = COURSES.BAESP101; if (!sp) return [];
+    const taken = sel.filter((i) => CLASSES[i] && CLASSES[i].code !== "BAESP101").flatMap((i) => CLASSES[i].times);
+    return sp.options.filter((o) => o.length === 2 && !timesClash(optTimes(o), taken));
+  }
   function load() {
     let s = null;
     try { s = JSON.parse(localStorage.getItem(KEY)); } catch (e) { /* storage blocked or empty */ }
@@ -120,6 +129,8 @@
     if (!Array.isArray(s.genCourses)) s.genCourses = DEFAULT_PICK.slice();
     if (!s.fac || typeof s.fac !== "object") s.fac = {};
     if (!s.gen || typeof s.gen !== "object") s.gen = {};
+    // built-in: your friend's first plan from ffcs-medrid.vercel.app (Chinese left out)
+    if (!s.builtinRemoved && !s.plans.some((p) => p.builtin)) s.plans.push(makeFriendPlan());
     return s;
   }
   function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } }
@@ -807,7 +818,11 @@
           return `<div class="card plan ${on ? "active" : ""}">
             <div><h3>${esc(p.name)}</h3><div class="chips">
               <span class="chip lav">${n} courses</span><span class="chip cyan">${[...new Set(sel.map((k) => k.code))].reduce((a, c) => a + credits(c), 0)} credits</span>
-              ${cl ? `<span class="chip salmon">${cl} clash${cl > 1 ? "es" : ""}</span>` : ""}${on ? `<span class="chip lime">Active</span>` : ""}</div></div>
+              ${cl ? `<span class="chip salmon">${cl} clash${cl > 1 ? "es" : ""}</span>` : ""}${on ? `<span class="chip lime">Active</span>` : ""}${p.builtin ? `<span class="chip sky">Built-in</span>` : ""}</div>
+              ${p.builtin ? (() => { const fits = spanishFits(p.sel); return `<div class="small" style="margin-top:8px;font-weight:600">${fits.length
+                ? `Spanish fits with ${fits.map((o) => `${esc(titleCase(CLASSES[o[0]].faculty))} (${esc(optClasses(o).map((k) => k.slots).join(" + "))}: ${esc(optClasses(o).map((k) => whenText(k.times)).join("; "))})`).join(" or ")}. Both are outside PRP (Spanish has no PRP classes) and add an 8 AM lab.
+                   <button class="btn sm lav" style="margin-top:6px" data-act="friendspanish" data-p="${p.id}">Make a copy with Spanish</button>`
+                : "Spanish can't fit around this plan without a clash."}</div>`; })() : ""}</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end">
               ${on ? "" : `<button class="btn sm lime" data-act="pactive" data-p="${p.id}">Use</button>`}
               ${p.sel.length ? `<a class="icon-btn" href="${viewLink(p.sel, p.name)}" target="_blank" rel="noopener" aria-label="Open full timetable">${icon("cal", 16)}</a>` : ""}
@@ -821,6 +836,7 @@
       <div style="display:flex;gap:10px;justify-content:center;margin-top:18px;flex-wrap:wrap">
         <button class="btn lime" data-act="pnew">${icon("plus", 16, 3)} New plan</button>
         <button class="btn lav" data-act="pimport">Import a code</button>
+        ${state.plans.some((p) => p.builtin) ? "" : `<button class="btn" data-act="friendback">Add friend's plan back</button>`}
         ${plan().sel.length ? `<button class="btn salmon" data-act="pclear">Clear active plan</button>` : ""}
       </div>
       <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
@@ -1303,7 +1319,16 @@
       case "pactive": state.active = pl.id; save(); render(); toast(`Now using ${pl.name}`); return;
       case "pcopy": { const id2 = uid(); state.plans.push({ id: id2, name: (pl.name + " copy").slice(0, 40), sel: pl.sel.slice() }); save(); render(); toast("Duplicated"); return; }
       case "prename": textModal("Rename plan", pl.name, (v) => { if (v) { pl.name = v; save(); } }); return;
-      case "pdel": confirmModal("Delete plan?", `Delete “${esc(pl.name)}”? This can't be undone.`, "Delete", () => {
+      case "friendback": state.builtinRemoved = false; state.plans.push(makeFriendPlan()); save(); render(); toast("Friend's plan added back"); return;
+      case "friendspanish": {
+        const fits = spanishFits(pl.sel);
+        if (!fits.length) { toast("Spanish doesn't fit"); return; }
+        const id2 = uid();
+        state.plans.push({ id: id2, name: (pl.name + " + Spanish").slice(0, 48), sel: pl.sel.concat(fits[0]) });
+        state.active = id2; save(); render(); toast(`Added Spanish with ${titleCase(CLASSES[fits[0][0]].faculty)}`); return;
+      }
+      case "pdel": confirmModal("Delete plan?", `Delete “${esc(pl.name)}”?${pl.builtin ? " You can add it back with the “Add friend's plan back” button." : " This can't be undone."}`, "Delete", () => {
+        if (pl.builtin) state.builtinRemoved = true;
         state.plans = state.plans.filter((p) => p !== pl);
         if (state.active === pl.id) state.active = state.plans[0].id;
         save();
