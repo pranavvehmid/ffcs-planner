@@ -218,6 +218,16 @@
     }
   }
 
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => { a.remove(); URL.revokeObjectURL(url); }, 200);
+  }
+
   const ICONS = {
     home: '<path d="M4 11 12 4l8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
     book: '<path d="M5 4h10a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h10"/>',
@@ -233,6 +243,7 @@
     plus: '<path d="M12 5v14M5 12h14"/>',
     eye: '<rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 13h3M13 16h4"/>',
     spark: '<path d="M12 2c.5 4.8 2.2 7 7 8-4.8 1-6.5 3.2-7 8-.5-4.8-2.2-7-7-8 4.8-1 6.5-3.2 7-8z"/>',
+    image: '<rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>',
   };
   const icon = (n, size = 20, sw = 2.4) =>
     `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[n]}</svg>`;
@@ -505,7 +516,7 @@
     const tabs = `<div class="tabs">${days.map((d) => `<button class="tab ${ttDay === d ? "active" : ""}" data-act="day" data-d="${d}">${DAYS[d]}</button>`).join("")}
       <button class="tab ${ttDay === "W" ? "active" : ""}" data-act="day" data-d="W">Weekly</button></div>`;
     if (!sel.length) return `${topbar("Timetable")}${tabs}<div class="card empty"><div class="big">Empty week</div><div class="muted">Add courses to see your timetable.</div><a class="btn lime" style="margin-top:14px" href="#/courses">Browse courses</a></div>`;
-    return `${topbar("Timetable")}${tabs}<div style="text-align:center;margin:-6px 0 14px"><a class="btn sm cyan" href="${viewLink(plan().sel, plan().name)}" target="_blank" rel="noopener">${icon("cal", 14)} Open full timetable</a></div>${ttDay === "W" ? weeklyGrid(sel, days) : dayView(sel, ttDay)}`;
+    return `${topbar("Timetable")}${tabs}<div style="display:flex;gap:8px;justify-content:center;margin:-6px 0 14px;flex-wrap:wrap"><a class="btn sm cyan" href="${viewLink(plan().sel, plan().name)}" target="_blank" rel="noopener">${icon("eye", 14)} Full timetable</a><button class="btn sm mint" data-act="viewics" data-code="${esc(encode(plan().sel))}" data-name="${esc(plan().name || "")}">${icon("cal", 14)} Export .ics</button><button class="btn sm lav" data-act="viewpng" data-code="${esc(encode(plan().sel))}" data-name="${esc(plan().name || "")}">${icon("image", 14)} Save image</button></div>${ttDay === "W" ? weeklyGrid(sel, days) : dayView(sel, ttDay)}`;
   }
 
   function dayView(sel, d) {
@@ -989,6 +1000,469 @@
     </div>`;
   }
 
+  /* ======================= export: calendar (.ics) and image (PNG) ======================= */
+  function generateICS(ids, planName) {
+    const ks = ids.map((i) => CLASSES[i]).filter(Boolean);
+    const SEM_START_YEAR = 2027, SEM_START_MONTH = 0, SEM_START_DAY = 4; // Monday Jan 4, 2027
+    const pad = (n) => String(n).padStart(2, "0");
+    const dtStamp = new Date().toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+    const calName = (planName || "FFCS Timetable").replace(/[\\;,\n]/g, " ");
+
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//FFCS Planner//VIT Vellore//EN",
+      "CALSCALE:GREGORIAN",
+      "METHOD:PUBLISH",
+      `X-WR-CALNAME:${calName}`,
+      "X-WR-TIMEZONE:Asia/Kolkata",
+      "BEGIN:VTIMEZONE",
+      "TZID:Asia/Kolkata",
+      "X-LIC-LOCATION:Asia/Kolkata",
+      "BEGIN:STANDARD",
+      "TZOFFSETFROM:+0530",
+      "TZOFFSETTO:+0530",
+      "TZNAME:IST",
+      "DTSTART:19700101T000000",
+      "END:STANDARD",
+      "END:VTIMEZONE",
+    ];
+
+    const BYDAYS = ["MO", "TU", "WE", "TH", "FR", "SA", "SU"];
+
+    ks.forEach((k) => {
+      for (let d = 0; d < 7; d++) {
+        const dayTimes = k.times.filter((x) => x.d === d);
+        if (!dayTimes.length) continue;
+        const blocks = blocksOf(dayTimes);
+        blocks.forEach((b, bi) => {
+          const startH = Math.floor(b.s / 60), startM = b.s % 60;
+          const endH = Math.floor(b.e / 60), endM = b.e % 60;
+          const evDate = new Date(Date.UTC(SEM_START_YEAR, SEM_START_MONTH, SEM_START_DAY + d));
+          const dateStr = `${evDate.getUTCFullYear()}${pad(evDate.getUTCMonth() + 1)}${pad(evDate.getUTCDate())}`;
+          const dtStart = `${dateStr}T${pad(startH)}${pad(startM)}00`;
+          const dtEnd = `${dateStr}T${pad(endH)}${pad(endM)}00`;
+          const uid = `ffcs-w26-${k.id}-${d}-${b.s}-${bi}@ffcs-planner`;
+          const summary = `${k.title} (${k.group === "lab" ? "Lab" : "Theory"})`;
+          const desc = `Course: ${k.code} - ${k.title}\\nType: ${TYPE_NAMES[k.type] || k.type}\\nSlot: ${k.slots}\\nVenue: ${k.venue}\\nFaculty: ${titleCase(k.faculty)}`;
+
+          lines.push(
+            "BEGIN:VEVENT",
+            `UID:${uid}`,
+            `DTSTAMP:${dtStamp}`,
+            `DTSTART;TZID=Asia/Kolkata:${dtStart}`,
+            `DTEND;TZID=Asia/Kolkata:${dtEnd}`,
+            `RRULE:FREQ=WEEKLY;BYDAY=${BYDAYS[d]};UNTIL=20270501T182959Z`,
+            `SUMMARY:${summary.replace(/[\\;,]/g, (m) => "\\" + m)}`,
+            `LOCATION:${(k.venue || "").replace(/[\\;,]/g, (m) => "\\" + m)}`,
+            `DESCRIPTION:${desc}`,
+            "STATUS:CONFIRMED",
+            "END:VEVENT"
+          );
+        });
+      }
+    });
+
+    lines.push("END:VCALENDAR");
+    return lines.join("\r\n");
+  }
+
+  function downloadICS(ids, planName) {
+    try {
+      const ics = generateICS(ids, planName);
+      const safeName = (planName || "timetable").trim().replace(/[^a-zA-Z0-9_\-]+/g, "_").toLowerCase();
+      const blob = new Blob([ics], { type: "text/calendar;charset=utf-8" });
+      downloadBlob(blob, `${safeName}.ics`);
+      toast("Downloaded calendar (.ics)");
+    } catch (err) {
+      console.error(err);
+      toast("Failed to export calendar");
+    }
+  }
+
+  function drawRoundRect(ctx, x, y, w, h, r) {
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r);
+    else {
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+  }
+
+  function drawNeoCard(ctx, x, y, w, h, r, bg, border = "#000", bw = 2.5, shadow = 4) {
+    if (shadow > 0) {
+      drawRoundRect(ctx, x + shadow, y + shadow, w, h, r);
+      ctx.fillStyle = "#000";
+      ctx.fill();
+    }
+    drawRoundRect(ctx, x, y, w, h, r);
+    ctx.fillStyle = bg;
+    ctx.fill();
+    if (bw > 0) {
+      ctx.lineWidth = bw;
+      ctx.strokeStyle = border;
+      ctx.stroke();
+    }
+  }
+
+  function drawCanvasChip(ctx, text, x, y, bg, color = "#000", fontSize = 11.5, bold = true) {
+    ctx.font = `${bold ? "800 " : "600 "}${fontSize}px "Plus Jakarta Sans", system-ui, sans-serif`;
+    const m = ctx.measureText(text);
+    const pw = 12, ph = 6;
+    const w = Math.round(m.width + pw * 2);
+    const h = Math.round(fontSize + ph * 2 + 2);
+    const r = 999;
+    drawNeoCard(ctx, x, y, w, h, r, bg, "#000", 2, 2.5);
+    ctx.fillStyle = color;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(text, x + w / 2, y + h / 2 + 0.5);
+    return w;
+  }
+
+  async function renderTimetableCanvas(ids, planName) {
+    if (document.fonts && document.fonts.ready) await document.fonts.ready;
+    const ks = ids.map((i) => CLASSES[i]).filter(Boolean);
+    const codes = [...new Set(ks.map((k) => k.code))];
+    const cr = codes.reduce((a, c) => a + credits(c), 0);
+    const m = metrics(ks.flatMap((k) => k.times));
+    const clashIds = new Set(allClashes(ks).flat().map((k) => k.id));
+    const days = activeDays([ks.flatMap((k) => k.times)]);
+
+    const START = 8 * 60, END = 20 * 60;
+    const pxPerMin = 1.25;
+    const timeColW = 68;
+    const dayColW = 180;
+    const gridW = timeColW + days.length * dayColW;
+    const pad = 28;
+    const cardW = gridW + 36;
+    const canvasW = cardW + pad * 2;
+
+    const headerH = 130;
+    const tvGridH = (END - START) * pxPerMin;
+    const dayHeadH = 46;
+    const legendH = 40;
+    const tableHeadH = 34;
+    const tableRowH = 32;
+    const tableH = tableHeadH + codes.length * tableRowH + 16;
+    const cardInnerH = headerH + dayHeadH + tvGridH + legendH + tableH + 48;
+    const cardH = cardInnerH;
+    const canvasH = cardH + pad * 2 + 8;
+
+    const dpr = 2;
+    const canvas = document.createElement("canvas");
+    canvas.width = Math.round(canvasW * dpr);
+    canvas.height = Math.round(canvasH * dpr);
+    canvas.style.width = canvasW + "px";
+    canvas.style.height = canvasH + "px";
+    const ctx = canvas.getContext("2d");
+    ctx.scale(dpr, dpr);
+
+    ctx.fillStyle = "#FFFFF0";
+    ctx.fillRect(0, 0, canvasW, canvasH);
+
+    ctx.fillStyle = "rgba(0, 0, 0, 0.08)";
+    for (let px = 12; px < canvasW; px += 18) {
+      for (let py = 12; py < canvasH; py += 18) {
+        ctx.beginPath();
+        ctx.arc(px, py, 1.1, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    const cx = pad, cy = pad;
+    drawNeoCard(ctx, cx, cy, cardW, cardH, 22, "#FFFFFF", "#000000", 3, 6);
+
+    let curY = cy + 22;
+    drawCanvasChip(ctx, (DATA.semester || "WINTER SEMESTER 2026-27").toUpperCase(), cx + 22, curY, "#D0FF00", "#000", 11, true);
+    curY += 34;
+
+    ctx.fillStyle = "#000000";
+    ctx.font = '900 28px "Unbounded", "Plus Jakarta Sans", sans-serif';
+    ctx.textAlign = "left";
+    ctx.textBaseline = "top";
+    ctx.fillText(planName || "My Timetable", cx + 22, curY);
+    curY += 38;
+
+    let chipX = cx + 22;
+    chipX += drawCanvasChip(ctx, `${cr} credits`, chipX, curY, "#E0D0FF", "#000", 11.5, true) + 8;
+    chipX += drawCanvasChip(ctx, `${m.hours} h / week`, chipX, curY, "#E0D0FF", "#000", 11.5, true) + 8;
+    chipX += drawCanvasChip(ctx, `${m.earlyDays} day${m.earlyDays === 1 ? "" : "s"} with 8 AM`, chipX, curY, m.earlyDays ? "#FFE0B0" : "#70FFC0", "#000", 11.5, true) + 8;
+    const lunchTxt = m.lunchDays ? `${m.lunchDays} day${m.lunchDays > 1 ? "s" : ""} no lunch` : "Lunch every day";
+    chipX += drawCanvasChip(ctx, lunchTxt, chipX, curY, m.lunchDays ? "#FFE0B0" : "#70FFC0", "#000", 11.5, true) + 8;
+    chipX += drawCanvasChip(ctx, `Ends by ${fmt(m.lastEnd)}`, chipX, curY, "#E0D0FF", "#000", 11.5, true) + 8;
+    if (clashIds.size) drawCanvasChip(ctx, "Clashes detected", chipX, curY, "#FFA0A0", "#000", 11.5, true);
+    curY += 46;
+
+    ctx.beginPath();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#000000";
+    ctx.moveTo(cx + 20, curY);
+    ctx.lineTo(cx + cardW - 20, curY);
+    ctx.stroke();
+    curY += 18;
+
+    const gridLeft = cx + Math.round((cardW - gridW) / 2);
+    const gridTop = curY;
+
+    ctx.textAlign = "center";
+    days.forEach((d, i) => {
+      const colX = gridLeft + timeColW + i * dayColW + 4;
+      const colW = dayColW - 8;
+      drawNeoCard(ctx, colX, gridTop, colW, 40, 10, "#A0E0FF", "#000", 2, 2.5);
+      ctx.fillStyle = "#000";
+      ctx.font = '800 13px "Unbounded", "Plus Jakarta Sans", sans-serif';
+      ctx.textBaseline = "middle";
+      ctx.fillText(DAYS[d].slice(0, 3).toUpperCase(), colX + colW / 2, gridTop + 15);
+      ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = "#333";
+      ctx.fillText(`${Math.round(m.perDay[d] / 60 * 10) / 10} h`, colX + colW / 2, gridTop + 28);
+    });
+
+    const bodyTop = gridTop + dayHeadH;
+    const yMin = (min) => bodyTop + (min - START) * pxPerMin;
+
+    for (let h = 8; h <= 20; h++) {
+      const yLine = yMin(h * 60);
+      ctx.font = '800 11px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = "#222";
+      ctx.textAlign = "right";
+      ctx.textBaseline = "middle";
+      const label = `${h > 12 ? h - 12 : h} ${h >= 12 ? "PM" : "AM"}`;
+      ctx.fillText(label, gridLeft + timeColW - 10, yLine);
+
+      ctx.beginPath();
+      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 1;
+      ctx.strokeStyle = "rgba(0,0,0,0.22)";
+      ctx.moveTo(gridLeft + timeColW, yLine);
+      ctx.lineTo(gridLeft + gridW, yLine);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "#000";
+    days.forEach((d, i) => {
+      const lineX = gridLeft + timeColW + i * dayColW;
+      ctx.beginPath();
+      ctx.moveTo(lineX, bodyTop);
+      ctx.lineTo(lineX, bodyTop + tvGridH);
+      ctx.stroke();
+    });
+    ctx.beginPath();
+    ctx.moveTo(gridLeft + gridW, bodyTop);
+    ctx.lineTo(gridLeft + gridW, bodyTop + tvGridH);
+    ctx.stroke();
+
+    const lunchY = yMin(800);
+    const lunchH = (840 - 800) * pxPerMin;
+    const lunchLeft = gridLeft + timeColW;
+    const lunchW = days.length * dayColW;
+
+    ctx.save();
+    ctx.fillStyle = "#F5EEDC";
+    ctx.fillRect(lunchLeft, lunchY, lunchW, lunchH);
+    ctx.strokeStyle = "rgba(0,0,0,0.06)";
+    ctx.lineWidth = 2;
+    for (let lx = lunchLeft - lunchH; lx < lunchLeft + lunchW; lx += 10) {
+      ctx.beginPath();
+      ctx.moveTo(lx, lunchY + lunchH);
+      ctx.lineTo(lx + lunchH, lunchY);
+      ctx.stroke();
+    }
+    ctx.restore();
+
+    ctx.beginPath();
+    ctx.lineWidth = 1.2;
+    ctx.strokeStyle = "rgba(0,0,0,0.3)";
+    ctx.moveTo(lunchLeft, lunchY);
+    ctx.lineTo(lunchLeft + lunchW, lunchY);
+    ctx.moveTo(lunchLeft, lunchY + lunchH);
+    ctx.lineTo(lunchLeft + lunchW, lunchY + lunchH);
+    ctx.stroke();
+
+    ctx.font = '800 11px "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = "#666";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    days.forEach((d, i) => {
+      const cxDay = gridLeft + timeColW + i * dayColW + dayColW / 2;
+      ctx.fillText("LUNCH", cxDay, lunchY + lunchH / 2);
+    });
+
+    days.forEach((d, i) => {
+      const colX = gridLeft + timeColW + i * dayColW + 4;
+      const colW = dayColW - 8;
+      const dayClasses = [];
+      ks.forEach((k) => blocksOf(k.times.filter((x) => x.d === d)).forEach((b) => dayClasses.push({ k, ...b })));
+
+      dayClasses.forEach(({ k, s, e }) => {
+        const blockY = yMin(s);
+        const blockH = Math.max(28, (e - s) * pxPerMin - 3);
+        const isLab = k.group === "lab";
+        const isClash = clashIds.has(k.id);
+        const bg = isClash ? "#FFA0A0" : isLab ? "#A0F0F0" : "#70FFC0";
+
+        drawNeoCard(ctx, colX, blockY, colW, blockH, 8, bg, "#000", 2, 2.5);
+
+        ctx.save();
+        ctx.beginPath();
+        drawRoundRect(ctx, colX, blockY, colW, blockH, 8);
+        ctx.clip();
+
+        ctx.textAlign = "left";
+        ctx.textBaseline = "top";
+        const textX = colX + 8;
+        let textY = blockY + 5;
+
+        ctx.font = '800 11px "Plus Jakarta Sans", sans-serif';
+        ctx.fillStyle = "#000";
+        let title = k.title;
+        if (ctx.measureText(title).width > colW - 16) {
+          while (title.length > 4 && ctx.measureText(title + "...").width > colW - 16) title = title.slice(0, -1);
+          title += "...";
+        }
+        ctx.fillText(title, textX, textY);
+        textY += 14;
+
+        if (blockH >= 40) {
+          ctx.font = '700 9.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = "#111";
+          ctx.fillText(`${fmt(s)}–${fmt(e)} · ${isLab ? "Lab" : "Theory"}`, textX, textY);
+          textY += 13;
+        }
+
+        if (blockH >= 55) {
+          ctx.font = '600 9.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = "#222";
+          ctx.fillText(`${k.slots} · ${k.venue}`, textX, textY);
+          textY += 13;
+        }
+
+        if (blockH >= 70) {
+          ctx.font = '700 9.5px "Plus Jakarta Sans", sans-serif';
+          ctx.fillStyle = "#000";
+          let fac = titleCase(k.faculty);
+          if (ctx.measureText(fac).width > colW - 16) {
+            while (fac.length > 4 && ctx.measureText(fac + "...").width > colW - 16) fac = fac.slice(0, -1);
+            fac += "...";
+          }
+          ctx.fillText(fac, textX, textY);
+        }
+
+        ctx.restore();
+      });
+    });
+
+    curY = bodyTop + tvGridH + 18;
+
+    let legX = gridLeft + 8;
+    legX += drawCanvasChip(ctx, "Theory", legX, curY, "#70FFC0", "#000", 11, true) + 8;
+    legX += drawCanvasChip(ctx, "Lab", legX, curY, "#A0F0F0", "#000", 11, true) + 8;
+    legX += drawCanvasChip(ctx, "Lunch 1:20–2:00", legX, curY, "#F5EEDC", "#444", 11, true) + 8;
+    if (clashIds.size) legX += drawCanvasChip(ctx, "Clash", legX, curY, "#FFA0A0", "#000", 11, true) + 8;
+    curY += 40;
+
+    const tblX = cx + 20;
+    const tblW = cardW - 40;
+    drawNeoCard(ctx, tblX, curY, tblW, tableH, 12, "#FFFFFF", "#000", 2, 3);
+
+    const thY = curY + 18;
+    ctx.font = '800 11px "Unbounded", "Plus Jakarta Sans", sans-serif';
+    ctx.fillStyle = "#555";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "middle";
+    const cCodeX = tblX + 16;
+    const cTitleX = tblX + 120;
+    const cFacX = tblX + 410;
+    const cSlotX = tblX + 660;
+    const cCrX = tblX + tblW - 30;
+
+    ctx.fillText("CODE", cCodeX, thY);
+    ctx.fillText("COURSE TITLE", cTitleX, thY);
+    ctx.fillText("FACULTY", cFacX, thY);
+    ctx.fillText("SLOT · VENUE", cSlotX, thY);
+    ctx.textAlign = "right";
+    ctx.fillText("CR", cCrX, thY);
+
+    let rowY = thY + 20;
+    codes.forEach((code, idx) => {
+      const cs = ks.filter((k) => k.code === code);
+      const cCourse = COURSES[code];
+      const fac = titleCase(cs[0].faculty);
+      const slotsVenue = cs.map((k) => `${k.slots === "NIL" ? "Online" : k.slots} (${k.venue === "NIL" ? "Online" : k.venue})`).join(" + ");
+      const crVal = credits(code);
+
+      if (idx % 2 === 1) {
+        ctx.fillStyle = "rgba(0,0,0,0.025)";
+        ctx.fillRect(tblX + 4, rowY - 12, tblW - 8, tableRowH);
+      }
+
+      ctx.textAlign = "left";
+      ctx.fillStyle = "#000";
+      ctx.font = '800 11.5px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(code, cCodeX, rowY);
+
+      ctx.font = '600 11.5px "Plus Jakarta Sans", sans-serif';
+      let cName = (cCourse && cCourse.title) || code;
+      if (ctx.measureText(cName).width > 270) {
+        while (cName.length > 4 && ctx.measureText(cName + "...").width > 270) cName = cName.slice(0, -1);
+        cName += "...";
+      }
+      ctx.fillText(cName, cTitleX, rowY);
+
+      let facTxt = fac;
+      if (ctx.measureText(facTxt).width > 230) {
+        while (facTxt.length > 4 && ctx.measureText(facTxt + "...").width > 230) facTxt = facTxt.slice(0, -1);
+        facTxt += "...";
+      }
+      ctx.fillText(facTxt, cFacX, rowY);
+
+      let svTxt = slotsVenue;
+      if (ctx.measureText(svTxt).width > 200) {
+        while (svTxt.length > 4 && ctx.measureText(svTxt + "...").width > 200) svTxt = svTxt.slice(0, -1);
+        svTxt += "...";
+      }
+      ctx.font = '500 11px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = "#333";
+      ctx.fillText(svTxt, cSlotX, rowY);
+
+      ctx.textAlign = "right";
+      ctx.font = '800 11.5px "Plus Jakarta Sans", sans-serif';
+      ctx.fillStyle = "#000";
+      ctx.fillText(String(crVal), cCrX, rowY);
+
+      rowY += tableRowH;
+    });
+
+    return canvas;
+  }
+
+  async function exportTimetablePNG(ids, planName) {
+    try {
+      toast("Generating image...");
+      const canvas = await renderTimetableCanvas(ids, planName);
+      const safeName = (planName || "timetable").trim().replace(/[^a-zA-Z0-9_\-]+/g, "_").toLowerCase();
+      canvas.toBlob((blob) => {
+        if (!blob) { toast("Failed to create image"); return; }
+        downloadBlob(blob, `${safeName}.png`);
+        toast("Saved timetable image (.png)");
+      }, "image/png");
+    } catch (err) {
+      console.error(err);
+      toast("Failed to export image");
+    }
+  }
+
   /* ======================= full timetable page ======================= */
   const viewLink = (ids, name) => `#/view/${encode(ids)}/${encodeURIComponent(name || "")}`;
   function pageView(code, name) {
@@ -1059,6 +1533,8 @@
       </div>
       <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap">
         <button class="btn lime" data-act="viewuse" data-code="${esc(code)}" data-name="${esc(name || "")}">Use this plan</button>
+        <button class="btn mint" data-act="viewics" data-code="${esc(code)}" data-name="${esc(name || "")}">${icon("cal", 16)} Export .ics</button>
+        <button class="btn cyan" data-act="viewpng" data-code="${esc(code)}" data-name="${esc(name || "")}">${icon("image", 16)} Save image</button>
         <button class="btn lav" data-act="viewcopy">${icon("copy", 16)} Copy share link</button>
         <button class="btn" data-act="print">Print</button>
       </div>`;
@@ -1283,6 +1759,16 @@
         const id = uid();
         state.plans.push({ id, name: (el.dataset.name || "Plan from full view").slice(0, 48), sel: ids });
         state.active = id; save(); toast("Saved and set as your active plan"); render(); return;
+      }
+      case "viewics": {
+        const ids = decode(el.dataset.code) || [];
+        downloadICS(ids, el.dataset.name);
+        return;
+      }
+      case "viewpng": {
+        const ids = decode(el.dataset.code) || [];
+        exportTimetablePNG(ids, el.dataset.name);
+        return;
       }
       case "viewcopy": copy(location.href); return;
       case "print": window.print(); return;
