@@ -396,7 +396,7 @@ table.cmp thead th { font-weight: 900; }
 .tv-block .tv-fac { font-weight: 800; }
 .tv-table td, .tv-table th { vertical-align: top; }
 @media print {
-  .bottom-nav, .toast, .tv-top .back, [data-act="viewuse"], [data-act="viewcopy"], [data-act="print"] { display: none !important; }
+  .bottom-nav, .toast, .tv-top .back, [data-act="viewuse"], [data-act="viewcopy"], [data-act="print"], [data-act="viewics"], [data-act="viewpng"] { display: none !important; }
   body { background: #fff; }
   .page { padding: 0; max-width: none; }
   .scroll-x { overflow: visible; }
