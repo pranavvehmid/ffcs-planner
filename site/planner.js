@@ -36,6 +36,47 @@
     return /1$/.test(s) ? "am" : "pm";
   }
 
+  /* ---------------- course credits ---------------- */
+  // Known course credits (from curriculum handbooks); others fall back to standard heuristics.
+  const CREDITS = {
+    // UCC: First-Year Science Core & Foundation
+    BAHUM101: 1, BAMAT205: 4, BAPHY105: 4,
+    BACHY105: 4, BAMAT101: 4, BAEEE101: 4, BAENG101: 4,
+    BACSE101: 2, BASTS102: 1, BACLE105: 3,
+    // UCC & OEC: Languages
+    BAESP101: 2, BAFRE101: 2, BAGER101: 2, BAJAP101: 2, BAARB101: 2, BACHI101: 2,
+    BAFRE201: 2, BAGER201: 2, BAHIN101: 2, BAHIN102: 2, BAJAP201: 2,
+    // UCC & OEC: Humanities
+    BAHUM109: 3, BAHUM110: 3, BAHUM111: 3, BAHUM119: 3,
+    BAHUM126: 3, BAHUM127: 3, BAHUM129: 3, BAHUM130: 3,
+    BAHUM226: 3, BAHUM238: 3,
+    // PCC & CON: Computer Science & Engineering
+    BACSE103: 4, BACSE104: 4, BACSE105: 4, BACSE106: 4,
+    BACSE201: 3, BACSE204: 4, BACSE205: 4,
+    BACSE324: 4, BACSE325: 4,
+    // OEC: Civil Engineering
+    BACLE301: 3, BACLE316: 3, BACLE319: 2, BACLE402: 3, BACLE417: 3,
+    // OEC: CSE Electives
+    BACSE301: 4, BACSE302: 4, BACSE305: 4, BACSE320: 4,
+    // OEC: Biotechnology & Chemical Engineering
+    BABIT103: 4, BABIT303: 3, BABIT310: 3,
+    BACHE320: 3, BACHE326: 3, BACHE333: 3, BACHE334: 3,
+    // OEC: Healthcare, Management & Finance
+    BAHST305: 3, BAHST306: 3, BAHST308: 4, BAHST310: 3, BAHST313: 4, BAHST315: 3,
+    BAITE311: 3, BAITE312: 3, BAMAT208: 4, BAMGT301: 3,
+  };
+  function credits(code, courses) {
+    if (CREDITS[code] !== undefined) return CREDITS[code];
+    const c = courses && courses[code];
+    if (!c) return 0;
+    if (c.embedded) return 4;
+    if (c.types.includes("TH") || c.types.includes("ETH")) return 3;
+    if (c.types.includes("OC")) return 2;
+    if (c.types.includes("LO") || c.types.includes("ELA")) return 2;
+    if (c.types.includes("SS")) return 1;
+    return 3;
+  }
+
   /* ---------------- course data ---------------- */
   function build(DATA) {
     const CLASSES = [], COURSES = {};
@@ -450,7 +491,7 @@
     return { debug, plans, limits, limitsKeep, minSplit, count: n, capped: res.capped, relaxed: notes.relaxed, noPRP: notes.noPRP, amMiss: notes.amMiss || [], rules: rulesUsed };
   }
 
-  const api = { build, plan, metrics, blocksOf, timesClash, halfOf, PROFILES, SLOT_TIMES, DAYS };
+  const api = { build, plan, metrics, blocksOf, timesClash, halfOf, PROFILES, SLOT_TIMES, DAYS, CREDITS, credits };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   root.FFCSPlanner = api;
 })(typeof self !== "undefined" ? self : this);

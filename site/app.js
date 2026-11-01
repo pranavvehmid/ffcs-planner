@@ -87,11 +87,35 @@
   const optClasses = (o) => o.map((i) => CLASSES[i]);
   const optTimes = (o) => o.flatMap((i) => CLASSES[i].times);
 
-  // Credits are not on VTOP's allocation page, so these are estimates:
+  // Credits are not on VTOP's allocation page, so known credits are mapped and others use standard estimates:
   // theory + lab 4, theory only 3, online 2, lab only 2, soft skills 1.
-  // Known credits (from Pranav); the rest are estimates.
-  const CREDITS = { BAHUM101: 1, BAMAT205: 4, BAPHY105: 4, BACSE103: 4, BACSE104: 4, BACSE105: 4, BACSE106: 4,
-    BAESP101: 2, BAFRE101: 2, BAGER101: 2, BAJAP101: 2, BAARB101: 2, BACHI101: 2 };
+  const CREDITS = (window.FFCSPlanner && window.FFCSPlanner.CREDITS) || {
+    // UCC: First-Year Science Core & Foundation
+    BAHUM101: 1, BAMAT205: 4, BAPHY105: 4,
+    BACHY105: 4, BAMAT101: 4, BAEEE101: 4, BAENG101: 4,
+    BACSE101: 2, BASTS102: 1, BACLE105: 3,
+    // UCC & OEC: Languages
+    BAESP101: 2, BAFRE101: 2, BAGER101: 2, BAJAP101: 2, BAARB101: 2, BACHI101: 2,
+    BAFRE201: 2, BAGER201: 2, BAHIN101: 2, BAHIN102: 2, BAJAP201: 2,
+    // UCC & OEC: Humanities
+    BAHUM109: 3, BAHUM110: 3, BAHUM111: 3, BAHUM119: 3,
+    BAHUM126: 3, BAHUM127: 3, BAHUM129: 3, BAHUM130: 3,
+    BAHUM226: 3, BAHUM238: 3,
+    // PCC & CON: Computer Science & Engineering
+    BACSE103: 4, BACSE104: 4, BACSE105: 4, BACSE106: 4,
+    BACSE201: 3, BACSE204: 4, BACSE205: 4,
+    BACSE324: 4, BACSE325: 4,
+    // OEC: Civil Engineering
+    BACLE301: 3, BACLE316: 3, BACLE319: 2, BACLE402: 3, BACLE417: 3,
+    // OEC: CSE Electives
+    BACSE301: 4, BACSE302: 4, BACSE305: 4, BACSE320: 4,
+    // OEC: Biotechnology & Chemical Engineering
+    BABIT103: 4, BABIT303: 3, BABIT310: 3,
+    BACHE320: 3, BACHE326: 3, BACHE333: 3, BACHE334: 3,
+    // OEC: Healthcare, Management & Finance
+    BAHST305: 3, BAHST306: 3, BAHST308: 4, BAHST310: 3, BAHST313: 4, BAHST315: 3,
+    BAITE311: 3, BAITE312: 3, BAMAT208: 4, BAMGT301: 3,
+  };
   function credits(code) {
     const c = COURSES[code];
     if (!c) return 0;
@@ -333,7 +357,7 @@
             <h3 class="section-title" style="font-size:15px">Clashes</h3>
             ${clashes.map(([a, b]) => `<div class="small" style="font-weight:700;margin:4px 0">${esc(a.code)} ${esc(a.slots)} ✕ ${esc(b.code)} ${esc(b.slots)}</div>`).join("")}
           </div>` : ""}
-          <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates, since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.<br>Look and feel inspired by Vitals, a VIT Vellore student app.</p>
+          <p class="footer-note">*Credits for mapped courses and languages are set; others are estimates, since VTOP's allocation page doesn't list them.<br>Course list from VTOP, updated ${lastScrape.toLocaleDateString("en-IN", { day: "numeric", month: "short", year: "numeric" })}. Your plans are saved in this browser only.<br>Look and feel inspired by Vitals, a VIT Vellore student app.</p>
         </section>
       </div>`;
   }
@@ -840,7 +864,7 @@
         <button class="btn lav" data-act="pimport">Import a code</button>
         ${plan().sel.length ? `<button class="btn salmon" data-act="pclear">Clear active plan</button>` : ""}
       </div>
-      <p class="footer-note">*Credits for your courses and Level I languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
+      <p class="footer-note">*Credits for mapped courses and languages are set; others are estimates (theory + lab 4, theory only 3, online 2).</p>`;
   }
 
   const progressCard = (msg) => `<div class="card" id="gen-progress" style="margin-top:18px">
